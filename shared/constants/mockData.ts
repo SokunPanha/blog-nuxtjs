@@ -147,3 +147,284 @@ export const homeBlogSectionData = [
     ],
   },
 ];
+
+
+export const mockBlogData = [
+  {
+    id: 1,
+    title: "Understanding JavaScript Closures",
+    author: {
+      name: "John Doe",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+    },
+     date: "2 days ago",
+    htmlContent: `
+      <h1>Understanding JavaScript Closures</h1>
+      <p>A closure allows a function to access variables from an outer scope even after the outer function has finished executing.</p>
+
+      <pre><code class="language-js">
+function outer() {
+  let count = 0;
+  return function inner() {
+    count++;
+    console.log(count);
+  };
+}
+
+const counter = outer();
+counter(); // 1
+counter(); // 2
+      </code></pre>
+
+      <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*8t8s6Rk9x3FhF38sZ4N2yA.png" alt="JavaScript Closure Diagram" />
+    <h1>Understanding JavaScript Closures</h1>
+      <p>A closure allows a function to access variables from an outer scope even after the outer function has finished executing.</p>
+
+      <pre><code class="language-js">
+function outer() {
+  let count = 0;
+  return function inner() {
+    count++;
+    console.log(count);
+  };
+}
+
+const counter = outer();
+counter(); // 1
+counter(); // 2
+      </code></pre>
+
+      <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*8t8s6Rk9x3FhF38sZ4N2yA.png" alt="JavaScript Closure Diagram" />
+    <h1>Understanding JavaScript Closures</h1>
+      <p>A closure allows a function to access variables from an outer scope even after the outer function has finished executing.</p>
+
+      <pre><code class="language-js">
+function outer() {
+  let count = 0;
+  return function inner() {
+    count++;
+    console.log(count);
+  };
+}
+
+const counter = outer();
+counter(); // 1
+counter(); // 2
+      </code></pre>
+
+      <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*8t8s6Rk9x3FhF38sZ4N2yA.png" alt="JavaScript Closure Diagram" />
+    <h1>Understanding JavaScript Closures</h1>
+      <p>A closure allows a function to access variables from an outer scope even after the outer function has finished executing.</p>
+
+      <pre><code class="language-js">
+function outer() {
+  let count = 0;
+  return function inner() {
+    count++;
+    console.log(count);
+  };
+}
+
+const counter = outer();
+counter(); // 1
+counter(); // 2
+      </code></pre>
+
+      <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*8t8s6Rk9x3FhF38sZ4N2yA.png" alt="JavaScript Closure Diagram" />
+    <h1>Understanding JavaScript Closures</h1>
+      <p>A closure allows a function to access variables from an outer scope even after the outer function has finished executing.</p>
+
+      <pre><code class="language-js">
+function outer() {
+  let count = 0;
+  return function inner() {
+    count++;
+    console.log(count);
+  };
+}
+
+const counter = outer();
+counter(); // 1
+counter(); // 2
+      </code></pre>
+
+      <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*8t8s6Rk9x3FhF38sZ4N2yA.png" alt="JavaScript Closure Diagram" />
+    <h1>Understanding JavaScript Closures</h1>
+      <p>A closure allows a function to access variables from an outer scope even after the outer function has finished executing.</p>
+
+      <pre><code class="language-js">
+function outer() {
+  let count = 0;
+  return function inner() {
+    count++;
+    console.log(count);
+  };
+}
+
+const counter = outer();
+counter(); // 1
+counter(); // 2
+      </code></pre>
+
+      <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*8t8s6Rk9x3FhF38sZ4N2yA.png" alt="JavaScript Closure Diagram" />
+    <h1>Understanding JavaScript Closures</h1>
+      <p>A closure allows a function to access variables from an outer scope even after the outer function has finished executing.</p>
+
+      <pre><code class="language-js">
+function outer() {
+  let count = 0;
+  return function inner() {
+    count++;
+    console.log(count);
+  };
+}
+
+const counter = outer();
+counter(); // 1
+counter(); // 2
+      </code></pre>
+
+      <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*8t8s6Rk9x3FhF38sZ4N2yA.png" alt="JavaScript Closure Diagram" />
+    <h1>Understanding JavaScript Closures</h1>
+      <p>A closure allows a function to access variables from an outer scope even after the outer function has finished executing.</p>
+
+      <pre><code class="language-js">
+function outer() {
+  let count = 0;
+  return function inner() {
+    count++;
+    console.log(count);
+  };
+}
+
+const counter = outer();
+counter(); // 1
+counter(); // 2
+      </code></pre>
+
+      <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*8t8s6Rk9x3FhF38sZ4N2yA.png" alt="JavaScript Closure Diagram" />
+    
+      `,
+  },
+  {
+    id: 2,
+    title: "Vue 3 Composition API Basics",
+    author: {
+      name: "Jane Smith",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+    },
+    date: "3 days ago",
+    htmlContent: `
+      <h1>Vue 3 Composition API Basics</h1>
+      <p>The Composition API makes logic reuse and organization easier.</p>
+
+      <pre><code class="language-ts">
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const count = ref(0);
+    const increment = () => count.value++;
+    return { count, increment };
+  }
+};
+      </code></pre>
+
+      <img src="https://vuejs.org/assets/composition-api-after.8f0c1f3b.png" alt="Vue Composition API" />
+    `,
+  },
+  {
+    id: 3,
+    title: "Nuxt 3 Server API Example",
+    author: {
+      name: "Alice Johnson",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+    },
+    date: "4 days ago",   
+    htmlContent: `
+      <h1>Nuxt 3 Server API Example</h1>
+      <p>Nuxt 3 provides a simple way to create backend APIs.</p>
+
+      <pre><code class="language-ts">
+export default defineEventHandler(() => {
+  return {
+    message: 'Hello from server API'
+  };
+});
+      </code></pre>
+
+      <img src="https://nuxt.com/assets/home/hero-dark.png" alt="Nuxt 3 Architecture" />
+    `,
+  },
+  {
+    id: 4,
+    title: "CSS Flexbox Layout",
+    author: {
+      name: "Bob Brown",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+    },
+    date: "5 days ago",
+    htmlContent: `
+      <h1>CSS Flexbox Layout</h1>
+      <p>Flexbox is a one-dimensional layout method for arranging items.</p>
+
+      <pre><code class="language-css">
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+      </code></pre>
+
+      <img src="https://css-tricks.com/wp-content/uploads/2018/10/01-container.svg" alt="CSS Flexbox Diagram" />
+    `,
+  },
+];
+
+
+export const mockRelatedBlogData = [
+  {
+    id: 1,
+    title: "Understanding JavaScript Closures",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+    author: {
+      name: "John Doe",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+    },
+    date: "2 days ago",
+   
+  },
+  {
+    id: 2,
+    title: "Vue 3 Composition API Basics",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+    author: {
+      name: "Jane Smith",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+    },
+    date: "3 days ago",
+   
+  },
+  {
+    id: 3,
+    title: "Nuxt 3 Server API Example",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+    author: {
+      name: "Alice Johnson",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+    },
+    date: "4 days ago",   
+   
+  },
+  {
+    id: 4,
+    title: "CSS Flexbox Layout",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+    author: {
+      name: "Bob Brown",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+    },
+    date: "5 days ago",
+  },
+];
+    
