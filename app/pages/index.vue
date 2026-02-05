@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { homeBlogSectionData } from "#shared/constants/mockData";
-
 definePageMeta({
   layout: "blog-layout",
 });
+
 
 </script>
 

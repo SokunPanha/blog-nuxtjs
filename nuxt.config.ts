@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     '~/components/blog/ui/common',
     '~/components/blog/features',
     '~/components/admin/ui',
+    
   ],
   css: [
     '~/assets/css/main.css',
