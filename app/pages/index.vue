@@ -1,3 +1,15 @@
+<script setup lang="ts">
+definePageMeta({
+    layout: 'blog-layout',
+})
+</script>
+
 <template>
-    <h1>Home Page</h1>
+   <main>
+         <div>
+            <UContainer>
+                
+            </UContainer>
+         </div>
+   </main>
 </template>
