@@ -1,15 +1,10 @@
 <script setup lang="ts">
 definePageMeta({
-    layout: 'blog-layout',
-})
+  layout: "blog-layout",
+});
 </script>
 
 <template>
-   <main>
-         <div>
-            <UContainer>
-                
-            </UContainer>
-         </div>
-   </main>
+  <HomeHero />
+  
 </template>
