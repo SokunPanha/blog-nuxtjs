@@ -10,10 +10,11 @@ export default defineNuxtConfig({
     '@nuxt/fonts'
   ],
   components: [
-    '~/components/ui',
-    '~/components/ui/layouts',
-    '~/components/ui/common',
-    '~/components/features',
+    '~/components/blog/ui',
+    '~/components/blog/ui/layouts',
+    '~/components/blog/ui/common',
+    '~/components/blog/features',
+    '~/components/admin/ui',
   ],
   css: [
     '~/assets/css/main.css',
@@ -31,6 +32,17 @@ export default defineNuxtConfig({
         provider: 'google',
       }
     ]
+  },
+  vite: {
+    optimizeDeps: {
+      include: [
+        '@nuxt/ui > prosemirror-state',
+        '@nuxt/ui > prosemirror-transform',
+        '@nuxt/ui > prosemirror-model',
+        '@nuxt/ui > prosemirror-view',
+        '@nuxt/ui > prosemirror-gapcursor'
+      ]
+    }
   },
   i18n:{
     locales: [
