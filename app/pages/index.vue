@@ -6,5 +6,6 @@ definePageMeta({
 
 <template>
   <HomeHero />
+  <HomeBrowseCategory />
   
 </template>

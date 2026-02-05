@@ -1,5 +1,5 @@
 <template>
-      <main class="grid py-10">
+  <main class="grid bg-gray-100 dark:bg-gray-800 py-10">
     <div
       class="flex max-w-4xl mx-auto flex-col md:flex-row md:justify-between items-center gap-4"
     >

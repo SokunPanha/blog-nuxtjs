@@ -4,6 +4,6 @@
     <slot name="default"></slot>
   </main>
   <footer>
-    <p>Footer</p>
+    <!-- <p>Footer</p> -->
   </footer>
 </template>

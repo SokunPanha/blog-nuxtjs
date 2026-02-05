@@ -13,7 +13,7 @@ const navItems = [
 
 <template>
   <header class="sticky top-0 z-50 bg-white dark:bg-black">
-    <nav class="flex justify-between items-center w-full p-3 shadow-2xl">
+    <nav class="flex justify-between items-center w-full p-3 shadow-xl">
       <div class="flex items-center gap-2"> 
         <UDrawer direction="bottom" class="sm:hidden">
           <UButton color="neutral" variant="ghost" icon="i-lucide-menu" />
