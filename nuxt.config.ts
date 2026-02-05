@@ -45,6 +45,11 @@ export default defineNuxtConfig({
       ]
     }
   },
+  nitro: {
+    prerender: {
+      failOnError: false
+    }
+  },
   i18n:{
     locales: [
       {
