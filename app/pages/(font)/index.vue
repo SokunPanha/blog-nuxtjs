@@ -3,20 +3,17 @@ import { homeBlogSectionData } from "#shared/constants/mockData";
 definePageMeta({
   layout: "blog-layout",
 });
-
-
 </script>
 
 <template>
-<main>
+  <main>
     <HomeHero />
-  <HomeBrowseCategory />
-  <HomeBlogSection
-    v-for="section in homeBlogSectionData"
-    :blogs="section.blogs"
-    :section-title="section.title"
-    :view-all-path="section.viewAllPath"
-  />
-  
-</main>
+    <HomeBrowseCategory />
+    <HomeBlogSection
+      v-for="section in homeBlogSectionData"
+      :blogs="section.blogs"
+      :section-title="section.title"
+      :view-all-path="section.viewAllPath"
+    />
+  </main>
 </template>

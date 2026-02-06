@@ -6,6 +6,8 @@ const layoutName = computed(() => {
     return 'admin-layout'
   } else if (route.path.startsWith('/admin')) {
     return false
+  } else if (route.path.startsWith('/blog')) {
+    return false
   } else {
     return 'blog-layout'
   }

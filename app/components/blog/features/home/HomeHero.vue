@@ -22,6 +22,10 @@ onMounted(() => {
       <Transition name="slide-right" appear>
         <section v-if="isVisible">
           <NuxtImg
+            format="webp"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+            width="400"
+            height="400"
             class="md:w-[500px] w-[300px]"
             src="https://static.vecteezy.com/system/resources/previews/028/589/224/original/coding-3d-rendering-icon-illustration-free-png.png"
             alt=""
