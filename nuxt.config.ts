@@ -20,6 +20,7 @@ export default defineNuxtConfig({
     '~/components/blog/ui/common',
     '~/components/blog/features',
     '~/components/admin/ui',
+    '~/components/shared',
     
   ],
   css: [
@@ -61,12 +62,12 @@ export default defineNuxtConfig({
       {
         code: 'en',
         name: 'English',
-        file: 'en.json',
+        files:['en.json', 'en/label.json', 'en/message.json', 'en/tableColumn.json', 'en/validation.json']
       },
       {
         code: 'kh',
         name: 'Khmer',
-        file: 'kh.json',
+        files:['kh.json', 'kh/label.json', 'kh/message.json', 'kh/tableColumn.json', 'kh/validation.json']
       },
     ],
     defaultLocale: 'en',

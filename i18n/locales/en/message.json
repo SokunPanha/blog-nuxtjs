@@ -1,0 +1,8 @@
+{
+    "message":{
+        "login_success":"Login success",
+        "login_error":"Login error",
+        "logout_success":"Logout success",
+        "logout_error":"Logout error"
+    }
+}
