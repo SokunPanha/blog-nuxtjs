@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@ai-sdk/vue':
         specifier: ^3.0.70
-        version: 3.0.73(vue@3.5.27(typescript@5.9.3))(zod@3.25.76)
+        version: 3.0.73(vue@3.5.27(typescript@5.9.3))(zod@4.3.6)
       '@nuxt/fonts':
         specifier: ^0.13.0
         version: 0.13.0(db0@0.3.4(@electric-sql/pglite@0.3.15)(better-sqlite3@12.6.2)(mysql2@3.15.3))(ioredis@5.9.2)(magicast@0.5.2)(vite@7.3.1(@types/node@25.2.1)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
@@ -19,7 +19,7 @@ importers:
         version: 2.0.0(db0@0.3.4(@electric-sql/pglite@0.3.15)(better-sqlite3@12.6.2)(mysql2@3.15.3))(ioredis@5.9.2)(magicast@0.5.2)
       '@nuxt/ui':
         specifier: ^4.4.0
-        version: 4.4.0(@nuxt/content@3.11.2(@electric-sql/pglite@0.3.15)(better-sqlite3@12.6.2)(magicast@0.5.2)(mysql2@3.15.3)(valibot@1.2.0(typescript@5.9.3)))(@tiptap/extensions@3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0))(@tiptap/y-tiptap@3.0.2(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.5)(y-protocols@1.0.7(yjs@13.6.29))(yjs@13.6.29))(db0@0.3.4(@electric-sql/pglite@0.3.15)(better-sqlite3@12.6.2)(mysql2@3.15.3))(embla-carousel@8.6.0)(ioredis@5.9.2)(magicast@0.5.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tailwindcss@4.1.18)(typescript@5.9.3)(valibot@1.2.0(typescript@5.9.3))(vite@7.3.1(@types/node@25.2.1)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue-router@4.6.4(vue@3.5.27(typescript@5.9.3)))(vue@3.5.27(typescript@5.9.3))(yjs@13.6.29)(zod@3.25.76)
+        version: 4.4.0(@nuxt/content@3.11.2(@electric-sql/pglite@0.3.15)(better-sqlite3@12.6.2)(magicast@0.5.2)(mysql2@3.15.3)(valibot@1.2.0(typescript@5.9.3)))(@tiptap/extensions@3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0))(@tiptap/y-tiptap@3.0.2(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.5)(y-protocols@1.0.7(yjs@13.6.29))(yjs@13.6.29))(db0@0.3.4(@electric-sql/pglite@0.3.15)(better-sqlite3@12.6.2)(mysql2@3.15.3))(embla-carousel@8.6.0)(ioredis@5.9.2)(magicast@0.5.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tailwindcss@4.1.18)(typescript@5.9.3)(valibot@1.2.0(typescript@5.9.3))(vite@7.3.1(@types/node@25.2.1)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue-router@4.6.4(vue@3.5.27(typescript@5.9.3)))(vue@3.5.27(typescript@5.9.3))(yjs@13.6.29)(zod@4.3.6)
       '@nuxtjs/i18n':
         specifier: ^10.2.1
         version: 10.2.1(@vue/compiler-dom@3.5.27)(db0@0.3.4(@electric-sql/pglite@0.3.15)(better-sqlite3@12.6.2)(mysql2@3.15.3))(eslint@9.39.2(jiti@2.6.1))(ioredis@5.9.2)(magicast@0.5.2)(rollup@4.57.1)(vue@3.5.27(typescript@5.9.3))
@@ -44,6 +44,9 @@ importers:
       nuxt:
         specifier: ^4.3.0
         version: 4.3.0(@electric-sql/pglite@0.3.15)(@parcel/watcher@2.5.6)(@types/node@25.2.1)(@vue/compiler-sfc@3.5.27)(better-sqlite3@12.6.2)(cac@6.7.14)(db0@0.3.4(@electric-sql/pglite@0.3.15)(better-sqlite3@12.6.2)(mysql2@3.15.3))(eslint@9.39.2(jiti@2.6.1))(ioredis@5.9.2)(lightningcss@1.31.1)(magicast@0.5.2)(mysql2@3.15.3)(optionator@0.9.4)(rollup@4.57.1)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.2.1)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
+      nuxt-auth-utils:
+        specifier: ^0.5.28
+        version: 0.5.28(bcrypt@6.0.0)(magicast@0.5.2)
       pg:
         specifier: ~8.18.0
         version: 8.18.0
@@ -62,6 +65,9 @@ importers:
       vue-router:
         specifier: ^4.6.4
         version: 4.6.4(vue@3.5.27(typescript@5.9.3))
+      zod:
+        specifier: ~4.3.6
+        version: 4.3.6
     devDependencies:
       '@prisma/client':
         specifier: ~7.3.0
@@ -89,6 +95,18 @@ importers:
         version: 4.21.0
 
 packages:
+
+  '@adonisjs/hash@9.1.1':
+    resolution: {integrity: sha512-ZkRguwjAp4skKvKDdRAfdJ2oqQ0N7p9l3sioyXO1E8o0WcsyDgEpsTQtuVNoIdMiw4sn4gJlmL3nyF4BcK1ZDQ==}
+    engines: {node: '>=20.6.0'}
+    peerDependencies:
+      argon2: ^0.31.2 || ^0.41.0 || ^0.43.0
+      bcrypt: ^5.1.1 || ^6.0.0
+    peerDependenciesMeta:
+      argon2:
+        optional: true
+      bcrypt:
+        optional: true
 
   '@ai-sdk/gateway@3.0.36':
     resolution: {integrity: sha512-2r1Q6azvqMYxQ1hqfWZmWg4+8MajoldD/ty65XdhCaCoBfvDu7trcvxXDfTSU+3/wZ1JIDky46SWYFOHnTbsBw==}
@@ -1774,6 +1792,10 @@ packages:
     resolution: {integrity: sha512-tmmZ3lQxAe/k/+rNnXQRawJ4NjxO2hqiOLTHvWchtGZULp4RyFeh6aU4XdOYBFe2KE1oShQTv4AblOs2iOrNnQ==}
     engines: {node: '>= 10.0.0'}
 
+  '@phc/format@1.0.0':
+    resolution: {integrity: sha512-m7X9U6BG2+J+R1lSOdCiITLLrxm+cWlNI3HUFA92oLO77ObGNzaKdh8pMLqdZcshtkKuV84olNNXDfMc4FezBQ==}
+    engines: {node: '>=10'}
+
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
@@ -1789,6 +1811,17 @@ packages:
 
   '@poppinss/exception@1.2.3':
     resolution: {integrity: sha512-dCED+QRChTVatE9ibtoaxc+WkdzOSjYTKi/+uacHWIsfodVfpsueo3+DKpgU5Px8qXjgmXkSvhXvSCz3fnP9lw==}
+
+  '@poppinss/object-builder@1.1.0':
+    resolution: {integrity: sha512-FOrOq52l7u8goR5yncX14+k+Ewi5djnrt1JwXeS/FvnwAPOiveFhiczCDuvXdssAwamtrV2hp5Rw9v+n2T7hQg==}
+    engines: {node: '>=20.6.0'}
+
+  '@poppinss/string@1.7.1':
+    resolution: {integrity: sha512-OrLzv/nGDU6l6dLXIQHe8nbNSWWfuSbpB/TW5nRpZFf49CLuQlIHlSPN9IdSUv2vG+59yGM6LoibsaHn8B8mDw==}
+
+  '@poppinss/utils@6.10.1':
+    resolution: {integrity: sha512-da+MMyeXhBaKtxQiWPfy7+056wk3lVIhioJnXHXkJ2/OHDaZfFcyKHNl1R06sdYO8lIRXcXdoZ6LO2ARmkAREA==}
+    engines: {node: '>=18.16.0'}
 
   '@prisma/adapter-pg@7.3.0':
     resolution: {integrity: sha512-iuYQMbIPO6i9O45Fv8TB7vWu00BXhCaNAShenqF7gLExGDbnGp5BfFB4yz1K59zQ59jF6tQ9YHrg0P6/J3OoLg==}
@@ -2501,6 +2534,9 @@ packages:
   '@types/pg@8.16.0':
     resolution: {integrity: sha512-RmhMd/wD+CF8Dfo+cVIy3RR5cl8CyfXQ0tGgW6XBL8L4LM/UTEbNXYRbLwU6w+CgrKBNbrQWt4FUtTfaU5jSYQ==}
 
+  '@types/pluralize@0.0.33':
+    resolution: {integrity: sha512-JOqsl+ZoCpP4e8TDke9W79FDcSgPAR0l6pixx2JHkhnRjvShyYiAYw2LVsnA7K08Y6DeOnaU6ujmENO4os/cYg==}
+
   '@types/react@19.2.13':
     resolution: {integrity: sha512-KkiJeU6VbYbUOp5ITMIc7kBfqlYkKA5KhEHVrGMmUUMt7NeaZg65ojdPk+FtNrBAOXNVM5QM72jnADjM+XVRAQ==}
 
@@ -2974,6 +3010,10 @@ packages:
 
   caniuse-lite@1.0.30001768:
     resolution: {integrity: sha512-qY3aDRZC5nWPgHUgIB84WL+nySuo19wk0VJpp/XI9T34lrvkyhRvNVOFJOp2kxClQhiFBu+TaUSudf6oa3vkSA==}
+
+  case-anything@3.1.2:
+    resolution: {integrity: sha512-wljhAjDDIv/hM2FzgJnYQg90AWmZMNtESCjTeLH680qTzdo0nErlCxOmgzgX4ZsZAtIvqHyD87ES8QyriXB+BQ==}
+    engines: {node: '>=18'}
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
@@ -3650,6 +3690,10 @@ packages:
   flatted@3.3.3:
     resolution: {integrity: sha512-GX+ysw4PBCz0PzosHDepZGANEuFCMLrnRTiEy9McGjmkCQYwRq4A/X786G/fjM/+OjsWSU1ZrY5qyARZmO/uwg==}
 
+  flattie@1.1.1:
+    resolution: {integrity: sha512-9UbaD6XdAL97+k/n+N7JwX46K/M6Zc6KcFYskrYL8wbBV/Uyk0CTAMY0VT+qiK5PM7AIc9aTWYtq65U7T+aCNQ==}
+    engines: {node: '>=8'}
+
   fontaine@0.7.0:
     resolution: {integrity: sha512-vlaWLyoJrOnCBqycmFo/CA8ZmPzuyJHYmgu261KYKByZ4YLz9sTyHZ4qoHgWSYiDsZXhiLo2XndVMz0WOAyZ8Q==}
     engines: {node: '>=18.12.0'}
@@ -4117,6 +4161,9 @@ packages:
   jiti@2.6.1:
     resolution: {integrity: sha512-ekilCSN1jwRvIbgeg/57YFh8qQDNbwDb9xT/qu2DAHbFFZUicIl4ygVaAvzveMhMVr3LnpSKTNnwt8PoOfmKhQ==}
     hasBin: true
+
+  jose@6.1.3:
+    resolution: {integrity: sha512-0TpaTfihd4QMNwrz/ob2Bp7X04yuxJkjRGi4aKmOqwhov54i6u79oCv7T+C7lo70MKH6BesI3vscD1yb/yzKXQ==}
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -4783,6 +4830,23 @@ packages:
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
 
+  nuxt-auth-utils@0.5.28:
+    resolution: {integrity: sha512-qWwJurmNTt1/Srxs9NqNAUz32mjIVBOFNr/vzoienMSp2qOktjxr5F9Ce0azb01w+KRz1hVfxA0/wtgCVsjZ0A==}
+    peerDependencies:
+      '@atproto/api': ^0.13.15
+      '@atproto/oauth-client-node': ^0.2.0
+      '@simplewebauthn/browser': ^11.0.0
+      '@simplewebauthn/server': ^11.0.0
+    peerDependenciesMeta:
+      '@atproto/api':
+        optional: true
+      '@atproto/oauth-client-node':
+        optional: true
+      '@simplewebauthn/browser':
+        optional: true
+      '@simplewebauthn/server':
+        optional: true
+
   nuxt-component-meta@0.17.1:
     resolution: {integrity: sha512-5pVCzWXqg9HP159JDhdfQJtFvgmS/KouEVpyYLPEBXWMrQoJBwujsczmLeIKXKI2BTy4RqfXy8N1GfGTZNb57g==}
     hasBin: true
@@ -4807,6 +4871,9 @@ packages:
     resolution: {integrity: sha512-K6AJy1GMVyfyMXRVB88700BJqNUkByijGJM8kEHpLdcAt+vSQAVfkWWHYzuRXHSY6xA2sNc5RjTj0p9rE2izVQ==}
     engines: {node: '>=18'}
     hasBin: true
+
+  oauth4webapi@3.8.3:
+    resolution: {integrity: sha512-pQ5BsX3QRTgnt5HxgHwgunIRaDXBdkT23tf8dfzmtTIL2LTpdmxgbpbBm0VgFWAIDlezQvQCTgnVIUmHupXHxw==}
 
   obug@2.1.1:
     resolution: {integrity: sha512-uTqF9MuPraAQ+IsnPf366RG4cP9RtUi7MLO1N3KEc+wb0a6yKpeL0lmk2IB1jY5KHPAlTc6T/JRdC/YqxHNwkQ==}
@@ -4845,6 +4912,9 @@ packages:
   open@8.4.2:
     resolution: {integrity: sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==}
     engines: {node: '>=12'}
+
+  openid-client@6.8.1:
+    resolution: {integrity: sha512-VoYT6enBo6Vj2j3Q5Ec0AezS+9YGzQo1f5Xc42lreMGlfP4ljiXPKVDvCADh+XHCV/bqPu/wWSiCVXbJKvrODw==}
 
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
@@ -5019,6 +5089,10 @@ packages:
 
   pkg-types@2.3.0:
     resolution: {integrity: sha512-SIqCzDRg0s9npO5XQ3tNZioRY1uK06lA41ynBC1YmFTmnY6FjUjVt6s4LoADmwoig1qqD0oK8h1p/8mlMx8Oig==}
+
+  pluralize@8.0.0:
+    resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
+    engines: {node: '>=4'}
 
   possible-typed-array-names@1.1.0:
     resolution: {integrity: sha512-/+5VFTchJDoVj3bhoqi6UeymcD00DAwb1nJwamzPvHEszJ4FpF6SNNbUbOS8yI56qHzdV8eK0qEfOSiodkTdxg==}
@@ -5536,6 +5610,10 @@ packages:
   safe-buffer@5.2.1:
     resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
 
+  safe-stable-stringify@2.5.0:
+    resolution: {integrity: sha512-b3rppTKm9T+PsVCBEOUR46GWI7fdOs00VKZ1+9c1EWDaDMvjQc6tUwuFyIprgGgTcWoVHSKrU8H31ZHA2e0RHA==}
+    engines: {node: '>=10'}
+
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
@@ -5548,6 +5626,9 @@ packages:
 
   scule@1.3.0:
     resolution: {integrity: sha512-6FtHJEvt+pVMIB9IBY+IcCJ6Z5f1iQnytgyfKMhDKgmzYG+TeH/wx1y3l27rshSbLiSanrR9ffZDrEsmjlQF2g==}
+
+  secure-json-parse@4.1.0:
+    resolution: {integrity: sha512-l4KnYfEyqYJxDwlNVyRfO2E4NTHfMKAWdUuA8J0yve2Dz/E/PdBepY03RvyJpssIpRFwJoCD55wA+mEDs6ByWA==}
 
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -6465,33 +6546,43 @@ packages:
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
 
+  zod@4.3.6:
+    resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
+
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
 snapshots:
 
-  '@ai-sdk/gateway@3.0.36(zod@3.25.76)':
+  '@adonisjs/hash@9.1.1(bcrypt@6.0.0)':
+    dependencies:
+      '@phc/format': 1.0.0
+      '@poppinss/utils': 6.10.1
+    optionalDependencies:
+      bcrypt: 6.0.0
+
+  '@ai-sdk/gateway@3.0.36(zod@4.3.6)':
     dependencies:
       '@ai-sdk/provider': 3.0.7
-      '@ai-sdk/provider-utils': 4.0.13(zod@3.25.76)
+      '@ai-sdk/provider-utils': 4.0.13(zod@4.3.6)
       '@vercel/oidc': 3.1.0
-      zod: 3.25.76
+      zod: 4.3.6
 
-  '@ai-sdk/provider-utils@4.0.13(zod@3.25.76)':
+  '@ai-sdk/provider-utils@4.0.13(zod@4.3.6)':
     dependencies:
       '@ai-sdk/provider': 3.0.7
       '@standard-schema/spec': 1.1.0
       eventsource-parser: 3.0.6
-      zod: 3.25.76
+      zod: 4.3.6
 
   '@ai-sdk/provider@3.0.7':
     dependencies:
       json-schema: 0.4.0
 
-  '@ai-sdk/vue@3.0.73(vue@3.5.27(typescript@5.9.3))(zod@3.25.76)':
+  '@ai-sdk/vue@3.0.73(vue@3.5.27(typescript@5.9.3))(zod@4.3.6)':
     dependencies:
-      '@ai-sdk/provider-utils': 4.0.13(zod@3.25.76)
-      ai: 6.0.73(zod@3.25.76)
+      '@ai-sdk/provider-utils': 4.0.13(zod@4.3.6)
+      ai: 6.0.73(zod@4.3.6)
       swrv: 1.1.0(vue@3.5.27(typescript@5.9.3))
       vue: 3.5.27(typescript@5.9.3)
     transitivePeerDependencies:
@@ -7735,7 +7826,7 @@ snapshots:
     transitivePeerDependencies:
       - magicast
 
-  '@nuxt/ui@4.4.0(@nuxt/content@3.11.2(@electric-sql/pglite@0.3.15)(better-sqlite3@12.6.2)(magicast@0.5.2)(mysql2@3.15.3)(valibot@1.2.0(typescript@5.9.3)))(@tiptap/extensions@3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0))(@tiptap/y-tiptap@3.0.2(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.5)(y-protocols@1.0.7(yjs@13.6.29))(yjs@13.6.29))(db0@0.3.4(@electric-sql/pglite@0.3.15)(better-sqlite3@12.6.2)(mysql2@3.15.3))(embla-carousel@8.6.0)(ioredis@5.9.2)(magicast@0.5.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tailwindcss@4.1.18)(typescript@5.9.3)(valibot@1.2.0(typescript@5.9.3))(vite@7.3.1(@types/node@25.2.1)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue-router@4.6.4(vue@3.5.27(typescript@5.9.3)))(vue@3.5.27(typescript@5.9.3))(yjs@13.6.29)(zod@3.25.76)':
+  '@nuxt/ui@4.4.0(@nuxt/content@3.11.2(@electric-sql/pglite@0.3.15)(better-sqlite3@12.6.2)(magicast@0.5.2)(mysql2@3.15.3)(valibot@1.2.0(typescript@5.9.3)))(@tiptap/extensions@3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0))(@tiptap/y-tiptap@3.0.2(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.5)(y-protocols@1.0.7(yjs@13.6.29))(yjs@13.6.29))(db0@0.3.4(@electric-sql/pglite@0.3.15)(better-sqlite3@12.6.2)(mysql2@3.15.3))(embla-carousel@8.6.0)(ioredis@5.9.2)(magicast@0.5.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tailwindcss@4.1.18)(typescript@5.9.3)(valibot@1.2.0(typescript@5.9.3))(vite@7.3.1(@types/node@25.2.1)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue-router@4.6.4(vue@3.5.27(typescript@5.9.3)))(vue@3.5.27(typescript@5.9.3))(yjs@13.6.29)(zod@4.3.6)':
     dependencies:
       '@floating-ui/dom': 1.7.5
       '@iconify/vue': 5.0.0(vue@3.5.27(typescript@5.9.3))
@@ -7807,7 +7898,7 @@ snapshots:
       '@nuxt/content': 3.11.2(@electric-sql/pglite@0.3.15)(better-sqlite3@12.6.2)(magicast@0.5.2)(mysql2@3.15.3)(valibot@1.2.0(typescript@5.9.3))
       valibot: 1.2.0(typescript@5.9.3)
       vue-router: 4.6.4(vue@3.5.27(typescript@5.9.3))
-      zod: 3.25.76
+      zod: 4.3.6
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -8376,6 +8467,8 @@ snapshots:
       '@parcel/watcher-win32-ia32': 2.5.6
       '@parcel/watcher-win32-x64': 2.5.6
 
+  '@phc/format@1.0.0': {}
+
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
@@ -8392,6 +8485,24 @@ snapshots:
       supports-color: 10.2.2
 
   '@poppinss/exception@1.2.3': {}
+
+  '@poppinss/object-builder@1.1.0': {}
+
+  '@poppinss/string@1.7.1':
+    dependencies:
+      '@types/pluralize': 0.0.33
+      case-anything: 3.1.2
+      pluralize: 8.0.0
+      slugify: 1.6.6
+
+  '@poppinss/utils@6.10.1':
+    dependencies:
+      '@poppinss/exception': 1.2.3
+      '@poppinss/object-builder': 1.1.0
+      '@poppinss/string': 1.7.1
+      flattie: 1.1.1
+      safe-stable-stringify: 2.5.0
+      secure-json-parse: 4.1.0
 
   '@prisma/adapter-pg@7.3.0':
     dependencies:
@@ -9083,6 +9194,8 @@ snapshots:
       pg-protocol: 1.11.0
       pg-types: 2.2.0
 
+  '@types/pluralize@0.0.33': {}
+
   '@types/react@19.2.13':
     dependencies:
       csstype: 3.2.3
@@ -9407,13 +9520,13 @@ snapshots:
 
   agent-base@7.1.4: {}
 
-  ai@6.0.73(zod@3.25.76):
+  ai@6.0.73(zod@4.3.6):
     dependencies:
-      '@ai-sdk/gateway': 3.0.36(zod@3.25.76)
+      '@ai-sdk/gateway': 3.0.36(zod@4.3.6)
       '@ai-sdk/provider': 3.0.7
-      '@ai-sdk/provider-utils': 4.0.13(zod@3.25.76)
+      '@ai-sdk/provider-utils': 4.0.13(zod@4.3.6)
       '@opentelemetry/api': 1.9.0
-      zod: 3.25.76
+      zod: 4.3.6
 
   ajv@6.12.6:
     dependencies:
@@ -9651,6 +9764,8 @@ snapshots:
       lodash.uniq: 4.5.0
 
   caniuse-lite@1.0.30001768: {}
+
+  case-anything@3.1.2: {}
 
   ccount@2.0.1: {}
 
@@ -10345,6 +10460,8 @@ snapshots:
 
   flatted@3.3.3: {}
 
+  flattie@1.1.1: {}
+
   fontaine@0.7.0:
     dependencies:
       '@capsizecss/unpack': 3.0.1
@@ -11002,6 +11119,8 @@ snapshots:
       '@pkgjs/parseargs': 0.11.0
 
   jiti@2.6.1: {}
+
+  jose@6.1.3: {}
 
   js-tokens@4.0.0: {}
 
@@ -11925,6 +12044,24 @@ snapshots:
     dependencies:
       boolbase: 1.0.0
 
+  nuxt-auth-utils@0.5.28(bcrypt@6.0.0)(magicast@0.5.2):
+    dependencies:
+      '@adonisjs/hash': 9.1.1(bcrypt@6.0.0)
+      '@nuxt/kit': 4.3.0(magicast@0.5.2)
+      defu: 6.1.4
+      h3: 1.15.5
+      hookable: 6.0.1
+      jose: 6.1.3
+      ofetch: 1.5.1
+      openid-client: 6.8.1
+      pathe: 2.0.3
+      scule: 1.3.0
+      uncrypto: 0.1.3
+    transitivePeerDependencies:
+      - argon2
+      - bcrypt
+      - magicast
+
   nuxt-component-meta@0.17.1(magicast@0.5.2):
     dependencies:
       '@nuxt/kit': 4.3.0(magicast@0.5.2)
@@ -12070,6 +12207,8 @@ snapshots:
       pathe: 2.0.3
       tinyexec: 1.0.2
 
+  oauth4webapi@3.8.3: {}
+
   obug@2.1.1: {}
 
   ofetch@1.5.1:
@@ -12114,6 +12253,11 @@ snapshots:
       define-lazy-prop: 2.0.0
       is-docker: 2.2.1
       is-wsl: 2.2.0
+
+  openid-client@6.8.1:
+    dependencies:
+      jose: 6.1.3
+      oauth4webapi: 3.8.3
 
   optionator@0.9.4:
     dependencies:
@@ -12381,6 +12525,8 @@ snapshots:
       confbox: 0.2.2
       exsolve: 1.0.8
       pathe: 2.0.3
+
+  pluralize@8.0.0: {}
 
   possible-typed-array-names@1.1.0:
     optional: true
@@ -13033,6 +13179,8 @@ snapshots:
 
   safe-buffer@5.2.1: {}
 
+  safe-stable-stringify@2.5.0: {}
+
   safer-buffer@2.1.2: {}
 
   sax@1.4.4: {}
@@ -13040,6 +13188,8 @@ snapshots:
   scheduler@0.27.0: {}
 
   scule@1.3.0: {}
+
+  secure-json-parse@4.1.0: {}
 
   semver@6.3.1: {}
 
@@ -13187,8 +13337,7 @@ snapshots:
 
   slash@5.1.0: {}
 
-  slugify@1.6.6:
-    optional: true
+  slugify@1.6.6: {}
 
   smob@1.5.0: {}
 
@@ -14020,6 +14169,9 @@ snapshots:
       zod: 3.25.76
     optional: true
 
-  zod@3.25.76: {}
+  zod@3.25.76:
+    optional: true
+
+  zod@4.3.6: {}
 
   zwitch@2.0.4: {}

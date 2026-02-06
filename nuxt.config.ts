@@ -2,12 +2,17 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  devServer: {
+    port: 3001,
+    
+  },
   modules: [
     '@nuxt/content',
     '@nuxt/image',
     '@nuxt/ui',
     '@nuxtjs/i18n',
-    '@nuxt/fonts'
+    '@nuxt/fonts',
+    'nuxt-auth-utils'
   ],
   components: [
     '~/components/blog/ui',
@@ -50,6 +55,7 @@ export default defineNuxtConfig({
       failOnError: false
     }
   },
+  
   i18n:{
     locales: [
       {
