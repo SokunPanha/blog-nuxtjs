@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useAuth } from '~/compossables/useAuth';
-
-const {logOut} = useAuth()
+definePageMeta({
+  layout: "admin-layout",
+});
 </script>
 
 <template>
