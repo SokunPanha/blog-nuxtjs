@@ -17,12 +17,17 @@ const options = computed(()=> ({
   ...props.options
 }))
 
+const imageLoaded = ref(false)
+
 </script>
 <template>
 <NuxtLink :to="`/blog/${props.blog.id}`">
   <div :class="options.horizontal ? 'flex items-center gap-2' : ' hover:shadow-lg group cursor-pointer transition-all duration-300  rounded-lg h-[250px] max-w-[250px]  overflow-hidden shrink-0'">
-    <div :class="options.horizontal ? 'max-w-[200px] w-[200px] h-[100px] ' : 'relative w-full h-1/2 '" class="rounded-lg overflow-hidden">
-      <NuxtImg loading="lazy" class="w-full  h-full  object-cover group-hover:scale-110 transition-all duration-300" :src="props.blog.image" />
+    <div :class="options.horizontal ? 'max-w-[200px] w-[200px] h-[100px] ' : 'relative w-full aspect-video '" class="rounded-lg overflow-hidden">
+      <div v-if="!imageLoaded" class="w-full  h-full  object-cover group-hover:scale-110 transition-all duration-300">
+        <USkeleton class="w-full  h-full  object-cover group-hover:scale-110 transition-all duration-300" />
+      </div>
+      <NuxtImg @load="imageLoaded = true"  loading="lazy" class="w-full  h-full  object-cover group-hover:scale-110 transition-all duration-300" :src="props.blog.image" />
     </div>
     <div :class="options.horizontal ? 'w-[200px] h-[100px] ' : 'p-2'">
       <p class="font-semibold line-clamp-2">{{ props.blog.title }}</p>

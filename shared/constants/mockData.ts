@@ -1,7 +1,7 @@
 export const homeBlogSectionData = [
   {
     title: "Latest Blog",
-    viewAllPath: "/blogs",
+    viewAllPath: "/blog",
     blogs: [
       {
         id: 1,
@@ -38,7 +38,7 @@ export const homeBlogSectionData = [
 
   {
     title: "Popular Blogs",
-    viewAllPath: "/blogs/popular",
+    viewAllPath: "/blog/popular",
     blogs: [
       {
         id: 101,
@@ -75,7 +75,7 @@ export const homeBlogSectionData = [
 
   {
     title: "Featured Stories",
-    viewAllPath: "/blogs/featured",
+    viewAllPath: "/blog/featured",
     blogs: [
       {
         id: 201,
@@ -112,7 +112,7 @@ export const homeBlogSectionData = [
 
   {
     title: "Career & Learning",
-    viewAllPath: "/blogs/career",
+    viewAllPath: "/blog/career",
     blogs: [
       {
         id: 301,

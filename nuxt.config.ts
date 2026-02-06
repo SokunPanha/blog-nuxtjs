@@ -66,5 +66,11 @@ export default defineNuxtConfig({
     defaultLocale: 'en',
     strategy: 'no_prefix',
     langDir: 'locales',
+  },
+  app: {
+    pageTransition: {
+      name: 'slide',
+      mode: 'default'
+    }
   }
 })
