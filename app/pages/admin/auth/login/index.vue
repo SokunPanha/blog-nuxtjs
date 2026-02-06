@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import * as z from "zod";
 import { useAuth } from "~/compossables/useAuth";
-
+const {t} = useI18n()
 definePageMeta({
   layout: false,
 });
 
 const schema = z.object({
-  username: z.string().min(1, "Username is required"),
-  password: z.string().min(1, "Password is required"),
+  username: z.string().min(1, t("validation.username_required")),
+  password: z.string().min(1, t("validation.password_required")),
 });
 
 type Schema = z.output<typeof schema>;
@@ -30,10 +30,10 @@ const { login, loading } = useAuth();
       <template #header>
         <div class="text-center">
           <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
-            Admin Login
+            {{ $t('label.login_to_system') }}
           </h1>
           <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            Sign in to access the admin panel
+            {{ $t('label.blog_admin') }}
           </p>
         </div>
       </template>
@@ -44,21 +44,21 @@ const { login, loading } = useAuth();
         class="space-y-4"
         @submit="login(state.username, state.password)"
       >
-        <UFormField label="Username" name="username">
+        <UFormField :label="$t('label.username')" name="username">
           <UInput
             v-model="state.username"
-            placeholder="Enter your username"
+            :placeholder="$t('placeholder.enter_username')"
             icon="i-lucide-user"
             size="lg"
             class="w-full"
           />
         </UFormField>
 
-        <UFormField label="Password" name="password">
+        <UFormField :label="$t('label.password')" name="password">
           <UInput
             v-model="state.password"
             type="password"
-            placeholder="Enter your password"
+            :placeholder="$t('placeholder.enter_password')"
             icon="i-lucide-lock"
             size="lg"
             class="w-full"
@@ -80,7 +80,7 @@ const { login, loading } = useAuth();
           block
           :loading="loading"
         >
-          Sign In
+          {{ $t('label.login') }}
         </UButton>
       </UForm>
     </UCard>

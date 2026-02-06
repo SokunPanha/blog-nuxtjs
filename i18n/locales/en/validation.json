@@ -3,6 +3,8 @@
         "required":"This field is required",
         "email":"Email is invalid",
         "min":"This field must be at least {min} characters",
-        "max":"This field must be at most {max} characters"
+        "max":"This field must be at most {max} characters",
+        "username_required":"Username is required",
+        "password_required":"Password is required"
     }
 }

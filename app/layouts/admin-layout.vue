@@ -1,62 +1,71 @@
 <script setup lang="ts">
+import type { navigationMenu } from "#build/ui";
 import type { DropdownMenuItem } from "@nuxt/ui";
 import { useAuth } from "~/compossables/useAuth";
 
 const { logOut } = useAuth();
 const { user } = useUserSession();
+const { t } = useI18n();
 
 const isSidebarOpen = ref(false);
 const isSidebarCollapsed = ref(false);
 
-const navigation = [
+const navigation = computed(() => [
   {
-    label: "Dashboard",
+    label: t("label.dashboard"),
     icon: "i-lucide-layout-dashboard",
     to: "/admin",
   },
   {
-    label: "Posts",
+    label: t("label.blogs_management"),
     icon: "i-lucide-file-text",
-    to: "/admin/posts",
+    children: [
+      {
+        label: t("label.blogs"),
+        icon: "i-lucide-file-text",
+        to: "/admin/blog-management/blogs",
+      },
+      {
+        label: t("label.categories"),
+        icon: "i-lucide-folder",
+        to: "/admin/blog-management/categories",
+      },
+    ],
   },
   {
-    label: "Categories",
-    icon: "i-lucide-folder",
-    to: "/admin/categories",
-  },
-  {
-    label: "Users",
+    label: t("label.system_setting"),
     icon: "i-lucide-users",
-    to: "/admin/users",
+    children: [
+      {
+        label: t("label.users"),
+        icon: "i-lucide-users",
+        to: "/admin/system-setting/users",
+      },
+    ],
   },
-  {
-    label: "Settings",
-    icon: "i-lucide-settings",
-    to: "/admin/settings",
-  },
-];
+]);
 
-const userMenuItems: DropdownMenuItem[][] = [
+const userMenuItems = computed<DropdownMenuItem[][]>(() => [
   [
     {
-      label: "Profile",
+      label: t("label.profile"),
       icon: "i-lucide-user",
       to: "/admin/profile",
     },
     {
-      label: "Settings",
+      label: t("label.settings"),
       icon: "i-lucide-settings",
       to: "/admin/settings",
     },
   ],
   [
     {
-      label: "Logout",
+      label: t("label.logout"),
       icon: "i-lucide-log-out",
       onSelect: logOut,
     },
   ],
-];
+]);
 </script>
 
 <template>
@@ -70,7 +79,7 @@ const userMenuItems: DropdownMenuItem[][] = [
             class="flex items-center justify-between h-16 px-4 border-b border-gray-200 dark:border-gray-700"
           >
             <span class="text-xl font-bold text-gray-900 dark:text-white">
-              Admin
+              {{ $t("label.admin") }}
             </span>
             <UButton
               icon="i-lucide-x"
@@ -105,9 +114,9 @@ const userMenuItems: DropdownMenuItem[][] = [
         <NuxtLink
           v-if="!isSidebarCollapsed"
           to="/admin"
-          class="text-xl font-bold text-gray-900 dark:text-white"
+          class="text-xl font-bold text-gray-900 dark:text-white transition-all duration-300 animate-[fade-in_1s_ease-in-out]"
         >
-          Admin Panel
+          {{ $t("label.admin_panel") }}
         </NuxtLink>
         <UIcon
           v-else
@@ -124,21 +133,6 @@ const userMenuItems: DropdownMenuItem[][] = [
           orientation="vertical"
         />
       </nav>
-
-      <!-- Collapse toggle button -->
-      <div class="p-3 border-t border-gray-200 dark:border-gray-700">
-        <UButton
-          :icon="
-            isSidebarCollapsed
-              ? 'i-lucide-chevrons-right'
-              : 'i-lucide-chevrons-left'
-          "
-          color="neutral"
-          variant="ghost"
-          block
-          @click="isSidebarCollapsed = !isSidebarCollapsed"
-        />
-      </div>
     </aside>
 
     <!-- Main content area -->
@@ -148,8 +142,19 @@ const userMenuItems: DropdownMenuItem[][] = [
     >
       <!-- Top header -->
       <header
-        class="sticky top-0 z-20 flex items-center justify-between h-16 px-4 bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 sm:px-6"
+        class="sticky top-0 z-20 flex items-center justify-between h-16 pr-4 bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 sm:pr-6"
       >
+        <UButton
+          class="lg:inline-block cursor-pointer hidden"
+          :icon="
+            isSidebarCollapsed
+              ? 'material-symbols:right-panel-close-outline-rounded'
+              : 'material-symbols:left-panel-open-outline-rounded'
+          "
+          color="neutral"
+          variant="ghost"
+          @click="isSidebarCollapsed = !isSidebarCollapsed"
+        />
         <!-- Mobile menu button -->
         <UButton
           icon="i-lucide-menu"
@@ -178,7 +183,7 @@ const userMenuItems: DropdownMenuItem[][] = [
                 icon="i-lucide-user"
               />
               <span class="hidden sm:inline text-sm font-medium">
-                {{ user?.username || "User" }}
+                {{ user?.username || $t("label.user") }}
               </span>
               <UIcon name="i-lucide-chevron-down" class="w-4 h-4" />
             </UButton>
@@ -188,8 +193,23 @@ const userMenuItems: DropdownMenuItem[][] = [
 
       <!-- Page content -->
       <main class="p-4 sm:p-6 lg:p-8">
-        <slot />
+        <Transition name="fade-slide" mode="out-in">
+          <slot />
+        </Transition>
       </main>
     </div>
   </div>
 </template>
+
+<style scoped>
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: all 0.5s ease;
+}
+
+.fade-slide-enter-from,
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+</style>

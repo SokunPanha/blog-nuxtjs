@@ -1,8 +1,22 @@
 {
-    "label":{
-        "username":"Username",
-        "password":"Password",
-        "login":"Login",
-        "logout":"Logout"
-    }
+  "label": {
+    "username": "Username",
+    "password": "Password",
+    "login": "Login",
+    "logout": "Logout",
+    "admin": "Admin",
+    "admin_panel": "Admin Panel",
+    "dashboard": "Dashboard",
+    "posts": "Posts",
+    "categories": "Categories",
+    "users": "Users",
+    "settings": "Settings",
+    "profile": "Profile",
+    "user": "User",
+    "system_setting": "System Setting",
+    "blog_management": "Blog Management",
+    "blogs": "Blogs",
+    "login_to_system": "Login to System",
+    "blog_admin": "Blog Admin"
+  }
 }

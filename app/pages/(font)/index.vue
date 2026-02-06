@@ -8,7 +8,8 @@ definePageMeta({
 </script>
 
 <template>
-  <HomeHero />
+<main>
+    <HomeHero />
   <HomeBrowseCategory />
   <HomeBlogSection
     v-for="section in homeBlogSectionData"
@@ -17,4 +18,5 @@ definePageMeta({
     :view-all-path="section.viewAllPath"
   />
   
+</main>
 </template>

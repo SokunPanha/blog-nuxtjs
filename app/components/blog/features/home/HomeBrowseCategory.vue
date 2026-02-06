@@ -37,10 +37,10 @@ const categories = [
        <div class="flex flex-col gap-4 max-w-4xl mx-auto px-4">
          <div class="flex justify-between items-center">
             <p class=" font-semibold ">Browse Category</p>
-            <NuxtLink to="/categories">View All ></NuxtLink>
+            <NuxtLink to="/">View All ></NuxtLink>
         </div>
         <div class=" flex flex-nowrap overflow-x-auto  no-scrollbar gap-4 py-3">
-            <NuxtLink v-for="category in categories" :key="category.id" :to="`/categories/${category.id}`"  class="p-2  shadow-md w-[150px] max-w-[200px] shrink-0 block ">
+            <NuxtLink v-for="category in categories" :key="category.id" :to="`/`"  class="p-2  shadow-md w-[150px] max-w-[200px] shrink-0 block ">
                 <div class="flex flex-col items-center  gap-2">
                     <Icon :name="category.icon" />
                     <p>{{ category.name }}</p>

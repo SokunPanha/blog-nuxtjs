@@ -1,83 +1,93 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
+  compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   devServer: {
     port: 3001,
-    
   },
   modules: [
-    '@nuxt/content',
-    '@nuxt/image',
-    '@nuxt/ui',
-    '@nuxtjs/i18n',
-    '@nuxt/fonts',
-    'nuxt-auth-utils'
+    "@nuxt/content",
+    "@nuxt/image",
+    "@nuxt/ui",
+    "@nuxtjs/i18n",
+    "@nuxt/fonts",
+    "nuxt-auth-utils",
   ],
   components: [
-    '~/components/blog/ui',
-    '~/components/blog/ui/layouts',
-    '~/components/blog/ui/common',
-    '~/components/blog/features',
-    '~/components/admin/ui',
-    '~/components/shared',
-    
+    "~/components/blog/ui",
+    "~/components/blog/ui/layouts",
+    "~/components/blog/ui/common",
+    "~/components/blog/features",
+    "~/components/admin/ui",
+    "~/components/shared",
   ],
-  css: [
-    '~/assets/css/main.css',
-  ],
+  css: ["~/assets/css/main.css"],
   fonts: {
-    families:  [
+    families: [
       {
-        name: 'Roboto',
+        name: "Roboto",
         weights: [400, 500, 700],
-        provider: 'google',
+        provider: "google",
       },
       {
-        name: 'Inter',
+        name: "Inter",
         weights: [400, 500, 700],
-        provider: 'google',
-      }
-    ]
+        provider: "google",
+      },
+    ],
   },
   vite: {
     optimizeDeps: {
       include: [
-        '@nuxt/ui > prosemirror-state',
-        '@nuxt/ui > prosemirror-transform',
-        '@nuxt/ui > prosemirror-model',
-        '@nuxt/ui > prosemirror-view',
-        '@nuxt/ui > prosemirror-gapcursor'
-      ]
-    }
+        "@nuxt/ui > prosemirror-state",
+        "@nuxt/ui > prosemirror-transform",
+        "@nuxt/ui > prosemirror-model",
+        "@nuxt/ui > prosemirror-view",
+        "@nuxt/ui > prosemirror-gapcursor",
+      ],
+    },
   },
   nitro: {
     prerender: {
-      failOnError: false
-    }
+      failOnError: false,
+    },
   },
-  
-  i18n:{
+
+  i18n: {
     locales: [
       {
-        code: 'en',
-        name: 'English',
-        files:['en.json', 'en/label.json', 'en/message.json', 'en/tableColumn.json', 'en/validation.json']
+        code: "en",
+        name: "English",
+        files: [
+          "en.json",
+          "en/label.json",
+          "en/message.json",
+          "en/tableColumn.json",
+          "en/validation.json",
+          "en/placeholder.json",
+        ],
       },
       {
-        code: 'kh',
-        name: 'Khmer',
-        files:['kh.json', 'kh/label.json', 'kh/message.json', 'kh/tableColumn.json', 'kh/validation.json']
+        code: "kh",
+        name: "Khmer",
+        files: [
+          "kh.json",
+          "kh/label.json",
+          "kh/message.json",
+          "kh/tableColumn.json",
+          "kh/validation.json",
+          "kh/placeholder.json",
+        ],
       },
     ],
-    defaultLocale: 'en',
-    strategy: 'no_prefix',
-    langDir: 'locales',
+    defaultLocale: "en",
+    strategy: "no_prefix",
+    langDir: "locales",
   },
   app: {
     pageTransition: {
-      name: 'slide',
-      mode: 'default'
-    }
-  }
-})
+      name: "slide",
+      mode: "default",
+    },
+  },
+});
