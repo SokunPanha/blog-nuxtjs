@@ -22,15 +22,28 @@
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "^4.4.0",
     "@nuxtjs/i18n": "^10.2.1",
+    "@prisma/adapter-pg": "~7.3.0",
     "@tiptap/extension-emoji": "^3.19.0",
     "@tiptap/extension-text-align": "^3.19.0",
     "@vueuse/core": "^14.2.0",
     "better-sqlite3": "^12.6.2",
+    "jsonwebtoken": "~9.0.3",
     "nuxt": "^4.3.0",
+    "pg": "~8.18.0",
     "tailwindcss": "^4.1.18",
     "tiptap-extension-code-block-shiki": "^1.0.0",
     "typescript": "^5.9.3",
     "vue": "^3.5.27",
     "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@prisma/client": "~7.3.0",
+    "@types/bcrypt": "~6.0.0",
+    "@types/jsonwebtoken": "~9.0.10",
+    "@types/pg": "~8.16.0",
+    "bcrypt": "~6.0.0",
+    "dotenv": "~17.2.4",
+    "prisma": "~7.3.0",
+    "tsx": "~4.21.0"
   }
 }
