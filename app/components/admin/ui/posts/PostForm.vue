@@ -31,6 +31,7 @@ const formState = reactive({
   coverImage: props.post?.coverImage || "",
   content: props.post?.content || "",
   status: (props.post?.status || "DRAFT") as PostStatus,
+  isFeatured: props.post?.isFeatured || false,
   categoryIds: props.post?.categories?.map((c) => c.id) || [] as string[],
   tagIds: props.post?.tags?.map((t) => t.id) || [] as string[],
 });
@@ -42,6 +43,7 @@ const schema = z.object({
   coverImage: z.string().url("Must be a valid URL"),
   content: z.string().min(1, "Content is required"),
   status: z.enum(["DRAFT", "PUBLISHED", "ARCHIVED"]),
+  isFeatured: z.boolean().optional(),
   categoryIds: z.array(z.string()).optional(),
   tagIds: z.array(z.string()).optional(),
 });
@@ -88,6 +90,7 @@ watch(
       formState.coverImage = newPost.coverImage;
       formState.content = newPost.content;
       formState.status = newPost.status as PostStatus;
+      formState.isFeatured = newPost.isFeatured || false;
       formState.categoryIds = newPost.categories?.map((c) => c.id) || [];
       formState.tagIds = newPost.tags?.map((t) => t.id) || [];
     }
@@ -132,6 +135,13 @@ watch(
           <div class="space-y-4">
             <UFormField name="status" :label="t('label.status') || 'Status'">
               <USelect v-model="formState.status" :items="statusOptions" value-key="value" />
+            </UFormField>
+
+            <UFormField name="isFeatured">
+              <UCheckbox
+                v-model="formState.isFeatured"
+                :label="t('label.featured_post') || 'Featured Post'"
+              />
             </UFormField>
 
             <div class="flex gap-2 pt-4">

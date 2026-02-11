@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref, computed } from "vue";
+
 interface Props {
   modelValue?: string | null;
   folder?: string;
@@ -19,34 +21,46 @@ const previewUrl = computed(() => props.modelValue || null);
 const isDragging = ref(false);
 const fileInput = ref<HTMLInputElement | null>(null);
 
+// NEW
+const inputMode = ref<"upload" | "url">("upload");
+const urlInput = ref("");
+
+// =================== Upload ===================
 const handleFileSelect = async (event: Event) => {
   const target = event.target as HTMLInputElement;
   const file = target.files?.[0];
-  if (file) {
-    await handleUpload(file);
-  }
+  if (file) await handleUpload(file);
 };
 
 const handleDrop = async (event: DragEvent) => {
   isDragging.value = false;
   const file = event.dataTransfer?.files?.[0];
-  if (file) {
-    await handleUpload(file);
-  }
+  if (file) await handleUpload(file);
 };
 
 const handleUpload = async (file: File) => {
   const result = await uploadImage(file, props.folder);
-  if (result) {
-    emit("update:modelValue", result.url);
+  if (result) emit("update:modelValue", result.url);
+};
+
+// =================== URL ===================
+const handleUrlSubmit = () => {
+  if (!urlInput.value) return;
+
+  try {
+    new URL(urlInput.value);
+    emit("update:modelValue", urlInput.value);
+    urlInput.value = "";
+  } catch {
+    alert("Invalid image URL");
   }
 };
 
+// =================== Remove ===================
 const handleRemove = () => {
   emit("update:modelValue", null);
-  if (fileInput.value) {
-    fileInput.value.value = "";
-  }
+  inputMode.value = "upload";
+  if (fileInput.value) fileInput.value.value = "";
 };
 
 const triggerFileInput = () => {
@@ -56,6 +70,25 @@ const triggerFileInput = () => {
 
 <template>
   <div class="space-y-2">
+    <!-- Toggle -->
+    <div class="flex gap-2">
+      <UButton
+        size="sm"
+        :variant="inputMode === 'upload' ? 'solid' : 'outline'"
+        @click="inputMode = 'upload'"
+      >
+        Upload
+      </UButton>
+
+      <UButton
+        size="sm"
+        :variant="inputMode === 'url' ? 'solid' : 'outline'"
+        @click="inputMode = 'url'"
+      >
+        URL
+      </UButton>
+    </div>
+
     <!-- Preview -->
     <div
       v-if="previewUrl"
@@ -75,6 +108,18 @@ const triggerFileInput = () => {
           @click="handleRemove"
         />
       </div>
+    </div>
+
+    <!-- URL input -->
+    <div v-else-if="inputMode === 'url'" class="space-y-2">
+      <UInput
+        v-model="urlInput"
+        placeholder="Paste image URL..."
+        size="lg"
+      />
+      <UButton block color="primary" @click="handleUrlSubmit">
+        Use Image
+      </UButton>
     </div>
 
     <!-- Upload area -->
@@ -100,13 +145,21 @@ const triggerFileInput = () => {
       />
 
       <div v-if="loading" class="space-y-2">
-        <UIcon name="i-lucide-loader-2" class="w-8 h-8 mx-auto animate-spin text-primary-500" />
-        <p class="text-sm text-gray-500">Uploading... {{ progress }}%</p>
+        <UIcon
+          name="i-lucide-loader-2"
+          class="w-8 h-8 mx-auto animate-spin text-primary-500"
+        />
+        <p class="text-sm text-gray-500">
+          Uploading... {{ progress }}%
+        </p>
         <UProgress :value="progress" />
       </div>
 
       <div v-else class="space-y-2">
-        <UIcon name="i-lucide-upload-cloud" class="w-10 h-10 mx-auto text-gray-400" />
+        <UIcon
+          name="i-lucide-upload-cloud"
+          class="w-10 h-10 mx-auto text-gray-400"
+        />
         <p class="text-sm text-gray-600 dark:text-gray-400">
           {{ t("label.drag_drop_image") || "Drag and drop an image, or click to browse" }}
         </p>
