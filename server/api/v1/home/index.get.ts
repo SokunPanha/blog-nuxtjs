@@ -1,52 +1,53 @@
 import { prisma } from "~~/server/api/utils/db";
 
 export default defineEventHandler(async () => {
-  // Get latest posts
+  const baseSelect = {
+    id: true,
+    title: true,
+    slug: true,
+    coverImage: true,
+    excerpt: true,
+    publishedAt: true,
+    author: {
+      select: {
+        id: true,
+        username: true,
+        firstName: true,
+        lastName: true,
+        avatar: true,
+      },
+    },
+  };
+
+  const baseWhere = {
+    status: "PUBLISHED",
+    deletedAt: null,
+  };
+
+  // Get latest posts (ordered by publishedAt desc)
   const latestPosts = await prisma.post.findMany({
-    where: { status: "PUBLISHED", deletedAt: null },
-    take: 3,
+    where: baseWhere,
+    take: 6,
     orderBy: { publishedAt: "desc" },
-    select: {
-      id: true,
-      title: true,
-      slug: true,
-      coverImage: true,
-      excerpt: true,
-      publishedAt: true,
-      author: { select: { username: true, avatar: true } },
-    },
+    select: baseSelect,
   });
 
-  // Get popular posts (by view count or comment count - simulated for now)
+  // Get popular posts (ordered by createdAt for now - will use viewCount after migration)
+  // TODO: Change to orderBy: { viewCount: "desc" } after running: npx prisma db push
   const popularPosts = await prisma.post.findMany({
-    where: { status: "PUBLISHED", deletedAt: null },
-    take: 3,
-    orderBy: { createdAt: "desc" }, // Should be views/likes
-    select: {
-      id: true,
-      title: true,
-      slug: true,
-      coverImage: true,
-      excerpt: true,
-      publishedAt: true,
-      author: { select: { username: true, avatar: true } },
-    },
+    where: baseWhere,
+    take: 6,
+    orderBy: { createdAt: "desc" },
+    select: baseSelect,
   });
 
-  // Get featured posts (by view count or comment count - simulated for now)
+  // Get featured posts (using latest posts for now - will filter by isFeatured after migration)
+  // TODO: Add isFeatured: true filter after running: npx prisma db push
   const featuredPosts = await prisma.post.findMany({
-    where: { status: "PUBLISHED", deletedAt: null },
-    take: 3,
-    orderBy: { createdAt: "asc" }, // Should be featured flag
-    select: {
-      id: true,
-      title: true,
-      slug: true,
-      coverImage: true,
-      excerpt: true,
-      publishedAt: true,
-      author: { select: { username: true, avatar: true } },
-    },
+    where: baseWhere,
+    take: 6,
+    orderBy: { createdAt: "asc" },
+    select: baseSelect,
   });
 
   return {

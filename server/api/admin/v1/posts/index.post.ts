@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const { title, excerpt, slug, coverImage, content, status, categoryIds, tagIds } =
+  const { title, excerpt, slug, coverImage, content, status, isFeatured, categoryIds, tagIds } =
     result.data;
 
   // Generate slug if not provided
@@ -40,6 +40,7 @@ export default defineEventHandler(async (event) => {
   );
 
   // Create post
+  // TODO: Add isFeatured: isFeatured || false after running: npx prisma db push
   const post = await prisma.post.create({
     data: {
       title,
@@ -48,6 +49,7 @@ export default defineEventHandler(async (event) => {
       coverImage,
       content,
       status,
+      // isFeatured: isFeatured || false, // Uncomment after migration
       publishedAt: status === "PUBLISHED" ? new Date() : null,
       authorId: session.user.id,
       categories: categoryIds?.length

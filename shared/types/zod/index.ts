@@ -32,6 +32,7 @@ export const PostRequestSchema = z.object({
   coverImage: z.string().url(),
   content: z.string().min(1),
   status: PostStatusEnum.default("DRAFT"),
+  isFeatured: z.boolean().default(false),
   categoryIds: z.array(z.string()).optional(),
   tagIds: z.array(z.string()).optional(),
 });

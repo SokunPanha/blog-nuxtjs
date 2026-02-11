@@ -49,7 +49,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const { title, excerpt, slug, coverImage, content, status, categoryIds, tagIds } =
+  const { title, excerpt, slug, coverImage, content, status, isFeatured, categoryIds, tagIds } =
     result.data;
 
   // Handle slug update
@@ -84,6 +84,7 @@ export default defineEventHandler(async (event) => {
   }
 
   // Update post
+  // TODO: Add isFeatured after running: npx prisma db push
   const post = await prisma.post.update({
     where: { id },
     data: {
@@ -93,6 +94,7 @@ export default defineEventHandler(async (event) => {
       coverImage,
       content,
       status,
+      // isFeatured, // Uncomment after migration
       publishedAt,
       categories: categoryIds !== undefined
         ? {
