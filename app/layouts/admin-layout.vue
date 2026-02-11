@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { navigationMenu } from "#build/ui";
 import type { DropdownMenuItem } from "@nuxt/ui";
-import { useAuth } from "~/compossables/useAuth";
+import { useAuth } from "~/composables/useAuth";
 
 const { logOut } = useAuth();
 const { user } = useUserSession();
@@ -29,6 +29,11 @@ const navigation = computed(() => [
         label: t("label.categories"),
         icon: "i-lucide-folder",
         to: "/admin/blog-management/categories",
+      },
+      {
+        label: t("label.tags"),
+        icon: "i-lucide-tag",
+        to: "/admin/blog-management/tags",
       },
     ],
   },
