@@ -221,7 +221,7 @@ const breadcrumbs = [
       v-model:open="deleteModalOpen"
       :loading="deleteLoading"
       :title="t('label.delete_tag') || 'Delete Tag'"
-      :message="`Are you sure you want to delete '${selectedTag?.name}'? This action cannot be undone.`"
+      :message="t('message.confirm_delete_message', {name: selectedTag?.name}) || 'Are you sure you want to delete this item? This action cannot be undone.'"
       @confirm="handleDeleteConfirm"
     />
   </div>
