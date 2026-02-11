@@ -1,5 +1,15 @@
 {
-    "tableColumn": {
-        
-    }
+  "tableColumn": {
+    "post_title": "ចំណងជើង",
+    "post_status": "ស្ថានភាព",
+    "post_author": "អ្នកនិពន្ធ",
+    "post_category": "ប្រភេទ",
+    "post_published_at": "បានបោះពុម្ព",
+    "category_name": "ឈ្មោះ",
+    "category_posts": "អត្ថបទ",
+    "tag_name": "ឈ្មោះ",
+    "user_username": "អ្នកប្រើប្រាស់",
+    "user_email": "អ៊ីមែល",
+    "user_role": "តួនាទី"
+  }
 }

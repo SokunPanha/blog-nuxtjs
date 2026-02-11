@@ -5,6 +5,11 @@ export default defineNuxtConfig({
   devServer: {
     port: 3001,
   },
+  runtimeConfig: {
+    cloudinaryCloudName: process.env.CLOUDINARY_CLOUD_NAME,
+    cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
+    cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET,
+  },
   modules: [
     "@nuxt/content",
     "@nuxt/image",
@@ -19,6 +24,11 @@ export default defineNuxtConfig({
     "~/components/blog/ui/common",
     "~/components/blog/features",
     "~/components/admin/ui",
+    "~/components/admin/ui/common",
+    "~/components/admin/ui/posts",
+    "~/components/admin/ui/categories",
+    "~/components/admin/ui/tags",
+    "~/components/admin/ui/users",
     "~/components/shared",
   ],
   css: ["~/assets/css/main.css"],

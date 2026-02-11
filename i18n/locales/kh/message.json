@@ -1,8 +1,23 @@
 {
-    "message":{
-        "login_success":"Login success",
-        "login_error":"Login error",
-        "logout_success":"Logout success",
-        "logout_error":"Logout error"
-    }
+  "message": {
+    "login_success": "ចូលបានជោគជ័យ",
+    "login_error": "ចូលមានកំហុស",
+    "logout_success": "ចេញបានជោគជ័យ",
+    "logout_error": "ចេញមានកំហុស",
+    "created_success": "បង្កើតបានជោគជ័យ",
+    "updated_success": "ធ្វើបច្ចុប្បន្នភាពបានជោគជ័យ",
+    "deleted_success": "លុបបានជោគជ័យ",
+    "confirm_delete_message": "តើអ្នកប្រាកដជាចង់លុបធាតុនេះមែនទេ? សកម្មភាពនេះមិនអាចត្រឡប់វិញបានទេ។",
+    "error": "កំហុស",
+    "no_posts": "រកមិនឃើញអត្ថបទ",
+    "no_categories": "រកមិនឃើញប្រភេទ",
+    "check_back_later": "ពិនិត្យមកវិញនៅពេលក្រោយសម្រាប់មាតិកាថ្មី",
+    "blog_description": "ស្វែងរកការយល់ដឹង ការបង្រៀន និងរឿងរ៉ាវពីក្រុមរបស់យើង",
+    "categories_description": "រកមើលមាតិការបស់យើងតាមប្រធានបទ",
+    "post_not_found": "រកមិនឃើញអត្ថបទ",
+    "post_not_found_description": "អត្ថបទដែលអ្នកកំពុងស្វែងរកមិនមាន ឬត្រូវបានដកចេញ។",
+    "category_not_found": "រកមិនឃើញប្រភេទ",
+    "category_not_found_description": "ប្រភេទដែលអ្នកកំពុងស្វែងរកមិនមានទេ។",
+    "no_posts_in_category": "មិនមានអត្ថបទក្នុងប្រភេទនេះទេ"
+  }
 }

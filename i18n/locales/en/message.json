@@ -1,8 +1,23 @@
 {
-    "message":{
-        "login_success":"Login success",
-        "login_error":"Login error",
-        "logout_success":"Logout success",
-        "logout_error":"Logout error"
-    }
+  "message": {
+    "login_success": "Login success",
+    "login_error": "Login error",
+    "logout_success": "Logout success",
+    "logout_error": "Logout error",
+    "created_success": "Created successfully",
+    "updated_success": "Updated successfully",
+    "deleted_success": "Deleted successfully",
+    "confirm_delete_message": "Are you sure you want to delete this item? This action cannot be undone.",
+    "error": "Error",
+    "no_posts": "No posts found",
+    "no_categories": "No categories found",
+    "check_back_later": "Check back later for new content",
+    "blog_description": "Discover insights, tutorials, and stories from our team",
+    "categories_description": "Browse our content by topic",
+    "post_not_found": "Post not found",
+    "post_not_found_description": "The post you are looking for does not exist or has been removed.",
+    "category_not_found": "Category not found",
+    "category_not_found_description": "The category you are looking for does not exist.",
+    "no_posts_in_category": "No posts in this category"
+  }
 }

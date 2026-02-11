@@ -1,5 +1,15 @@
 {
-    "tableColumn": {
-        
-    }
+  "tableColumn": {
+    "post_title": "Title",
+    "post_status": "Status",
+    "post_author": "Author",
+    "post_category": "Categories",
+    "post_published_at": "Published",
+    "category_name": "Name",
+    "category_posts": "Posts",
+    "tag_name": "Name",
+    "user_username": "User",
+    "user_email": "Email",
+    "user_role": "Role"
+  }
 }
