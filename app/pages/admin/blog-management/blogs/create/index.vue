@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useAdminPosts } from '~/composables/useAdminPosts';
+import { useAdminPosts } from "~/composables/admin/useAdminPosts";
 
 definePageMeta({
   layout: "admin-layout",

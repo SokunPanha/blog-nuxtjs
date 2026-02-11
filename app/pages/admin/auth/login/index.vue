@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import * as z from "zod";
-import { useAuth } from "~/composables/useAuth";
-const {t} = useI18n()
+import { useAuth } from "~/composables/shared/useAuth";
+const { t } = useI18n();
 definePageMeta({
   layout: false,
 });
@@ -30,10 +30,10 @@ const { login, loading } = useAuth();
       <template #header>
         <div class="text-center">
           <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
-            {{ $t('label.login_to_system') }}
+            {{ $t("label.login_to_system") }}
           </h1>
           <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            {{ $t('label.blog_admin') }}
+            {{ $t("label.blog_admin") }}
           </p>
         </div>
       </template>
@@ -80,7 +80,7 @@ const { login, loading } = useAuth();
           block
           :loading="loading"
         >
-          {{ $t('label.login') }}
+          {{ $t("label.login") }}
         </UButton>
       </UForm>
     </UCard>

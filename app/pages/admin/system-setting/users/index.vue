@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TableColumn } from "@nuxt/ui";
-import type { User } from "~~/app/composables/useAdminUsers";
+import type { User } from "~/composables/admin/useAdminUsers";
 
 definePageMeta({
   layout: "admin-layout",
@@ -253,7 +253,10 @@ const breadcrumbs = [
       v-model:open="deleteModalOpen"
       :loading="deleteLoading"
       :title="t('label.delete_user') || 'Delete User'"
-      :message="t('message.confirm_delete_message', {name: selectedUser?.username}) || 'Are you sure you want to delete this item? This action cannot be undone.'"
+      :message="
+        t('message.confirm_delete_message', { name: selectedUser?.username }) ||
+        'Are you sure you want to delete this item? This action cannot be undone.'
+      "
       @confirm="handleDeleteConfirm"
     />
   </div>
