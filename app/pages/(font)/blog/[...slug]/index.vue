@@ -14,8 +14,13 @@ const slug = computed(() => {
   return Array.isArray(params) ? params.join("/") : params;
 });
 
-// Fetch post by slug
-const { data, pending, error } = await useFetch(`/api/v1/posts/${slug.value}`);
+// Fetch post by slug - no await for instant navigation, SSR still works
+const { data, pending, error } = useFetch(() => `/api/v1/posts/${slug.value}`, {
+  key: `post-${slug.value}`,
+  getCachedData(key, nuxtApp) {
+    return nuxtApp.payload.data[key] || nuxtApp.static.data[key];
+  },
+});
 
 const post = computed(() => data.value?.data || null);
 const relatedPosts = computed(() => data.value?.data?.relatedPosts || []);

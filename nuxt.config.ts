@@ -96,8 +96,8 @@ export default defineNuxtConfig({
   },
   app: {
     pageTransition: {
-      name: "fade",
-      mode: "default",
+      name: "page",
+      mode: "out-in",
     },
   },
 });

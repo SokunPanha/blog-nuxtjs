@@ -5,12 +5,8 @@ definePageMeta({
   layout: "blog-layout",
 });
 
-const { homeData, loading, fetchHomeData } = useHome();
+const { homeData, loading } = useHome();
 const { t } = useI18n();
-
-onMounted(() => {
-  fetchHomeData();
-});
 </script>
 
 <template>
