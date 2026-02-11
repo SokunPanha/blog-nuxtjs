@@ -21,13 +21,12 @@ const imageLoaded = ref(false);
 <template>
   <NuxtLink :to="`/blog/${props.blog.slug}`" class="block group h-full">
     <UCard
+      class="overflow-hidden h-full flex flex-col transition-all duration-300 hover:shadow-xl dark:hover:shadow-gray-800/50 hover:-translate-y-1"
       :ui="{
-        base: 'h-full transition-all duration-300 hover:shadow-xl dark:hover:shadow-gray-800/50 hover:-translate-y-1',
-        body: { padding: 'p-0' },
-        header: { padding: 'p-0' },
-        footer: { padding: 'p-4' },
+        header: 'p-0',
+        body: 'p-0',
+        footer: 'p-4',
       }"
-      class="overflow-hidden h-full flex flex-col"
     >
       <!-- Image Slot -->
       <template #header>
@@ -52,10 +51,10 @@ const imageLoaded = ref(false);
           <!-- Date Badge -->
           <div class="absolute top-3 right-3">
             <UBadge
-              color="white"
+              color="neutral"
               variant="solid"
               size="xs"
-              class="font-medium shadow-sm"
+              class="font-medium shadow-sm bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200"
             >
               {{ props.blog.date }}
             </UBadge>

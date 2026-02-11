@@ -83,6 +83,7 @@ watch(page, (newPage) => {
         :blog="{
           id: post.id,
           title: post.title,
+          slug: post.slug,
           image: post.coverImage,
           author: {
             name: `${post.author?.firstName || ''} ${post.author?.lastName || post.author?.username || ''}`.trim(),
@@ -91,7 +92,6 @@ watch(page, (newPage) => {
           date: post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : '',
         }"
         :options="{ showAuthorAvatar: true }"
-        @click="navigateTo(`/blog/${post.slug}`)"
       />
     </div>
 

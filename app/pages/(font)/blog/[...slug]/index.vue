@@ -123,7 +123,7 @@ useSeoMeta({
           <!-- Author -->
           <div class="flex flex-row items-center gap-2">
             <UAvatar
-              :src="post.author?.avatar"
+              :src="post.author?.avatar || undefined"
               :alt="post.author?.username"
               size="sm"
             />
@@ -174,6 +174,7 @@ useSeoMeta({
             :blog="{
               id: related.id,
               title: related.title,
+              slug: related.slug,
               image: related.coverImage,
               author: {
                 name: `${related.author?.firstName || ''} ${related.author?.lastName || related.author?.username || ''}`.trim(),
@@ -185,7 +186,6 @@ useSeoMeta({
               showAuthorAvatar: false,
               horizontal: isDesktop,
             }"
-            @click="navigateTo(`/blog/${related.slug}`)"
           />
         </div>
       </section>
