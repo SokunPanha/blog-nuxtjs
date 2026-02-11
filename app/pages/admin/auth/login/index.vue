@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import * as z from "zod";
-import { useAuth } from "~/compossables/useAuth";
+import { useAuth } from "~/composables/useAuth";
 const {t} = useI18n()
 definePageMeta({
   layout: false,

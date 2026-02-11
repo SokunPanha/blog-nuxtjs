@@ -1,49 +1,36 @@
 <script setup lang="ts">
 import type { TableColumn } from "@nuxt/ui";
-import type { User } from "~~/app/composables/useAdminUsers";
+import type { Tag } from "~~/app/composables/useAdminTags";
 
 definePageMeta({
   layout: "admin-layout",
 });
 
 const { t } = useI18n();
-const { users, meta, loading, fetchUsers, updateUser, deleteUser } =
-  useAdminUsers();
+const { tags, meta, loading, fetchTags, createTag, updateTag, deleteTag } =
+  useAdminTags();
 
 // State
 const search = ref("");
-const roleFilter = ref<string | undefined>(undefined);
 const page = ref(1);
 const limit = ref(10);
 
 // Modal state
 const formModalOpen = ref(false);
 const deleteModalOpen = ref(false);
-const selectedUser = ref<User | null>(null);
+const selectedTag = ref<Tag | null>(null);
 const formLoading = ref(false);
 const deleteLoading = ref(false);
 
-// Role options
-const roleOptions = [
-  { value: undefined, label: "All Roles" },
-  { value: "ADMIN", label: "Admin" },
-  { value: "AUTHOR", label: "Author" },
-  { value: "USER", label: "User" },
-];
-
 // Table columns
-const columns: TableColumn<User>[] = [
+const columns: TableColumn<Tag>[] = [
   {
-    accessorKey: "user",
-    header: t("tableColumn.user_username") || "User",
+    accessorKey: "name",
+    header: t("tableColumn.tag_name") || "Name",
   },
   {
-    accessorKey: "email",
-    header: t("tableColumn.user_email") || "Email",
-  },
-  {
-    accessorKey: "role",
-    header: t("tableColumn.user_role") || "Role",
+    accessorKey: "slug",
+    header: t("label.slug") || "Slug",
   },
   {
     accessorKey: "postCount",
@@ -55,78 +42,63 @@ const columns: TableColumn<User>[] = [
   },
 ];
 
-// Fetch users
-const loadUsers = async () => {
-  await fetchUsers({
+// Fetch tags
+const loadTags = async () => {
+  await fetchTags({
     page: page.value,
     limit: limit.value,
     search: search.value || undefined,
-    role: roleFilter.value || undefined,
   });
 };
 
-onMounted(loadUsers);
+onMounted(loadTags);
 
-watch([search, roleFilter], () => {
+watch(search, () => {
   page.value = 1;
-  loadUsers();
+  loadTags();
 });
 
-watch(page, loadUsers);
-
-// Format date
-const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-};
-
-// Get role badge color
-const getRoleColor = (role: string) => {
-  switch (role) {
-    case "ADMIN":
-      return "error";
-    case "AUTHOR":
-      return "primary";
-    default:
-      return "neutral";
-  }
-};
+watch(page, loadTags);
 
 // Actions
-const handleEdit = (user: User) => {
-  selectedUser.value = user;
+const handleCreate = () => {
+  selectedTag.value = null;
   formModalOpen.value = true;
 };
 
-const handleDeleteClick = (user: User) => {
-  selectedUser.value = user;
+const handleEdit = (tag: Tag) => {
+  selectedTag.value = tag;
+  formModalOpen.value = true;
+};
+
+const handleDeleteClick = (tag: Tag) => {
+  selectedTag.value = tag;
   deleteModalOpen.value = true;
 };
 
 const handleFormSubmit = async (data: any) => {
-  if (!selectedUser.value) return;
-
   try {
     formLoading.value = true;
-    await updateUser(selectedUser.value.id, data);
+    if (selectedTag.value) {
+      await updateTag(selectedTag.value.id, data);
+    } else {
+      await createTag(data);
+    }
     formModalOpen.value = false;
-    await loadUsers();
+    await loadTags();
   } finally {
     formLoading.value = false;
   }
 };
 
 const handleDeleteConfirm = async () => {
-  if (!selectedUser.value) return;
+  if (!selectedTag.value) return;
 
   try {
     deleteLoading.value = true;
-    await deleteUser(selectedUser.value.id);
+    await deleteTag(selectedTag.value.id);
     deleteModalOpen.value = false;
-    selectedUser.value = null;
+    selectedTag.value = null;
   } finally {
     deleteLoading.value = false;
   }
@@ -135,16 +107,22 @@ const handleDeleteConfirm = async () => {
 // Breadcrumbs
 const breadcrumbs = [
   { label: t("label.dashboard") || "Dashboard", to: "/admin" },
-  { label: t("label.users") || "Users" },
+  { label: t("label.tags") || "Tags" },
 ];
 </script>
 
 <template>
   <div>
     <AdminPageHeader
-      :title="t('label.users') || 'Users'"
+      :title="t('label.tags') || 'Tags'"
       :breadcrumbs="breadcrumbs"
-    />
+    >
+      <template #actions>
+        <UButton icon="i-lucide-plus" color="primary" @click="handleCreate">
+          {{ t("label.create") || "Create" }}
+        </UButton>
+      </template>
+    </AdminPageHeader>
 
     <UCard>
       <!-- Filters -->
@@ -156,40 +134,31 @@ const breadcrumbs = [
             :placeholder="t('placeholder.search') || 'Search...'"
             class="w-full sm:w-64"
           />
-          <USelect
-            v-model="roleFilter"
-            :items="roleOptions"
-            class="w-full sm:w-40"
-          />
         </div>
       </template>
 
       <!-- Table -->
-      <UTable :data="users" :columns="columns" :loading="loading">
-        <template #user-cell="{ row }">
+      <UTable :data="tags" :columns="columns" :loading="loading">
+        <template #name-cell="{ row }">
           <div class="flex items-center gap-3">
-            <UAvatar
-              :src="row.original.avatar || undefined"
-              :alt="row.original.username"
-              size="sm"
+            <img
+              v-if="row.original.coverImage"
+              :src="row.original.coverImage"
+              :alt="row.original.name"
+              class="w-8 h-8 rounded object-cover"
             />
-            <div>
-              <p class="font-medium">{{ row.original.username }}</p>
-              <p class="text-sm text-gray-500">
-                {{ row.original.firstName }} {{ row.original.lastName }}
-              </p>
+            <div
+              v-else
+              class="w-8 h-8 rounded bg-gray-200 dark:bg-gray-700 flex items-center justify-center"
+            >
+              <UIcon name="i-lucide-tag" class="w-4 h-4 text-gray-400" />
             </div>
+            <span class="font-medium">{{ row.original.name }}</span>
           </div>
         </template>
 
-        <template #email-cell="{ row }">
-          {{ row.original.email }}
-        </template>
-
-        <template #role-cell="{ row }">
-          <UBadge :color="getRoleColor(row.original.role)" variant="subtle">
-            {{ row.original.role }}
-          </UBadge>
+        <template #slug-cell="{ row }">
+          <code class="text-sm text-gray-500">{{ row.original.slug }}</code>
         </template>
 
         <template #postCount-cell="{ row }">
@@ -216,7 +185,6 @@ const breadcrumbs = [
                 color="error"
                 variant="ghost"
                 size="sm"
-                :disabled="row.original.postCount > 0"
                 @click="handleDeleteClick(row.original)"
               />
             </UTooltip>
@@ -241,9 +209,9 @@ const breadcrumbs = [
     </UCard>
 
     <!-- Form modal -->
-    <UserFormModal
+    <TagFormModal
       v-model:open="formModalOpen"
-      :user="selectedUser"
+      :tag="selectedTag"
       :loading="formLoading"
       @submit="handleFormSubmit"
     />
@@ -252,8 +220,8 @@ const breadcrumbs = [
     <ConfirmDeleteModal
       v-model:open="deleteModalOpen"
       :loading="deleteLoading"
-      :title="t('label.delete_user') || 'Delete User'"
-      :message="`Are you sure you want to delete '${selectedUser?.username}'? This action cannot be undone.`"
+      :title="t('label.delete_tag') || 'Delete Tag'"
+      :message="`Are you sure you want to delete '${selectedTag?.name}'? This action cannot be undone.`"
       @confirm="handleDeleteConfirm"
     />
   </div>
