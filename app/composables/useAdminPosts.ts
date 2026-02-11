@@ -1,4 +1,5 @@
 import { ref } from "vue";
+import { useToast } from "#imports";
 import type { PostRequestType, PostUpdateType } from "~~/shared/types/zod";
 
 export interface Post {
@@ -9,6 +10,8 @@ export interface Post {
   coverImage: string;
   content: string;
   status: string;
+  isFeatured: boolean;
+  viewCount: number;
   publishedAt: string | null;
   createdAt: string;
   updatedAt: string;

@@ -1,3 +1,6 @@
+import { ref } from "vue";
+import { useToast, useUserSession, navigateTo } from "#imports";
+
 export const useAuth = () => {
   const toast = useToast();
   const { fetch: refreshSession } = useUserSession();

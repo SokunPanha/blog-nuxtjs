@@ -1,3 +1,6 @@
+import { ref } from "vue";
+import { useToast } from "#imports";
+
 export interface UploadResult {
   url: string;
   publicId: string;

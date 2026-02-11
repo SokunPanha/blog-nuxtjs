@@ -1,4 +1,5 @@
 import { ref } from "vue";
+import { useToast } from "#imports";
 import type { TagRequestType, TagUpdateType } from "~~/shared/types/zod";
 
 export interface Tag {
