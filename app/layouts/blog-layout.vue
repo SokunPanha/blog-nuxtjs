@@ -1,6 +1,6 @@
 <template>
   <NavigationBar />
-  <main class="  pt-3 mx-auto">
+  <main class="relative pt-3 mx-auto">
     <slot name="default"></slot>
   </main>
   <footer>

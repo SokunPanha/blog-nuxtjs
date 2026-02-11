@@ -19,7 +19,9 @@ const layoutName = computed(() => {
     <NuxtLayout
       :name="layoutName"
     >
-      <NuxtPage />
+      <div class="relative min-h-screen">
+        <NuxtPage />
+      </div>
     </NuxtLayout>
   </UApp>
 </template>
