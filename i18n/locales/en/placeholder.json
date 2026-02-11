@@ -1,6 +1,9 @@
 {
     "placeholder":{
         "enter_username":"Enter your username",
-        "enter_password":"Enter your password"
+        "enter_password":"Enter your password",
+        "search":"Search...",
+        "select_categories":"Select categories",
+        "select_tags":"Select tags"
     }
 }

@@ -65,6 +65,11 @@
     "back_to_blog": "ត្រឡប់ទៅអត្ថបទ",
     "back_to_categories": "ត្រឡប់ទៅប្រភេទ",
     "all_categories": "ប្រភេទទាំងអស់",
-    "drag_drop_image": "អូសនិងទម្លាក់រូបភាព ឬចុចដើម្បីរកមើល"
+    "drag_drop_image": "អូសនិងទម្លាក់រូបភាព ឬចុចដើម្បីរកមើល",
+    "published_at": "បានបោះពុម្ពនៅ",
+    "popular_posts": "អត្ថបទពេញនិយម",
+    "latest_posts": "អត្ថបទថ្មីៗ",
+    "view_all": "មើលទាំងអស់",
+    "featured_post": "អត្ថបទពិសេស"
   }
 }
