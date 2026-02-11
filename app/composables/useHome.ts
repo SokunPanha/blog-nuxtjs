@@ -16,14 +16,14 @@ export const useHome = () => {
   const fetchHomeData = async () => {
     try {
       loading.value = true;
-      const { data } = await $fetch<{
+      const {data} = await useFetch<{
         data: {
           latestPosts: any[];
           popularPosts: any[];
           featuredPosts: any[];
         };
       }>("/api/v1/home");
-
+      const blogData = toValue(data)?.data
       const mapPost = (post: any): BlogCardType => ({
         id: post.id,
         title: post.title,
@@ -38,9 +38,9 @@ export const useHome = () => {
       });
 
       homeData.value = {
-        latestPosts: data.latestPosts.map(mapPost),
-        popularPosts: data.popularPosts.map(mapPost),
-        featuredPosts: data.featuredPosts.map(mapPost),
+        latestPosts:blogData?.latestPosts.map(mapPost) || [],
+        popularPosts: blogData?.popularPosts.map(mapPost) || [],
+        featuredPosts: blogData?.featuredPosts.map(mapPost) || [],
       };
     } catch (error) {
       console.error("Failed to fetch home data", error);
