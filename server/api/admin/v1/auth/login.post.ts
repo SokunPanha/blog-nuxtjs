@@ -30,6 +30,13 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  if (!user.password) {
+    throw createError({
+      statusCode: 401,
+      message: "This account uses OAuth login",
+    });
+  }
+
   const isValidPassword = await bcrypt.compare(password, user.password);
 
   if (!isValidPassword) {
@@ -75,7 +82,9 @@ export default defineEventHandler(async (event) => {
     user: {
       id: user.id,
       username: user.username,
+      email: user.email,
       role: user.role,
+      avatar: user.avatar || undefined,
     },
   });
 

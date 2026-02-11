@@ -18,6 +18,7 @@
     "category_not_found": "Category not found",
     "category_not_found_description": "The category you are looking for does not exist.",
     "no_posts_in_category": "No posts in this category",
-    "confirm_delete_message": "Are you sure you want to delete '{name}'? This action cannot be undone."
+    "confirm_delete_message": "Are you sure you want to delete '{name}'? This action cannot be undone.",
+    "choose_provider": "Choose your preferred sign in method"
   }
 }

@@ -11,7 +11,7 @@ const page = ref(Number(route.query.page) || 1);
 const limit = ref(12);
 
 // Fetch posts
-const { data, pending, error } = await useFetch("/api/v1/posts", {
+const { data, pending, error } = useFetch("/api/v1/posts", {
   query: computed(() => ({
     page: page.value,
     limit: limit.value,

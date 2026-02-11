@@ -8,18 +8,38 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   firstName String?
   lastName  String?
-  username  String   @unique
+  username  String    @unique
   avatar    String?
-  email     String   @unique
-  password  String
-  role      String   @default("USER") // USER, ADMIN, AUTHOR
+  email     String    @unique
+  password  String?
+  role      String    @default("USER") // USER, ADMIN, AUTHOR
   posts     Post[]
   comments  Comment[]
+  accounts  Account[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  provider          String  // google, github
+  providerAccountId String
+  accessToken       String?
+  refreshToken      String?
+  expiresAt         Int?
+  tokenType         String?
+  scope             String?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
 }
 
 model Post {

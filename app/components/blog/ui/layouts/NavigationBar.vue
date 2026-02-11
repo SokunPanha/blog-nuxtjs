@@ -46,6 +46,7 @@ const navItems = [
             >
             <LanguageSwitcher />
             <UColorModeButton />
+            <AuthButtons />
           </div>
         </template>
       </NavItems>

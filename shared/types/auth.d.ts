@@ -4,6 +4,7 @@ declare module '#auth-utils' {
     // Add your own fields
     id: string;
     username: string;
+    email: string;
     role: string;
     avatar?: string;
   }
