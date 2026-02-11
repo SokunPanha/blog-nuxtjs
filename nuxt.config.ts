@@ -10,6 +10,9 @@ export default defineNuxtConfig({
     cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
     cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET,
   },
+  imports: {
+    dirs: ["composables/admin", "composables/blog", "composables/shared"],
+  },
   modules: [
     "@nuxt/content",
     "@nuxt/image",
