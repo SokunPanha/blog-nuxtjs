@@ -6,12 +6,13 @@ interface Props {
   viewAllPath: string;
   blogs: BlogCardType[];
 }
-
 const props = defineProps<Props>();
+
 </script>
 
 <template>
   <section class="">
+ 
     <main class="md:p-10 p-4 max-w-7xl mx-auto">
       <div>
         <div class="flex justify-between items-center mb-6">

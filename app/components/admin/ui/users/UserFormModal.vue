@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { z } from "zod";
-import type { User } from "~~/app/composables/useAdminUsers";
+import type { User } from "~/composables/admin/useAdminUsers";
 
 type UserRole = "ADMIN" | "USER" | "AUTHOR";
 
@@ -56,7 +56,7 @@ watch(
       formState.avatar = props.user.avatar || "";
       formState.role = props.user.role as UserRole;
     }
-  }
+  },
 );
 
 const handleSubmit = () => {
@@ -78,13 +78,26 @@ const handleClose = () => {
     </template>
 
     <template #body>
-      <UForm :state="formState" :schema="schema" @submit="handleSubmit" class="space-y-4">
+      <UForm
+        :state="formState"
+        :schema="schema"
+        @submit="handleSubmit"
+        class="space-y-4"
+      >
         <div class="grid grid-cols-2 gap-4">
-          <UFormField name="firstName" :label="t('label.first_name') || 'First Name'" required>
+          <UFormField
+            name="firstName"
+            :label="t('label.first_name') || 'First Name'"
+            required
+          >
             <UInput v-model="formState.firstName" />
           </UFormField>
 
-          <UFormField name="lastName" :label="t('label.last_name') || 'Last Name'" required>
+          <UFormField
+            name="lastName"
+            :label="t('label.last_name') || 'Last Name'"
+            required
+          >
             <UInput v-model="formState.lastName" />
           </UFormField>
         </div>
@@ -113,11 +126,7 @@ const handleClose = () => {
         >
           {{ t("label.cancel") || "Cancel" }}
         </UButton>
-        <UButton
-          color="primary"
-          :loading="loading"
-          @click="handleSubmit"
-        >
+        <UButton color="primary" :loading="loading" @click="handleSubmit">
           {{ t("label.update") || "Update" }}
         </UButton>
       </div>

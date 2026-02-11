@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { z } from "zod";
-import type { Tag } from "~~/app/composables/useAdminTags";
+import type { Tag } from "~/composables/admin/useAdminTags";
 
 interface Props {
   open: boolean;
@@ -30,12 +30,18 @@ const formState = reactive({
 const schema = z.object({
   name: z.string().min(1, "Name is required").max(100),
   description: z.string().max(500).optional(),
-  coverImage: z.string().url("Must be a valid URL").optional().or(z.literal("")),
+  coverImage: z
+    .string()
+    .url("Must be a valid URL")
+    .optional()
+    .or(z.literal("")),
 });
 
 const isEdit = computed(() => !!props.tag);
 const modalTitle = computed(() =>
-  isEdit.value ? t("label.edit_tag") || "Edit Tag" : t("label.create_tag") || "Create Tag"
+  isEdit.value
+    ? t("label.edit_tag") || "Edit Tag"
+    : t("label.create_tag") || "Create Tag",
 );
 
 // Reset form when modal opens
@@ -53,7 +59,7 @@ watch(
         formState.coverImage = "";
       }
     }
-  }
+  },
 );
 
 const handleSubmit = () => {
@@ -75,16 +81,27 @@ const handleClose = () => {
     </template>
 
     <template #body>
-      <UForm :state="formState" :schema="schema" @submit="handleSubmit" class="space-y-4">
+      <UForm
+        :state="formState"
+        :schema="schema"
+        @submit="handleSubmit"
+        class="space-y-4"
+      >
         <UFormField name="name" :label="t('label.name') || 'Name'" required>
           <UInput v-model="formState.name" />
         </UFormField>
 
-        <UFormField name="description" :label="t('label.description') || 'Description'">
+        <UFormField
+          name="description"
+          :label="t('label.description') || 'Description'"
+        >
           <UTextarea v-model="formState.description" :rows="3" />
         </UFormField>
 
-        <UFormField name="coverImage" :label="t('label.cover_image') || 'Cover Image'">
+        <UFormField
+          name="coverImage"
+          :label="t('label.cover_image') || 'Cover Image'"
+        >
           <ImageUploader v-model="formState.coverImage" folder="tags" />
         </UFormField>
       </UForm>
@@ -100,12 +117,12 @@ const handleClose = () => {
         >
           {{ t("label.cancel") || "Cancel" }}
         </UButton>
-        <UButton
-          color="primary"
-          :loading="loading"
-          @click="handleSubmit"
-        >
-          {{ isEdit ? t("label.update") || "Update" : t("label.create") || "Create" }}
+        <UButton color="primary" :loading="loading" @click="handleSubmit">
+          {{
+            isEdit
+              ? t("label.update") || "Update"
+              : t("label.create") || "Create"
+          }}
         </UButton>
       </div>
     </template>

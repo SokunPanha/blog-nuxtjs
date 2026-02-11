@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { z } from "zod";
-import type { Category } from "~~/app/composables/useAdminCategories";
+import type { Category } from "~/composables/admin/useAdminCategories";
 
 type CategoryStatus = "DRAFT" | "PUBLISHED" | "ARCHIVED";
 
@@ -33,7 +33,11 @@ const formState = reactive({
 const schema = z.object({
   name: z.string().min(1, "Name is required").max(100),
   description: z.string().max(500).optional(),
-  coverImage: z.string().url("Must be a valid URL").optional().or(z.literal("")),
+  coverImage: z
+    .string()
+    .url("Must be a valid URL")
+    .optional()
+    .or(z.literal("")),
   status: z.enum(["DRAFT", "PUBLISHED", "ARCHIVED"]),
 });
 
@@ -45,7 +49,9 @@ const statusOptions = [
 
 const isEdit = computed(() => !!props.category);
 const modalTitle = computed(() =>
-  isEdit.value ? t("label.edit_category") || "Edit Category" : t("label.create_category") || "Create Category"
+  isEdit.value
+    ? t("label.edit_category") || "Edit Category"
+    : t("label.create_category") || "Create Category",
 );
 
 // Reset form when modal opens
@@ -65,7 +71,7 @@ watch(
         formState.status = "DRAFT";
       }
     }
-  }
+  },
 );
 
 const handleSubmit = () => {
@@ -87,16 +93,27 @@ const handleClose = () => {
     </template>
 
     <template #body>
-      <UForm :state="formState" :schema="schema" @submit="handleSubmit" class="space-y-4">
+      <UForm
+        :state="formState"
+        :schema="schema"
+        @submit="handleSubmit"
+        class="space-y-4"
+      >
         <UFormField name="name" :label="t('label.name') || 'Name'" required>
           <UInput v-model="formState.name" />
         </UFormField>
 
-        <UFormField name="description" :label="t('label.description') || 'Description'">
+        <UFormField
+          name="description"
+          :label="t('label.description') || 'Description'"
+        >
           <UTextarea v-model="formState.description" :rows="3" />
         </UFormField>
 
-        <UFormField name="coverImage" :label="t('label.cover_image') || 'Cover Image'">
+        <UFormField
+          name="coverImage"
+          :label="t('label.cover_image') || 'Cover Image'"
+        >
           <ImageUploader v-model="formState.coverImage" folder="categories" />
         </UFormField>
 
@@ -116,12 +133,12 @@ const handleClose = () => {
         >
           {{ t("label.cancel") || "Cancel" }}
         </UButton>
-        <UButton
-          color="primary"
-          :loading="loading"
-          @click="handleSubmit"
-        >
-          {{ isEdit ? t("label.update") || "Update" : t("label.create") || "Create" }}
+        <UButton color="primary" :loading="loading" @click="handleSubmit">
+          {{
+            isEdit
+              ? t("label.update") || "Update"
+              : t("label.create") || "Create"
+          }}
         </UButton>
       </div>
     </template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { navigationMenu } from "#build/ui";
 import type { DropdownMenuItem } from "@nuxt/ui";
-import { useAuth } from "~/composables/useAuth";
+import { useAuth } from "~/composables/shared/useAuth";
 
 const { logOut } = useAuth();
 const { user } = useUserSession();

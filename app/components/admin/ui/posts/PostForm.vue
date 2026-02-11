@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { z } from "zod";
-import type { Post } from "~~/app/composables/useAdminPosts";
-import type { Category } from "~~/app/composables/useAdminCategories";
-import type { Tag } from "~~/app/composables/useAdminTags";
+import type { Post } from "~/composables/admin/useAdminPosts";
+import type { Category } from "~/composables/admin/useAdminCategories";
+import type { Tag } from "~/composables/admin/useAdminTags";
 
 type PostStatus = "DRAFT" | "PUBLISHED" | "ARCHIVED";
 
@@ -32,8 +32,8 @@ const formState = reactive({
   content: props.post?.content || "",
   status: (props.post?.status || "DRAFT") as PostStatus,
   isFeatured: props.post?.isFeatured || false,
-  categoryIds: props.post?.categories?.map((c) => c.id) || [] as string[],
-  tagIds: props.post?.tags?.map((t) => t.id) || [] as string[],
+  categoryIds: props.post?.categories?.map((c) => c.id) || ([] as string[]),
+  tagIds: props.post?.tags?.map((t) => t.id) || ([] as string[]),
 });
 
 // Validation schema
@@ -69,11 +69,11 @@ onMounted(async () => {
 });
 
 const categoryOptions = computed(() =>
-  categories.value.map((c) => ({ value: c.id, label: c.name }))
+  categories.value.map((c) => ({ value: c.id, label: c.name })),
 );
 
 const tagOptions = computed(() =>
-  tags.value.map((t) => ({ value: t.id, label: t.name }))
+  tags.value.map((t) => ({ value: t.id, label: t.name })),
 );
 
 const handleSubmit = () => {
@@ -95,7 +95,7 @@ watch(
       formState.tagIds = newPost.tags?.map((t) => t.id) || [];
     }
   },
-  { deep: true }
+  { deep: true },
 );
 </script>
 
@@ -110,7 +110,11 @@ watch(
           </template>
 
           <div class="space-y-4">
-            <UFormField name="title" :label="t('label.title') || 'Title'" required>
+            <UFormField
+              name="title"
+              :label="t('label.title') || 'Title'"
+              required
+            >
               <UInput v-model="formState.title" size="lg" />
             </UFormField>
 
@@ -118,7 +122,11 @@ watch(
               <UTextarea v-model="formState.excerpt" :rows="3" />
             </UFormField>
 
-            <UFormField name="content" :label="t('label.content') || 'Content'" required>
+            <UFormField
+              name="content"
+              :label="t('label.content') || 'Content'"
+              required
+            >
               <EditorTipTap v-model="formState.content" class="min-h-[400px]" />
             </UFormField>
           </div>
@@ -134,7 +142,11 @@ watch(
 
           <div class="space-y-4">
             <UFormField name="status" :label="t('label.status') || 'Status'">
-              <USelect v-model="formState.status" :items="statusOptions" value-key="value" />
+              <USelect
+                v-model="formState.status"
+                :items="statusOptions"
+                value-key="value"
+              />
             </UFormField>
 
             <UFormField name="isFeatured">
@@ -161,7 +173,11 @@ watch(
                 class="flex-1"
                 :loading="loading"
               >
-                {{ post ? t("label.update") || "Update" : t("label.create") || "Create" }}
+                {{
+                  post
+                    ? t("label.update") || "Update"
+                    : t("label.create") || "Create"
+                }}
               </UButton>
             </div>
           </div>
@@ -169,7 +185,9 @@ watch(
 
         <UCard>
           <template #header>
-            <h3 class="font-semibold">{{ t("label.cover_image") || "Cover Image" }}</h3>
+            <h3 class="font-semibold">
+              {{ t("label.cover_image") || "Cover Image" }}
+            </h3>
           </template>
 
           <UFormField name="coverImage">
@@ -179,7 +197,9 @@ watch(
 
         <UCard>
           <template #header>
-            <h3 class="font-semibold">{{ t("label.categories") || "Categories" }}</h3>
+            <h3 class="font-semibold">
+              {{ t("label.categories") || "Categories" }}
+            </h3>
           </template>
 
           <UFormField name="categoryIds">
@@ -188,7 +208,9 @@ watch(
               :items="categoryOptions"
               multiple
               value-key="value"
-              :placeholder="t('placeholder.select_categories') || 'Select categories'"
+              :placeholder="
+                t('placeholder.select_categories') || 'Select categories'
+              "
             />
           </UFormField>
         </UCard>

@@ -4,10 +4,10 @@ const navItems = [
     name: "home",
     path: "/",
   },
-  {
-    name: "about",
-    path: "/about",
-  },
+  // {
+  //   name: "about",
+  //   path: "/about",
+  // },
 ];
 </script>
 
@@ -26,24 +26,22 @@ const navItems = [
             />
           </template>
         </UDrawer>
-        <NuxtLink to="/">
-          <NuxtImg
-            width="30"
-            height="30"
-            src="https://tse2.mm.bing.net/th/id/OIP.EUcT3At_FySw_WBbukRvGgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
-            alt=""
-          />
+        <NuxtLink
+          class="font-bold text-xl bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text text-transparent"
+          to="/"
+        >
+          Dev Hub
         </NuxtLink>
       </div>
 
       <NavItems class="" :nav-items="navItems" :options="{ horizontal: true }">
         <template #appendRight>
           <div class="flex gap-2 items-center">
-            <NuxtLink
+            <!-- <NuxtLink
               class="bg-black text-white dark:text-black dark:bg-white rounded-full px-2 py-1"
               to="/contact"
               >{{ $t("buy_me_a_coffee") }}</NuxtLink
-            >
+            > -->
             <LanguageSwitcher />
             <UColorModeButton />
             <AuthButtons />
