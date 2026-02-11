@@ -6,7 +6,7 @@ definePageMeta({
 const { t } = useI18n();
 
 // Fetch categories
-const { data, pending, error } = await useFetch("/api/v1/categories");
+const { data, pending, error } = useFetch("/api/v1/categories");
 
 const categories = computed(() => data.value?.data || []);
 </script>
@@ -19,12 +19,17 @@ const categories = computed(() => data.value?.data || []);
         {{ t("label.categories") || "Categories" }}
       </h1>
       <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-        {{ t("message.categories_description") || "Browse our content by topic" }}
+        {{
+          t("message.categories_description") || "Browse our content by topic"
+        }}
       </p>
     </div>
 
     <!-- Loading state -->
-    <div v-if="pending" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <div
+      v-if="pending"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+    >
       <div v-for="i in 8" :key="i" class="animate-pulse">
         <div class="bg-gray-200 dark:bg-gray-700 rounded-xl h-40 mb-4" />
         <div class="h-5 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mb-2" />
@@ -42,11 +47,11 @@ const categories = computed(() => data.value?.data || []);
     />
 
     <!-- Empty state -->
-    <div
-      v-else-if="categories.length === 0"
-      class="text-center py-12"
-    >
-      <UIcon name="i-lucide-folder" class="w-16 h-16 mx-auto text-gray-400 mb-4" />
+    <div v-else-if="categories.length === 0" class="text-center py-12">
+      <UIcon
+        name="i-lucide-folder"
+        class="w-16 h-16 mx-auto text-gray-400 mb-4"
+      />
       <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">
         {{ t("message.no_categories") || "No categories found" }}
       </h3>

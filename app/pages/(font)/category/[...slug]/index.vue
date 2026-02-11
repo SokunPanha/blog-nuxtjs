@@ -17,7 +17,7 @@ const page = ref(Number(route.query.page) || 1);
 const limit = ref(12);
 
 // Fetch category with posts
-const { data, pending, error } = await useFetch(`/api/v1/categories/${slug.value}`, {
+const { data: categoryData, pending, error } =  useFetch(`/api/v1/categories/${slug.value}`, {
   query: computed(() => ({
     page: page.value,
     limit: limit.value,
@@ -25,14 +25,14 @@ const { data, pending, error } = await useFetch(`/api/v1/categories/${slug.value
   watch: [page],
 });
 
-const category = computed(() => data.value?.data?.category || null);
-const posts = computed(() => data.value?.data?.data || []);
-const meta = computed(() => data.value?.data?.meta || null);
+const category = computed(() => toValue(categoryData)?.data?.category || null);
+const posts = computed(() => toValue(categoryData)?.data?.data || []);
+const meta = computed(() => toValue(categoryData)?.data?.meta || null);
 
 // Update URL when page changes
 watch(page, (newPage) => {
   navigateTo({
-    path: `/categories/${slug.value}`,
+    path: `/category/${slug.value}`,
     query: newPage > 1 ? { page: newPage } : {},
   });
 });
@@ -67,7 +67,7 @@ useHead({
         :description="t('message.category_not_found_description') || 'The category you are looking for does not exist.'"
         class="mb-6"
       />
-      <UButton @click="router.push('/categories')">
+      <UButton @click="router.push('/category')">
         {{ t("label.back_to_categories") || "Back to Categories" }}
       </UButton>
     </div>
@@ -81,7 +81,7 @@ useHead({
           color="neutral"
           icon="i-lucide-arrow-left"
           class="mb-4"
-          @click="router.push('/categories')"
+          @click="router.push('/category')"
         >
           {{ t("label.all_categories") || "All Categories" }}
         </UButton>
