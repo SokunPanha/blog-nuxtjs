@@ -5,10 +5,6 @@ import { parseMarkdown } from "@nuxtjs/mdc/runtime";
 
 definePageMeta({
   layout: "blog-layout",
-  pageTransition: {
-    name: "page-slide",
-    mode: "out-in",
-  },
 });
 
 const { t } = useI18n();
@@ -36,10 +32,7 @@ onMounted(() => {
 const isContentRestricted = computed(() => isMounted.value && !loggedIn.value);
 // Fetch post by slug - no await for instant navigation, SSR still works
 const { data, pending, error } = useFetch(() => `/api/v1/posts/${slug.value}`, {
-  key: `post-${slug.value}`,
-  getCachedData(key, nuxtApp) {
-    return nuxtApp.payload.data[key] || nuxtApp.static.data[key];
-  },
+  watch: [slug],
 });
 
 const post = computed(() => data.value?.data || null);
@@ -50,15 +43,28 @@ const parsedContent = ref<Awaited<ReturnType<typeof parseMarkdown>> | null>(null
 
 watch(
   () => post.value?.content,
-  async (content) => {
-    if (content) {
-      contentIsParsing.value = true;
-      parsedContent.value = await parseMarkdown(content);
-      contentIsParsing.value = false;
+  async (content, _, onCleanup) => {
+    if (!content) {
+      parsedContent.value = null
+      return
+    }
+
+    contentIsParsing.value = true
+
+    let cancelled = false
+    onCleanup(() => {
+      cancelled = true
+    })
+
+    const result = await parseMarkdown(content)
+
+    if (!cancelled) {
+      parsedContent.value = result
+      contentIsParsing.value = false
     }
   },
   { immediate: true }
-);
+)
 
 const breakPoint = useBreakpoints(
   {
