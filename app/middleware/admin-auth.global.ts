@@ -16,6 +16,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
     }
     return;
   }
+  
   // Check admin session for protected routes
   const { loggedIn, fetch } = useAdminSession();
   await fetch();

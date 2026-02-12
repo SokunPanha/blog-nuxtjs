@@ -20,7 +20,6 @@ const slug = computed(() => {
 // Use session from composable - state is already fetched by layout
 const { loggedIn, fetch } = useBlogSession();
 
-await callOnce("blog-session-fetch", fetch);
 
 // Track if we're on client to prevent hydration mismatch
 const isMounted = ref(false);
