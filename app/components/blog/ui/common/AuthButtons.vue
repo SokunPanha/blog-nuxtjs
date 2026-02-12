@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { DropdownMenuItem } from "@nuxt/ui";
+import { useBlogAuth } from "~/composables/blog/useBlogAuth";
 
-const { loggedIn, user, loginWithGithub, loginWithGoogle, logout } =
-  useBlogAuth();
 const { t } = useI18n();
 
 const isSignInOpen = ref(false);
-
+const { loggedIn, user, loginWithGithub, loginWithGoogle, logout } =
+  useBlogAuth();
 const userMenuItems = computed<DropdownMenuItem[][]>(() => [
   [
     {
@@ -45,42 +45,9 @@ const userMenuItems = computed<DropdownMenuItem[][]>(() => [
       >
         {{ t("label.sign_in") || "Sign In" }}
       </UButton>
-
       <UModal v-model:open="isSignInOpen">
         <template #content>
-          <div class="p-6 flex flex-col items-center gap-6">
-            <div class="text-center">
-              <h2 class="text-xl font-semibold text-gray-900 dark:text-white">
-                {{ t("label.sign_in_with") || "Sign in with" }}
-              </h2>
-              <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                {{ t("message.choose_provider") || "Choose your preferred sign in method" }}
-              </p>
-            </div>
-
-            <div class="flex flex-col gap-3 w-full max-w-xs">
-              <UButton
-                color="neutral"
-                variant="outline"
-                size="lg"
-                icon="i-simple-icons-google"
-                class="justify-center"
-                @click="loginWithGoogle"
-              >
-                Google
-              </UButton>
-              <UButton
-                color="neutral"
-                variant="outline"
-                size="lg"
-                icon="i-simple-icons-github"
-                class="justify-center"
-                @click="loginWithGithub"
-              >
-                GitHub
-              </UButton>
-            </div>
-          </div>
+          <OauthCard />
         </template>
       </UModal>
     </template>

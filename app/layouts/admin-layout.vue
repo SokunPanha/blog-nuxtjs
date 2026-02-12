@@ -2,10 +2,14 @@
 import type { navigationMenu } from "#build/ui";
 import type { DropdownMenuItem } from "@nuxt/ui";
 import { useAuth } from "~/composables/shared/useAuth";
+import { useAdminSession } from "~/composables/admin/useAdminSession";
 
 const { logOut } = useAuth();
-const { user } = useUserSession();
+const { user, fetch: fetchSession } = useAdminSession();
 const { t } = useI18n();
+
+// Note: Session fetch is handled by middleware, but we ensure state is synced
+await fetchSession();
 
 const isSidebarOpen = ref(false);
 const isSidebarCollapsed = ref(false);

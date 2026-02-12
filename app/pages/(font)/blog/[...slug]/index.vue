@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { useBreakpoints } from "@vueuse/core";
+import { Client } from "pg";
+import { useBlogSession } from "~/composables/blog/useBlogSession";
 
 definePageMeta({
   layout: "blog-layout",
@@ -8,11 +10,26 @@ definePageMeta({
 const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
+const isSignUpModalOpen = ref(false);
 
 const slug = computed(() => {
   const params = route.params.slug;
   return Array.isArray(params) ? params.join("/") : params;
 });
+const loggedIn = ref(false);
+  const { loggedIn: sessionLoggedIn, fetch } =  useBlogSession();
+  await fetch();
+  loggedIn.value = sessionLoggedIn.value;
+
+  watch(
+    sessionLoggedIn,
+    (newLoggedIn) => {
+      if (!newLoggedIn) {
+        isSignUpModalOpen.value = true;
+    }
+  },
+  { immediate: true },
+);
 
 // Fetch post by slug - no await for instant navigation, SSR still works
 const { data, pending, error } = useFetch(() => `/api/v1/posts/${slug.value}`, {
@@ -33,7 +50,7 @@ const breakPoint = useBreakpoints(
     xl: 1280,
     "2xl": 1536,
   },
-  { ssrWidth: 1024 }
+  { ssrWidth: 1024 },
 );
 
 const isDesktop = breakPoint.greaterOrEqual("lg");
@@ -82,7 +99,10 @@ useSeoMeta({
         color="error"
         icon="i-lucide-alert-circle"
         :title="t('message.post_not_found') || 'Post not found'"
-        :description="t('message.post_not_found_description') || 'The post you are looking for does not exist or has been removed.'"
+        :description="
+          t('message.post_not_found_description') ||
+          'The post you are looking for does not exist or has been removed.'
+        "
       />
       <div class="mt-6">
         <UButton @click="router.push('/blog')">
@@ -96,7 +116,10 @@ useSeoMeta({
       v-else-if="post"
       class="max-w-7xl mx-auto p-10 flex lg:flex-row flex-col justify-between gap-20"
     >
-      <section class="relative flex-1">
+      <section
+        :class="{ 'h-screen overflow-hidden': !loggedIn }"
+        class="relative flex-1"
+      >
         <UButton
           class="absolute top-0 -left-9 bg-gray-300 text-black dark:text-white dark:bg-gray-700 cursor-pointer"
           leading-icon="line-md-chevron-left"
@@ -133,7 +156,8 @@ useSeoMeta({
               size="sm"
             />
             <p class="text-sm text-gray-500">
-              {{ post.author?.firstName }} {{ post.author?.lastName || post.author?.username }}
+              {{ post.author?.firstName }}
+              {{ post.author?.lastName || post.author?.username }}
             </p>
           </div>
 
@@ -155,6 +179,13 @@ useSeoMeta({
             >
               #{{ tag.name }}
             </UBadge>
+          </div>
+
+           <div
+            v-if="!loggedIn"
+            class="h-[50vh] bg-gradient-to-b from-black/10 via-black/100 to-black flex p-10 items-end justify-center fixed bottom-0 left-0 right-0 w-full"
+          >
+            <OauthCard />
           </div>
         </div>
 
@@ -185,7 +216,9 @@ useSeoMeta({
                 name: `${related.author?.firstName || ''} ${related.author?.lastName || related.author?.username || ''}`.trim(),
                 image: related.author?.avatar || '',
               },
-              date: related.publishedAt ? new Date(related.publishedAt).toLocaleDateString() : '',
+              date: related.publishedAt
+                ? new Date(related.publishedAt).toLocaleDateString()
+                : '',
             }"
             :options="{
               showAuthorAvatar: false,
