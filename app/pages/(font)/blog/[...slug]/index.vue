@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useBreakpoints } from "@vueuse/core";
 import { useBlogSession } from "~/composables/blog/useBlogSession";
+import { parseMarkdown } from "@nuxtjs/mdc/runtime";
 
 definePageMeta({
   layout: "blog-layout",
@@ -13,6 +14,7 @@ definePageMeta({
 const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
+const contentIsParsing = ref(false);
 
 const slug = computed(() => {
   const params = route.params.slug;
@@ -42,6 +44,21 @@ const { data, pending, error } = useFetch(() => `/api/v1/posts/${slug.value}`, {
 
 const post = computed(() => data.value?.data || null);
 const relatedPosts = computed(() => data.value?.data?.relatedPosts || []);
+
+// Parse markdown content reactively
+const parsedContent = ref<Awaited<ReturnType<typeof parseMarkdown>> | null>(null);
+
+watch(
+  () => post.value?.content,
+  async (content) => {
+    if (content) {
+      contentIsParsing.value = true;
+      parsedContent.value = await parseMarkdown(content);
+      contentIsParsing.value = false;
+    }
+  },
+  { immediate: true }
+);
 
 const breakPoint = useBreakpoints(
   {
@@ -198,10 +215,25 @@ useSeoMeta({
         </div>
 
         <!-- Post content -->
-        <article
-          class="prose prose-lg dark:prose-invert max-w-none"
-          v-html="post.content"
-        />
+        <article class="prose prose-lg dark:prose-invert max-w-none">
+          <div v-if="contentIsParsing">
+            <div class="animate-pulse">
+              <div class="h-8 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-4" />
+              <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-8" />
+              <div class="h-64 bg-gray-200 dark:bg-gray-700 rounded mb-8" />
+              <div class="space-y-3">
+                <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded" />
+                <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded" />
+                <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3" />
+              </div>
+            </div>
+          </div>
+          <MDCRenderer
+            v-else-if="parsedContent?.body"
+            :body="parsedContent.body"
+            :data="parsedContent.data"
+          />
+        </article>
       </section>
 
       <!-- Related posts -->

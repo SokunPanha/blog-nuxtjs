@@ -24,6 +24,7 @@
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "^4.4.0",
     "@nuxtjs/i18n": "^10.2.1",
+    "@nuxtjs/mdc": "^0.20.1",
     "@prisma/adapter-pg": "~7.3.0",
     "@tiptap/extension-emoji": "^3.19.0",
     "@tiptap/extension-text-align": "^3.19.0",

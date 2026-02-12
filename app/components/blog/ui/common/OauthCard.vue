@@ -11,6 +11,18 @@ const props = defineProps({
     type: String,
   },
 });
+
+const loadingProvider = ref<"google" | "github" | null>(null);
+
+const handleGoogleLogin = () => {
+  loadingProvider.value = "google";
+  loginWithGoogle();
+};
+
+const handleGithubLogin = () => {
+  loadingProvider.value = "github";
+  loginWithGithub();
+};
 </script>
 
 <template>
@@ -35,7 +47,9 @@ const props = defineProps({
             size="lg"
             icon="i-simple-icons-google"
             class="justify-center"
-            @click="loginWithGoogle"
+            :loading="loadingProvider === 'google'"
+            :disabled="loadingProvider !== null"
+            @click="handleGoogleLogin"
           >
             Google
           </UButton>
@@ -45,7 +59,9 @@ const props = defineProps({
             size="lg"
             icon="i-simple-icons-github"
             class="justify-center"
-            @click="loginWithGithub"
+            :loading="loadingProvider === 'github'"
+            :disabled="loadingProvider !== null"
+            @click="handleGithubLogin"
           >
             GitHub
           </UButton>

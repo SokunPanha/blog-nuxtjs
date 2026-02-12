@@ -19,6 +19,7 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@nuxtjs/i18n",
     "@nuxt/fonts",
+    "@nuxtjs/mdc",
     "nuxt-auth-utils",
   ],
   components: [

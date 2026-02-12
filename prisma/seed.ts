@@ -216,7 +216,7 @@ async function main() {
   ]);
   console.log("✅ Created", tags.length, "tags");
 
-  // Create tech/coding posts
+  // Create tech/coding posts with Markdown content
   const posts = await Promise.all([
     prisma.post.upsert({
       where: { slug: "getting-started-with-nuxt-4" },
@@ -225,28 +225,34 @@ async function main() {
         title: "Getting Started with Nuxt 4: A Complete Guide",
         slug: "getting-started-with-nuxt-4",
         excerpt: "Learn how to build modern web applications with Nuxt 4, the latest version of the Vue.js meta-framework.",
-        content: `
-<h2>Introduction to Nuxt 4</h2>
-<p>Nuxt 4 is the latest major version of the popular Vue.js framework for building web applications. It comes with many improvements and new features that make development faster and more enjoyable.</p>
+        content: `## Introduction to Nuxt 4
 
-<h2>Key Features</h2>
-<ul>
-  <li><strong>Improved Performance:</strong> Nuxt 4 is faster than ever with optimized build times and runtime performance.</li>
-  <li><strong>Better Developer Experience:</strong> Enhanced hot module replacement and better error handling.</li>
-  <li><strong>TypeScript Support:</strong> First-class TypeScript support out of the box.</li>
-  <li><strong>Hybrid Rendering:</strong> Mix SSR, SSG, and client-side rendering in the same application.</li>
-</ul>
+Nuxt 4 is the latest major version of the popular Vue.js framework for building web applications. It comes with many improvements and new features that make development faster and more enjoyable.
 
-<h2>Getting Started</h2>
-<p>To create a new Nuxt 4 project, run the following command:</p>
-<pre><code>npx nuxi init my-app
+## Key Features
+
+- **Improved Performance:** Nuxt 4 is faster than ever with optimized build times and runtime performance.
+- **Better Developer Experience:** Enhanced hot module replacement and better error handling.
+- **TypeScript Support:** First-class TypeScript support out of the box.
+- **Hybrid Rendering:** Mix SSR, SSG, and client-side rendering in the same application.
+
+## Getting Started
+
+To create a new Nuxt 4 project, run the following command:
+
+\`\`\`bash
+npx nuxi init my-app
 cd my-app
 npm install
-npm run dev</code></pre>
+npm run dev
+\`\`\`
 
-<h2>Project Structure</h2>
-<p>Nuxt 4 uses a file-based routing system. Create Vue files in the <code>pages/</code> directory and they automatically become routes.</p>
-<pre><code>my-app/
+## Project Structure
+
+Nuxt 4 uses a file-based routing system. Create Vue files in the \`pages/\` directory and they automatically become routes.
+
+\`\`\`
+my-app/
 ├── app.vue
 ├── pages/
 │   ├── index.vue      # /
@@ -255,11 +261,12 @@ npm run dev</code></pre>
 │       └── [slug].vue # /blog/:slug
 ├── components/
 ├── composables/
-└── nuxt.config.ts</code></pre>
+└── nuxt.config.ts
+\`\`\`
 
-<h2>Conclusion</h2>
-<p>Nuxt 4 is a powerful framework that makes building Vue.js applications a breeze. Start exploring today!</p>
-        `.trim(),
+## Conclusion
+
+Nuxt 4 is a powerful framework that makes building Vue.js applications a breeze. Start exploring today!`,
         coverImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200",
         status: "PUBLISHED",
         isFeatured: true,
@@ -278,72 +285,112 @@ npm run dev</code></pre>
         title: "10 JavaScript Tips for Writing Better Code",
         slug: "10-javascript-tips-for-better-code",
         excerpt: "Improve your JavaScript skills with these practical tips and best practices for cleaner, more efficient code.",
-        content: `
-<h2>Write Better JavaScript</h2>
-<p>JavaScript is a versatile language, but writing clean and maintainable code requires practice. Here are 10 tips to improve your code quality.</p>
+        content: `## Write Better JavaScript
 
-<h3>1. Use const and let</h3>
-<p>Always prefer <code>const</code> for variables that don't change, and <code>let</code> for those that do. Avoid <code>var</code>.</p>
-<pre><code>// Good
+JavaScript is a versatile language, but writing clean and maintainable code requires practice. Here are 10 tips to improve your code quality.
+
+### 1. Use const and let
+
+Always prefer \`const\` for variables that don't change, and \`let\` for those that do. Avoid \`var\`.
+
+\`\`\`javascript
+// Good
 const API_URL = 'https://api.example.com';
 let count = 0;
 
 // Avoid
-var oldWay = 'deprecated';</code></pre>
+var oldWay = 'deprecated';
+\`\`\`
 
-<h3>2. Use Template Literals</h3>
-<p>Template literals make string concatenation cleaner and more readable.</p>
-<pre><code>const greeting = \`Hello, \${name}! You have \${count} messages.\`;</code></pre>
+### 2. Use Template Literals
 
-<h3>3. Destructuring Assignment</h3>
-<p>Extract values from objects and arrays more elegantly.</p>
-<pre><code>const { name, email } = user;
-const [first, second, ...rest] = items;</code></pre>
+Template literals make string concatenation cleaner and more readable.
 
-<h3>4. Arrow Functions</h3>
-<p>Use arrow functions for shorter syntax and lexical <code>this</code> binding.</p>
-<pre><code>const double = (n) => n * 2;
-const items = data.map(item => item.name);</code></pre>
+\`\`\`javascript
+const greeting = \`Hello, \${name}! You have \${count} messages.\`;
+\`\`\`
 
-<h3>5. Use Array Methods</h3>
-<p>Methods like <code>map</code>, <code>filter</code>, and <code>reduce</code> make code more declarative.</p>
-<pre><code>const activeUsers = users.filter(u => u.isActive);
+### 3. Destructuring Assignment
+
+Extract values from objects and arrays more elegantly.
+
+\`\`\`javascript
+const { name, email } = user;
+const [first, second, ...rest] = items;
+\`\`\`
+
+### 4. Arrow Functions
+
+Use arrow functions for shorter syntax and lexical \`this\` binding.
+
+\`\`\`javascript
+const double = (n) => n * 2;
+const items = data.map(item => item.name);
+\`\`\`
+
+### 5. Use Array Methods
+
+Methods like \`map\`, \`filter\`, and \`reduce\` make code more declarative.
+
+\`\`\`javascript
+const activeUsers = users.filter(u => u.isActive);
 const names = users.map(u => u.name);
-const total = prices.reduce((sum, p) => sum + p, 0);</code></pre>
+const total = prices.reduce((sum, p) => sum + p, 0);
+\`\`\`
 
-<h3>6. Optional Chaining</h3>
-<p>Safely access nested properties without checking each level.</p>
-<pre><code>const city = user?.address?.city ?? 'Unknown';</code></pre>
+### 6. Optional Chaining
 
-<h3>7. Nullish Coalescing</h3>
-<p>Use <code>??</code> instead of <code>||</code> for default values when you want to allow falsy values.</p>
-<pre><code>const count = data.count ?? 0; // Only defaults if null/undefined</code></pre>
+Safely access nested properties without checking each level.
 
-<h3>8. Async/Await</h3>
-<p>Write asynchronous code that reads like synchronous code.</p>
-<pre><code>async function fetchUser(id) {
+\`\`\`javascript
+const city = user?.address?.city ?? 'Unknown';
+\`\`\`
+
+### 7. Nullish Coalescing
+
+Use \`??\` instead of \`||\` for default values when you want to allow falsy values.
+
+\`\`\`javascript
+const count = data.count ?? 0; // Only defaults if null/undefined
+\`\`\`
+
+### 8. Async/Await
+
+Write asynchronous code that reads like synchronous code.
+
+\`\`\`javascript
+async function fetchUser(id) {
   try {
     const response = await fetch(\`/api/users/\${id}\`);
     return await response.json();
   } catch (error) {
     console.error('Failed to fetch user:', error);
   }
-}</code></pre>
+}
+\`\`\`
 
-<h3>9. Use Object Shorthand</h3>
-<p>Simplify object creation when property names match variable names.</p>
-<pre><code>const name = 'John';
+### 9. Use Object Shorthand
+
+Simplify object creation when property names match variable names.
+
+\`\`\`javascript
+const name = 'John';
 const age = 30;
-const user = { name, age }; // { name: 'John', age: 30 }</code></pre>
+const user = { name, age }; // { name: 'John', age: 30 }
+\`\`\`
 
-<h3>10. Spread Operator</h3>
-<p>Clone and merge objects/arrays immutably.</p>
-<pre><code>const newUser = { ...user, role: 'admin' };
-const allItems = [...items1, ...items2];</code></pre>
+### 10. Spread Operator
 
-<h2>Conclusion</h2>
-<p>These tips will help you write cleaner, more maintainable JavaScript code. Practice them daily!</p>
-        `.trim(),
+Clone and merge objects/arrays immutably.
+
+\`\`\`javascript
+const newUser = { ...user, role: 'admin' };
+const allItems = [...items1, ...items2];
+\`\`\`
+
+## Conclusion
+
+These tips will help you write cleaner, more maintainable JavaScript code. Practice them daily!`,
         coverImage: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=1200",
         status: "PUBLISHED",
         isFeatured: true,
@@ -362,28 +409,35 @@ const allItems = [...items1, ...items2];</code></pre>
         title: "TypeScript Generics Explained with Practical Examples",
         slug: "typescript-generics-explained",
         excerpt: "Master TypeScript generics with clear explanations and real-world examples you can use in your projects.",
-        content: `
-<h2>Understanding TypeScript Generics</h2>
-<p>Generics allow you to write flexible, reusable code while maintaining type safety. They're one of TypeScript's most powerful features.</p>
+        content: `## Understanding TypeScript Generics
 
-<h2>Basic Generic Function</h2>
-<p>Instead of using <code>any</code>, generics preserve type information:</p>
-<pre><code>// Without generics - loses type information
+Generics allow you to write flexible, reusable code while maintaining type safety. They're one of TypeScript's most powerful features.
+
+## Basic Generic Function
+
+Instead of using \`any\`, generics preserve type information:
+
+\`\`\`typescript
+// Without generics - loses type information
 function identity(arg: any): any {
   return arg;
 }
 
 // With generics - preserves type
-function identity&lt;T&gt;(arg: T): T {
+function identity<T>(arg: T): T {
   return arg;
 }
 
 const num = identity(42);        // type: number
-const str = identity('hello');   // type: string</code></pre>
+const str = identity('hello');   // type: string
+\`\`\`
 
-<h2>Generic Interfaces</h2>
-<p>Create flexible interfaces that work with multiple types:</p>
-<pre><code>interface ApiResponse&lt;T&gt; {
+## Generic Interfaces
+
+Create flexible interfaces that work with multiple types:
+
+\`\`\`typescript
+interface ApiResponse<T> {
   data: T;
   status: number;
   message: string;
@@ -394,39 +448,51 @@ interface User {
   name: string;
 }
 
-const userResponse: ApiResponse&lt;User&gt; = {
+const userResponse: ApiResponse<User> = {
   data: { id: 1, name: 'John' },
   status: 200,
   message: 'Success'
-};</code></pre>
+};
+\`\`\`
 
-<h2>Generic Constraints</h2>
-<p>Limit what types can be used with your generic:</p>
-<pre><code>interface HasLength {
+## Generic Constraints
+
+Limit what types can be used with your generic:
+
+\`\`\`typescript
+interface HasLength {
   length: number;
 }
 
-function logLength&lt;T extends HasLength&gt;(arg: T): void {
+function logLength<T extends HasLength>(arg: T): void {
   console.log(arg.length);
 }
 
 logLength('hello');     // OK - string has length
 logLength([1, 2, 3]);   // OK - array has length
-logLength(123);         // Error - number has no length</code></pre>
+logLength(123);         // Error - number has no length
+\`\`\`
 
-<h2>Multiple Type Parameters</h2>
-<p>Use multiple generics for complex relationships:</p>
-<pre><code>function map&lt;T, U&gt;(arr: T[], fn: (item: T) => U): U[] {
+## Multiple Type Parameters
+
+Use multiple generics for complex relationships:
+
+\`\`\`typescript
+function map<T, U>(arr: T[], fn: (item: T) => U): U[] {
   return arr.map(fn);
 }
 
 const numbers = [1, 2, 3];
 const strings = map(numbers, n => n.toString());
-// strings: string[]</code></pre>
+// strings: string[]
+\`\`\`
 
-<h2>Generic Classes</h2>
-<p>Create type-safe data structures:</p>
-<pre><code>class Stack&lt;T&gt; {
+## Generic Classes
+
+Create type-safe data structures:
+
+\`\`\`typescript
+class Stack<T> {
   private items: T[] = [];
 
   push(item: T): void {
@@ -438,14 +504,15 @@ const strings = map(numbers, n => n.toString());
   }
 }
 
-const numberStack = new Stack&lt;number&gt;();
+const numberStack = new Stack<number>();
 numberStack.push(1);
 numberStack.push(2);
-const value = numberStack.pop(); // type: number | undefined</code></pre>
+const value = numberStack.pop(); // type: number | undefined
+\`\`\`
 
-<h2>Conclusion</h2>
-<p>Generics are essential for writing reusable TypeScript code. Start using them to improve your type safety!</p>
-        `.trim(),
+## Conclusion
+
+Generics are essential for writing reusable TypeScript code. Start using them to improve your type safety!`,
         coverImage: "https://images.unsplash.com/photo-1599507593499-a3f7d7d97667?w=1200",
         status: "PUBLISHED",
         isFeatured: true,
@@ -464,19 +531,24 @@ const value = numberStack.pop(); // type: number | undefined</code></pre>
         title: "Building a REST API with Node.js and Express",
         slug: "building-rest-api-with-nodejs",
         excerpt: "Learn how to create a production-ready REST API using Node.js, Express, and best practices.",
-        content: `
-<h2>Introduction</h2>
-<p>REST APIs are the backbone of modern web applications. In this tutorial, we'll build a complete API using Node.js and Express.</p>
+        content: `## Introduction
 
-<h2>Project Setup</h2>
-<pre><code>mkdir my-api
+REST APIs are the backbone of modern web applications. In this tutorial, we'll build a complete API using Node.js and Express.
+
+## Project Setup
+
+\`\`\`bash
+mkdir my-api
 cd my-api
 npm init -y
 npm install express cors helmet morgan
-npm install -D typescript @types/node @types/express ts-node nodemon</code></pre>
+npm install -D typescript @types/node @types/express ts-node nodemon
+\`\`\`
 
-<h2>Project Structure</h2>
-<pre><code>my-api/
+## Project Structure
+
+\`\`\`
+my-api/
 ├── src/
 │   ├── controllers/
 │   │   └── userController.ts
@@ -488,10 +560,13 @@ npm install -D typescript @types/node @types/express ts-node nodemon</code></pre
 │   │   └── index.ts
 │   └── index.ts
 ├── package.json
-└── tsconfig.json</code></pre>
+└── tsconfig.json
+\`\`\`
 
-<h2>Basic Server Setup</h2>
-<pre><code>// src/index.ts
+## Basic Server Setup
+
+\`\`\`typescript
+// src/index.ts
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -516,10 +591,13 @@ app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(\`Server running on port \${PORT}\`);
-});</code></pre>
+});
+\`\`\`
 
-<h2>Creating Routes</h2>
-<pre><code>// src/routes/userRoutes.ts
+## Creating Routes
+
+\`\`\`typescript
+// src/routes/userRoutes.ts
 import { Router } from 'express';
 import * as userController from '../controllers/userController';
 
@@ -531,10 +609,13 @@ router.post('/', userController.createUser);
 router.put('/:id', userController.updateUser);
 router.delete('/:id', userController.deleteUser);
 
-export default router;</code></pre>
+export default router;
+\`\`\`
 
-<h2>Controller Implementation</h2>
-<pre><code>// src/controllers/userController.ts
+## Controller Implementation
+
+\`\`\`typescript
+// src/controllers/userController.ts
 import { Request, Response, NextFunction } from 'express';
 
 export const getAllUsers = async (
@@ -549,10 +630,13 @@ export const getAllUsers = async (
   } catch (error) {
     next(error);
   }
-};</code></pre>
+};
+\`\`\`
 
-<h2>Error Handling Middleware</h2>
-<pre><code>// src/middleware/errorHandler.ts
+## Error Handling Middleware
+
+\`\`\`typescript
+// src/middleware/errorHandler.ts
 import { Request, Response, NextFunction } from 'express';
 
 export const errorHandler = (
@@ -566,11 +650,12 @@ export const errorHandler = (
     error: 'Something went wrong!',
     message: err.message
   });
-};</code></pre>
+};
+\`\`\`
 
-<h2>Conclusion</h2>
-<p>You now have a solid foundation for building REST APIs with Node.js. Extend this with authentication, validation, and database integration!</p>
-        `.trim(),
+## Conclusion
+
+You now have a solid foundation for building REST APIs with Node.js. Extend this with authentication, validation, and database integration!`,
         coverImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200",
         status: "PUBLISHED",
         isFeatured: false,
@@ -589,20 +674,21 @@ export const errorHandler = (
         title: "Docker for Developers: From Zero to Production",
         slug: "docker-for-developers",
         excerpt: "A practical guide to containerizing your applications with Docker and Docker Compose.",
-        content: `
-<h2>Why Docker?</h2>
-<p>Docker solves the "it works on my machine" problem by packaging your application with all its dependencies into a container.</p>
+        content: `## Why Docker?
 
-<h2>Key Concepts</h2>
-<ul>
-  <li><strong>Image:</strong> A blueprint for containers (like a class)</li>
-  <li><strong>Container:</strong> A running instance of an image (like an object)</li>
-  <li><strong>Dockerfile:</strong> Instructions to build an image</li>
-  <li><strong>Docker Compose:</strong> Tool for multi-container applications</li>
-</ul>
+Docker solves the "it works on my machine" problem by packaging your application with all its dependencies into a container.
 
-<h2>Your First Dockerfile</h2>
-<pre><code># Node.js application Dockerfile
+## Key Concepts
+
+- **Image:** A blueprint for containers (like a class)
+- **Container:** A running instance of an image (like an object)
+- **Dockerfile:** Instructions to build an image
+- **Docker Compose:** Tool for multi-container applications
+
+## Your First Dockerfile
+
+\`\`\`dockerfile
+# Node.js application Dockerfile
 FROM node:20-alpine
 
 WORKDIR /app
@@ -619,10 +705,13 @@ RUN npm run build
 
 EXPOSE 3000
 
-CMD ["node", "dist/index.js"]</code></pre>
+CMD ["node", "dist/index.js"]
+\`\`\`
 
-<h2>Docker Compose for Development</h2>
-<pre><code># docker-compose.yml
+## Docker Compose for Development
+
+\`\`\`yaml
+# docker-compose.yml
 version: '3.8'
 
 services:
@@ -653,10 +742,13 @@ services:
     image: redis:7-alpine
 
 volumes:
-  postgres_data:</code></pre>
+  postgres_data:
+\`\`\`
 
-<h2>Common Docker Commands</h2>
-<pre><code># Build an image
+## Common Docker Commands
+
+\`\`\`bash
+# Build an image
 docker build -t my-app .
 
 # Run a container
@@ -666,16 +758,20 @@ docker run -p 3000:3000 my-app
 docker ps
 
 # Stop a container
-docker stop &lt;container_id&gt;
+docker stop <container_id>
 
 # Docker Compose commands
 docker-compose up -d      # Start in background
 docker-compose down       # Stop and remove
-docker-compose logs -f    # Follow logs</code></pre>
+docker-compose logs -f    # Follow logs
+\`\`\`
 
-<h2>Multi-stage Builds</h2>
-<p>Reduce image size by separating build and runtime:</p>
-<pre><code>FROM node:20-alpine AS builder
+## Multi-stage Builds
+
+Reduce image size by separating build and runtime:
+
+\`\`\`dockerfile
+FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
@@ -686,11 +782,12 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
-CMD ["node", "dist/index.js"]</code></pre>
+CMD ["node", "dist/index.js"]
+\`\`\`
 
-<h2>Conclusion</h2>
-<p>Docker makes your development and deployment workflow consistent and reproducible. Start containerizing your apps today!</p>
-        `.trim(),
+## Conclusion
+
+Docker makes your development and deployment workflow consistent and reproducible. Start containerizing your apps today!`,
         coverImage: "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=1200",
         status: "PUBLISHED",
         isFeatured: true,
@@ -709,33 +806,43 @@ CMD ["node", "dist/index.js"]</code></pre>
         title: "Git Workflow for Teams: Branching Strategies and Best Practices",
         slug: "git-workflow-for-teams",
         excerpt: "Learn effective Git branching strategies and collaboration workflows for development teams.",
-        content: `
-<h2>Introduction</h2>
-<p>A well-defined Git workflow helps teams collaborate effectively and maintain code quality.</p>
+        content: `## Introduction
 
-<h2>Popular Branching Strategies</h2>
+A well-defined Git workflow helps teams collaborate effectively and maintain code quality.
 
-<h3>Git Flow</h3>
-<p>Best for projects with scheduled releases:</p>
-<pre><code>main          ─────●─────────────●─────────
+## Popular Branching Strategies
+
+### Git Flow
+
+Best for projects with scheduled releases:
+
+\`\`\`
+main          ─────●─────────────●─────────
                ↑                ↑
 hotfix        ─●─               │
                ↓                │
 develop   ────●────●────●────●──┘
                ↑       ↑
-feature   ────●───────●</code></pre>
+feature   ────●───────●
+\`\`\`
 
-<h3>GitHub Flow</h3>
-<p>Simpler approach for continuous deployment:</p>
-<pre><code>main     ────●────●────●────●────
+### GitHub Flow
+
+Simpler approach for continuous deployment:
+
+\`\`\`
+main     ────●────●────●────●────
               ↑    ↑    ↑    ↑
 feature  ────●    │    │    │
 feature  ─────────●    │    │
 feature  ──────────────●    │
-feature  ───────────────────●</code></pre>
+feature  ───────────────────●
+\`\`\`
 
-<h2>Essential Git Commands</h2>
-<pre><code># Create and switch to new branch
+## Essential Git Commands
+
+\`\`\`bash
+# Create and switch to new branch
 git checkout -b feature/user-auth
 
 # Keep branch up to date with main
@@ -749,40 +856,47 @@ git rebase -i HEAD~3
 git merge --squash feature/user-auth
 
 # Cherry-pick specific commits
-git cherry-pick abc123</code></pre>
+git cherry-pick abc123
+\`\`\`
 
-<h2>Commit Message Convention</h2>
-<p>Follow conventional commits for clear history:</p>
-<pre><code># Format
-&lt;type&gt;(&lt;scope&gt;): &lt;description&gt;
+## Commit Message Convention
+
+Follow conventional commits for clear history:
+
+\`\`\`
+# Format
+<type>(<scope>): <description>
 
 # Examples
 feat(auth): add OAuth2 login support
 fix(api): handle null response in user endpoint
 docs(readme): update installation instructions
 refactor(utils): simplify date formatting function
-test(auth): add unit tests for login service</code></pre>
+test(auth): add unit tests for login service
+\`\`\`
 
-<h2>Pull Request Best Practices</h2>
-<ul>
-  <li>Keep PRs small and focused</li>
-  <li>Write clear descriptions</li>
-  <li>Add screenshots for UI changes</li>
-  <li>Request reviews from relevant team members</li>
-  <li>Address all comments before merging</li>
-</ul>
+## Pull Request Best Practices
 
-<h2>Protecting Your Main Branch</h2>
-<pre><code># Branch protection rules:
+- Keep PRs small and focused
+- Write clear descriptions
+- Add screenshots for UI changes
+- Request reviews from relevant team members
+- Address all comments before merging
+
+## Protecting Your Main Branch
+
+\`\`\`
+Branch protection rules:
 - Require pull request reviews
 - Require status checks to pass
 - Require branches to be up to date
 - Include administrators
-- Restrict force pushes</code></pre>
+- Restrict force pushes
+\`\`\`
 
-<h2>Conclusion</h2>
-<p>Choose a workflow that fits your team size and release cycle. Consistency is key!</p>
-        `.trim(),
+## Conclusion
+
+Choose a workflow that fits your team size and release cycle. Consistency is key!`,
         coverImage: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=1200",
         status: "PUBLISHED",
         isFeatured: false,
@@ -801,12 +915,14 @@ test(auth): add unit tests for login service</code></pre>
         title: "Vue 3 Composition API: A Complete Guide",
         slug: "vue-3-composition-api-guide",
         excerpt: "Master Vue 3's Composition API with practical examples and patterns for building scalable applications.",
-        content: `
-<h2>Introduction to Composition API</h2>
-<p>The Composition API is Vue 3's new way to organize component logic, offering better code reuse and TypeScript support.</p>
+        content: `## Introduction to Composition API
 
-<h2>Basic Setup</h2>
-<pre><code>&lt;script setup lang="ts"&gt;
+The Composition API is Vue 3's new way to organize component logic, offering better code reuse and TypeScript support.
+
+## Basic Setup
+
+\`\`\`vue
+<script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 
 // Reactive state
@@ -825,16 +941,19 @@ function increment() {
 onMounted(() => {
   console.log('Component mounted');
 });
-&lt;/script&gt;
+</script>
 
-&lt;template&gt;
-  &lt;h1&gt;{{ greeting }}&lt;/h1&gt;
-  &lt;p&gt;Count: {{ count }}&lt;/p&gt;
-  &lt;button @click="increment"&gt;Increment&lt;/button&gt;
-&lt;/template&gt;</code></pre>
+<template>
+  <h1>{{ greeting }}</h1>
+  <p>Count: {{ count }}</p>
+  <button @click="increment">Increment</button>
+</template>
+\`\`\`
 
-<h2>Reactive vs Ref</h2>
-<pre><code>import { ref, reactive } from 'vue';
+## Reactive vs Ref
+
+\`\`\`typescript
+import { ref, reactive } from 'vue';
 
 // ref - for primitives (access with .value)
 const count = ref(0);
@@ -845,16 +964,20 @@ const state = reactive({
   count: 0,
   user: null
 });
-state.count++;</code></pre>
+state.count++;
+\`\`\`
 
-<h2>Creating Composables</h2>
-<p>Extract and reuse logic across components:</p>
-<pre><code>// composables/useFetch.ts
+## Creating Composables
+
+Extract and reuse logic across components:
+
+\`\`\`typescript
+// composables/useFetch.ts
 import { ref } from 'vue';
 
-export function useFetch&lt;T&gt;(url: string) {
-  const data = ref&lt;T | null&gt;(null);
-  const error = ref&lt;Error | null&gt;(null);
+export function useFetch<T>(url: string) {
+  const data = ref<T | null>(null);
+  const error = ref<Error | null>(null);
   const loading = ref(true);
 
   async function fetchData() {
@@ -875,10 +998,13 @@ export function useFetch&lt;T&gt;(url: string) {
 }
 
 // Usage in component
-const { data: users, loading, error } = useFetch('/api/users');</code></pre>
+const { data: users, loading, error } = useFetch('/api/users');
+\`\`\`
 
-<h2>Watch and WatchEffect</h2>
-<pre><code>import { watch, watchEffect } from 'vue';
+## Watch and WatchEffect
+
+\`\`\`typescript
+import { watch, watchEffect } from 'vue';
 
 // Watch specific source
 watch(count, (newVal, oldVal) => {
@@ -893,10 +1019,13 @@ watch([firstName, lastName], ([first, last]) => {
 // watchEffect - auto-tracks dependencies
 watchEffect(() => {
   console.log(\`Count is: \${count.value}\`);
-});</code></pre>
+});
+\`\`\`
 
-<h2>Provide/Inject for Dependency Injection</h2>
-<pre><code>// Parent component
+## Provide/Inject for Dependency Injection
+
+\`\`\`typescript
+// Parent component
 import { provide } from 'vue';
 
 const theme = ref('dark');
@@ -905,11 +1034,12 @@ provide('theme', theme);
 // Child component (any depth)
 import { inject } from 'vue';
 
-const theme = inject('theme', 'light'); // 'light' is default</code></pre>
+const theme = inject('theme', 'light'); // 'light' is default
+\`\`\`
 
-<h2>Conclusion</h2>
-<p>The Composition API offers a powerful way to organize and reuse Vue component logic. Start using composables!</p>
-        `.trim(),
+## Conclusion
+
+The Composition API offers a powerful way to organize and reuse Vue component logic. Start using composables!`,
         coverImage: "https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=1200",
         status: "PUBLISHED",
         isFeatured: false,
@@ -928,12 +1058,14 @@ const theme = inject('theme', 'light'); // 'light' is default</code></pre>
         title: "React Hooks Deep Dive: Beyond the Basics",
         slug: "react-hooks-deep-dive",
         excerpt: "Go beyond useState and useEffect with advanced React hooks patterns and custom hook creation.",
-        content: `
-<h2>Introduction</h2>
-<p>React Hooks revolutionized how we write React components. Let's explore advanced patterns and custom hooks.</p>
+        content: `## Introduction
 
-<h2>useReducer for Complex State</h2>
-<pre><code>import { useReducer } from 'react';
+React Hooks revolutionized how we write React components. Let's explore advanced patterns and custom hooks.
+
+## useReducer for Complex State
+
+\`\`\`typescript
+import { useReducer } from 'react';
 
 interface State {
   count: number;
@@ -962,16 +1094,19 @@ function Counter() {
   const [state, dispatch] = useReducer(reducer, { count: 0, step: 1 });
 
   return (
-    &lt;div&gt;
-      &lt;p&gt;Count: {state.count}&lt;/p&gt;
-      &lt;button onClick={() => dispatch({ type: 'increment' })}&gt;+&lt;/button&gt;
-      &lt;button onClick={() => dispatch({ type: 'decrement' })}&gt;-&lt;/button&gt;
-    &lt;/div&gt;
+    <div>
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
+    </div>
   );
-}</code></pre>
+}
+\`\`\`
 
-<h2>useMemo and useCallback</h2>
-<pre><code>import { useMemo, useCallback } from 'react';
+## useMemo and useCallback
+
+\`\`\`typescript
+import { useMemo, useCallback } from 'react';
 
 function ExpensiveComponent({ items, filter }) {
   // Memoize expensive computation
@@ -985,18 +1120,21 @@ function ExpensiveComponent({ items, filter }) {
   }, []);
 
   return (
-    &lt;ul&gt;
+    <ul>
       {filteredItems.map(item => (
-        &lt;ListItem key={item.id} onClick={handleClick} /&gt;
+        <ListItem key={item.id} onClick={handleClick} />
       ))}
-    &lt;/ul&gt;
+    </ul>
   );
-}</code></pre>
+}
+\`\`\`
 
-<h2>Custom Hooks</h2>
-<pre><code>// useLocalStorage hook
-function useLocalStorage&lt;T&gt;(key: string, initialValue: T) {
-  const [storedValue, setStoredValue] = useState&lt;T&gt;(() => {
+## Custom Hooks
+
+\`\`\`typescript
+// useLocalStorage hook
+function useLocalStorage<T>(key: string, initialValue: T) {
+  const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
@@ -1020,12 +1158,15 @@ function useLocalStorage&lt;T&gt;(key: string, initialValue: T) {
 }
 
 // Usage
-const [theme, setTheme] = useLocalStorage('theme', 'light');</code></pre>
+const [theme, setTheme] = useLocalStorage('theme', 'light');
+\`\`\`
 
-<h2>useRef Beyond DOM</h2>
-<pre><code>function Timer() {
+## useRef Beyond DOM
+
+\`\`\`typescript
+function Timer() {
   const [count, setCount] = useState(0);
-  const intervalRef = useRef&lt;NodeJS.Timeout&gt;();
+  const intervalRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
     intervalRef.current = setInterval(() => {
@@ -1038,16 +1179,17 @@ const [theme, setTheme] = useLocalStorage('theme', 'light');</code></pre>
   const stop = () => clearInterval(intervalRef.current);
 
   return (
-    &lt;div&gt;
-      &lt;p&gt;{count}&lt;/p&gt;
-      &lt;button onClick={stop}&gt;Stop&lt;/button&gt;
-    &lt;/div&gt;
+    <div>
+      <p>{count}</p>
+      <button onClick={stop}>Stop</button>
+    </div>
   );
-}</code></pre>
+}
+\`\`\`
 
-<h2>Conclusion</h2>
-<p>Master these patterns to write more efficient and maintainable React code!</p>
-        `.trim(),
+## Conclusion
+
+Master these patterns to write more efficient and maintainable React code!`,
         coverImage: "https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?w=1200",
         status: "PUBLISHED",
         isFeatured: false,
@@ -1066,15 +1208,20 @@ const [theme, setTheme] = useLocalStorage('theme', 'light');</code></pre>
         title: "Building APIs with Python FastAPI",
         slug: "python-fastapi-tutorial",
         excerpt: "Learn to build high-performance APIs with FastAPI, Python's modern web framework.",
-        content: `
-<h2>Why FastAPI?</h2>
-<p>FastAPI is a modern Python framework for building APIs with automatic OpenAPI documentation and excellent performance.</p>
+        content: `## Why FastAPI?
 
-<h2>Installation</h2>
-<pre><code>pip install fastapi uvicorn[standard]</code></pre>
+FastAPI is a modern Python framework for building APIs with automatic OpenAPI documentation and excellent performance.
 
-<h2>Basic Application</h2>
-<pre><code>from fastapi import FastAPI, HTTPException
+## Installation
+
+\`\`\`bash
+pip install fastapi uvicorn[standard]
+\`\`\`
+
+## Basic Application
+
+\`\`\`python
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import Optional
 
@@ -1101,10 +1248,13 @@ async def read_item(item_id: int):
 async def create_item(item: Item):
     item_id = len(items_db) + 1
     items_db[item_id] = item
-    return {"id": item_id, **item.dict()}</code></pre>
+    return {"id": item_id, **item.dict()}
+\`\`\`
 
-<h2>Request Validation</h2>
-<pre><code>from pydantic import BaseModel, Field, validator
+## Request Validation
+
+\`\`\`python
+from pydantic import BaseModel, Field, validator
 
 class User(BaseModel):
     username: str = Field(..., min_length=3, max_length=50)
@@ -1119,10 +1269,13 @@ class User(BaseModel):
 
 @app.post("/users/")
 async def create_user(user: User):
-    return user</code></pre>
+    return user
+\`\`\`
 
-<h2>Dependency Injection</h2>
-<pre><code>from fastapi import Depends
+## Dependency Injection
+
+\`\`\`python
+from fastapi import Depends
 
 async def get_db():
     db = Database()
@@ -1139,16 +1292,20 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
 
 @app.get("/users/me")
 async def read_users_me(current_user: User = Depends(get_current_user)):
-    return current_user</code></pre>
+    return current_user
+\`\`\`
 
-<h2>Running the Server</h2>
-<pre><code>uvicorn main:app --reload</code></pre>
+## Running the Server
 
-<p>Visit <code>http://localhost:8000/docs</code> for automatic Swagger documentation!</p>
+\`\`\`bash
+uvicorn main:app --reload
+\`\`\`
 
-<h2>Conclusion</h2>
-<p>FastAPI combines speed, automatic validation, and great documentation. Perfect for modern Python APIs!</p>
-        `.trim(),
+Visit \`http://localhost:8000/docs\` for automatic Swagger documentation!
+
+## Conclusion
+
+FastAPI combines speed, automatic validation, and great documentation. Perfect for modern Python APIs!`,
         coverImage: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=1200",
         status: "PUBLISHED",
         isFeatured: false,
@@ -1167,7 +1324,16 @@ async def read_users_me(current_user: User = Depends(get_current_user)):
         title: "Kubernetes for Beginners: Getting Started Guide",
         slug: "draft-kubernetes-guide",
         excerpt: "Learn the basics of Kubernetes container orchestration.",
-        content: "<p>Coming soon: A comprehensive guide to Kubernetes...</p>",
+        content: `## Coming Soon
+
+A comprehensive guide to Kubernetes is coming soon!
+
+Stay tuned for:
+- Kubernetes architecture overview
+- Pods, Services, and Deployments
+- ConfigMaps and Secrets
+- Helm charts
+- Best practices for production`,
         coverImage: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=1200",
         status: "DRAFT",
         isFeatured: false,
