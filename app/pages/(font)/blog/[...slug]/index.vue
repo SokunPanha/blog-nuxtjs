@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useBreakpoints } from "@vueuse/core";
-import { Client } from "pg";
 import { useBlogSession } from "~/composables/blog/useBlogSession";
 
 definePageMeta({
@@ -10,27 +9,15 @@ definePageMeta({
 const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
-const isSignUpModalOpen = ref(false);
 
 const slug = computed(() => {
   const params = route.params.slug;
   return Array.isArray(params) ? params.join("/") : params;
 });
-const loggedIn = ref(false);
-  const { loggedIn: sessionLoggedIn, fetch } =  useBlogSession();
-  await fetch();
-  loggedIn.value = sessionLoggedIn.value;
 
-  watch(
-    sessionLoggedIn,
-    (newLoggedIn) => {
-      if (!newLoggedIn) {
-        isSignUpModalOpen.value = true;
-    }
-  },
-  { immediate: true },
-);
-
+// Use session from composable - state is already fetched by layout
+const { loggedIn, fetch } = useBlogSession();
+await fetch();
 // Fetch post by slug - no await for instant navigation, SSR still works
 const { data, pending, error } = useFetch(() => `/api/v1/posts/${slug.value}`, {
   key: `post-${slug.value}`,
@@ -114,12 +101,10 @@ useSeoMeta({
     <!-- Post content -->
     <div
       v-else-if="post"
+      :class="{ 'h-screen overflow-hidden': !loggedIn }"
       class="max-w-7xl mx-auto p-10 flex lg:flex-row flex-col justify-between gap-20"
     >
-      <section
-        :class="{ 'h-screen overflow-hidden': !loggedIn }"
-        class="relative flex-1"
-      >
+      <section class="relative flex-1">
         <UButton
           class="absolute top-0 -left-9 bg-gray-300 text-black dark:text-white dark:bg-gray-700 cursor-pointer"
           leading-icon="line-md-chevron-left"
@@ -143,10 +128,10 @@ useSeoMeta({
             <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
               {{ post.title }}
             </h1>
-            <p class="text-sm text-gray-500">
-              {{ formatDate(post.publishedAt) }}
-            </p>
           </div>
+          <p class="text-sm text-gray-500">
+            {{ formatDate(post.publishedAt) }}
+          </p>
 
           <!-- Author -->
           <div class="flex flex-row items-center gap-2">
@@ -181,9 +166,9 @@ useSeoMeta({
             </UBadge>
           </div>
 
-           <div
+          <div
             v-if="!loggedIn"
-            class="h-[50vh] bg-gradient-to-b from-black/10 via-black/100 to-black flex p-10 items-end justify-center fixed bottom-0 left-0 right-0 w-full"
+            class="h-[50vh] bg-gradient-to-b from-gray-50/40 via-gray-100 to-gray-50 dark:from-black/10 dark:via-black/100 dark:to-black dark:from-white/10 dark:via-white/100 dark:to-white flex p-10 items-end justify-center fixed bottom-0 left-0 right-0 w-full"
           >
             <OauthCard />
           </div>

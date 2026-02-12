@@ -15,12 +15,18 @@ export const useBlogAuth = () => {
 
   const loginWithGithub = () => {
     setRedirectCookie();
-    navigateTo("/api/auth/github", { external: true });
+    // Use location.replace to avoid adding history entry
+    if (import.meta.client) {
+      window.location.replace("/api/auth/github");
+    }
   };
 
   const loginWithGoogle = () => {
     setRedirectCookie();
-    navigateTo("/api/auth/google", { external: true });
+    // Use location.replace to avoid adding history entry
+    if (import.meta.client) {
+      window.location.replace("/api/auth/google");
+    }
   };
 
   const logout = async () => {
