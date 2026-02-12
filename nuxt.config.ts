@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET,
   },
   routeRules: {
-    "/": { isr: 300 },
+    "/": { ssr: false },
     "/blog/**": { isr: 300 },
     "/category/**": { isr: 300 },
     "/admin/**": { ssr: true }, // or just remove it
