@@ -104,10 +104,5 @@ export default defineNuxtConfig({
     strategy: "no_prefix",
     langDir: "locales",
   },
-  app: {
-    pageTransition: {
-      name: "page",
-      mode: "out-in",
-    },
-  },
+  
 });
