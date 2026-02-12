@@ -10,6 +10,12 @@ export default defineNuxtConfig({
     cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
     cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET,
   },
+  routeRules: {
+    "/": { isr: 300 },
+    "/blog/**": { isr: 300 },
+    "/category/**": { isr: 300 },
+    "/admin/**": { ssr: true }, // or just remove it
+  },
   imports: {
     dirs: ["composables/admin", "composables/blog", "composables/shared"],
   },
