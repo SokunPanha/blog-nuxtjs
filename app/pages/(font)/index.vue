@@ -7,6 +7,16 @@ definePageMeta({
 const router = useRouter();
 const { homeData, loading, cotegoriesData } = useHome();
 const { t } = useI18n();
+
+useHead({
+  title: t("label.blog") || "Blog",
+  meta: [
+    {
+      name: "description",
+      content: t("message.blog_description") || "Discover insights, tutorials, and stories from our team",
+    },
+  ],
+})
 </script>
 
 <template>
