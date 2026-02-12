@@ -37,6 +37,14 @@ export default defineEventHandler(async (event) => {
           slug: true,
         },
       },
+      relatedPosts: {
+        select: {
+          id: true,
+          title: true,
+          slug: true,
+          coverImage: true,
+        },
+      },
     },
   });
 

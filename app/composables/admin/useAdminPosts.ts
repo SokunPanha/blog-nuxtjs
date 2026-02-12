@@ -24,6 +24,7 @@ export interface Post {
   };
   categories: Array<{ id: string; name: string; slug: string }>;
   tags: Array<{ id: string; name: string; slug: string }>;
+  relatedPosts?: Array<{ id: string; title: string; slug: string; coverImage: string }>;
 }
 
 export interface PostsResponse {

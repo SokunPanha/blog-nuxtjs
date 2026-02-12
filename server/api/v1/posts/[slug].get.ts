@@ -41,6 +41,30 @@ export default defineEventHandler(async (event) => {
           slug: true,
         },
       },
+      // Include manually selected related posts
+      relatedPosts: {
+        where: {
+          status: "PUBLISHED",
+          deletedAt: null,
+        },
+        select: {
+          id: true,
+          title: true,
+          excerpt: true,
+          slug: true,
+          coverImage: true,
+          publishedAt: true,
+          author: {
+            select: {
+              id: true,
+              username: true,
+              firstName: true,
+              lastName: true,
+              avatar: true,
+            },
+          },
+        },
+      },
     },
   });
 
@@ -51,45 +75,57 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  // Get related posts (same category, excluding current post)
-  const categoryIds = post.categories.map((c) => c.id);
-  const relatedPosts = await prisma.post.findMany({
-    where: {
-      id: { not: post.id },
-      status: "PUBLISHED",
-      deletedAt: null,
-      categories: {
-        some: {
-          id: { in: categoryIds },
+  // Use manually selected related posts if available
+  let relatedPosts = post.relatedPosts || [];
+
+  // If not enough manually selected posts, supplement with category-based posts
+  if (relatedPosts.length < 4) {
+    const manualIds = relatedPosts.map((p) => p.id);
+    const categoryIds = post.categories.map((c) => c.id);
+
+    const categoryBasedPosts = await prisma.post.findMany({
+      where: {
+        id: { notIn: [post.id, ...manualIds] },
+        status: "PUBLISHED",
+        deletedAt: null,
+        categories: {
+          some: {
+            id: { in: categoryIds },
+          },
         },
       },
-    },
-    take: 4,
-    orderBy: { publishedAt: "desc" },
-    select: {
-      id: true,
-      title: true,
-      excerpt: true,
-      slug: true,
-      coverImage: true,
-      publishedAt: true,
-      author: {
-        select: {
-          id: true,
-          username: true,
-          firstName: true,
-          lastName: true,
-          avatar: true,
+      take: 4 - relatedPosts.length,
+      orderBy: { publishedAt: "desc" },
+      select: {
+        id: true,
+        title: true,
+        excerpt: true,
+        slug: true,
+        coverImage: true,
+        publishedAt: true,
+        author: {
+          select: {
+            id: true,
+            username: true,
+            firstName: true,
+            lastName: true,
+            avatar: true,
+          },
         },
       },
-    },
-  });
+    });
+
+    relatedPosts = [...relatedPosts, ...categoryBasedPosts];
+  }
+
+  // Remove relatedPosts from post object to avoid duplication
+  const { relatedPosts: _, ...postData } = post;
 
   return {
     status: 200,
     message: "Post retrieved successfully",
     data: {
-      ...post,
+      ...postData,
       relatedPosts,
     },
   };

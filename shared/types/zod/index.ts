@@ -35,6 +35,7 @@ export const PostRequestSchema = z.object({
   isFeatured: z.boolean().default(false),
   categoryIds: z.array(z.string()).optional(),
   tagIds: z.array(z.string()).optional(),
+  relatedPostIds: z.array(z.string()).optional(),
 });
 export type PostRequestType = z.infer<typeof PostRequestSchema>;
 

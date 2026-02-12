@@ -25,12 +25,13 @@ const imageLoaded = ref(false);
       :ui="{
         header: 'p-0',
         body: 'p-0',
-        footer: 'p-4',
+        footer: 'p-1',
       }"
+
     >
       <!-- Image Slot -->
       <template #header>
-        <div class="relative aspect-video overflow-hidden">
+        <div class="relative aspect-video  overflow-hidden">
           <NuxtImg
             v-if="props.blog.image"
             :src="props.blog.image"
@@ -63,7 +64,7 @@ const imageLoaded = ref(false);
       </template>
 
       <!-- Content -->
-      <div class="p-4 flex-1 flex flex-col gap-3">
+      <div class="p-1 flex-1 flex flex-col gap-3">
         <!-- Optional Categories if available in type -->
         <!-- <div class="flex gap-2">
             <UBadge color="primary" variant="subtle" size="xs">Tech</UBadge>
@@ -86,7 +87,7 @@ const imageLoaded = ref(false);
       <!-- Footer / Author -->
       <template #footer>
         <div
-          class="flex items-center gap-3 pt-2 border-t border-gray-100 dark:border-gray-800"
+          class="flex items-center gap-3 pt-2"
         >
           <UAvatar
             :src="props.blog.author.image"

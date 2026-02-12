@@ -4,6 +4,7 @@
         "enter_password":"Enter your password",
         "search":"Search...",
         "select_categories":"Select categories",
-        "select_tags":"Select tags"
+        "select_tags":"Select tags",
+        "select_related_posts":"Select related posts"
     }
 }

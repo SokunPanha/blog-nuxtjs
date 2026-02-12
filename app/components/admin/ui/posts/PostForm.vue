@@ -23,6 +23,7 @@ const emit = defineEmits<{
 const { t } = useI18n();
 const { fetchAllCategories } = useAdminCategories();
 const { fetchAllTags } = useAdminTags();
+const { fetchPosts } = useAdminPosts();
 
 // Form state
 const formState = reactive({
@@ -34,6 +35,7 @@ const formState = reactive({
   isFeatured: props.post?.isFeatured || false,
   categoryIds: props.post?.categories?.map((c) => c.id) || ([] as string[]),
   tagIds: props.post?.tags?.map((t) => t.id) || ([] as string[]),
+  relatedPostIds: props.post?.relatedPosts?.map((p) => p.id) || ([] as string[]),
 });
 
 // Validation schema
@@ -46,6 +48,7 @@ const schema = z.object({
   isFeatured: z.boolean().optional(),
   categoryIds: z.array(z.string()).optional(),
   tagIds: z.array(z.string()).optional(),
+  relatedPostIds: z.array(z.string()).optional(),
 });
 
 // Options
@@ -57,14 +60,21 @@ const statusOptions = [
 
 const categories = ref<Category[]>([]);
 const tags = ref<Tag[]>([]);
+const allPosts = ref<Post[]>([]);
 
-// Fetch categories and tags
+// Fetch categories, tags, and posts
 onMounted(async () => {
   try {
-    categories.value = await fetchAllCategories();
-    tags.value = await fetchAllTags();
+    const [cats, tagsData, postsData] = await Promise.all([
+      fetchAllCategories(),
+      fetchAllTags(),
+      fetchPosts({ limit: 100 }),
+    ]);
+    categories.value = cats;
+    tags.value = tagsData;
+    allPosts.value = postsData.data;
   } catch (error) {
-    console.error("Failed to fetch categories/tags:", error);
+    console.error("Failed to fetch data:", error);
   }
 });
 
@@ -74,6 +84,13 @@ const categoryOptions = computed(() =>
 
 const tagOptions = computed(() =>
   tags.value.map((t) => ({ value: t.id, label: t.name })),
+);
+
+// Filter out current post from related posts options
+const relatedPostOptions = computed(() =>
+  allPosts.value
+    .filter((p) => p.id !== props.post?.id)
+    .map((p) => ({ value: p.id, label: p.title })),
 );
 
 const handleSubmit = () => {
@@ -93,6 +110,7 @@ watch(
       formState.isFeatured = newPost.isFeatured || false;
       formState.categoryIds = newPost.categories?.map((c) => c.id) || [];
       formState.tagIds = newPost.tags?.map((t) => t.id) || [];
+      formState.relatedPostIds = newPost.relatedPosts?.map((p) => p.id) || [];
     }
   },
   { deep: true },
@@ -115,11 +133,11 @@ watch(
               :label="t('label.title') || 'Title'"
               required
             >
-              <UInput v-model="formState.title" size="lg" />
+              <UInput class="w-full" v-model="formState.title" size="lg" />
             </UFormField>
 
             <UFormField name="excerpt" :label="t('label.excerpt') || 'Excerpt'">
-              <UTextarea v-model="formState.excerpt" :rows="3" />
+              <UTextarea class="w-full" v-model="formState.excerpt" :rows="3" />
             </UFormField>
 
             <UFormField
@@ -135,7 +153,80 @@ watch(
 
       <!-- Sidebar -->
       <div class="space-y-6">
+       
+
         <UCard>
+          <template #header>
+            <h3 class="font-semibold">
+              {{ t("label.cover_image") || "Cover Image" }}
+            </h3>
+          </template>
+
+          <UFormField name="coverImage">
+            <ImageUploader v-model="formState.coverImage" folder="posts" />
+          </UFormField>
+        </UCard>
+
+        <UCard>
+          <template #header>
+            <h3 class="font-semibold">
+              {{ t("label.categories") || "Categories" }}
+            </h3>
+          </template>
+
+          <UFormField name="categoryIds">
+            <USelectMenu
+              class="w-full"
+              v-model="formState.categoryIds"
+              :items="categoryOptions"
+              multiple
+              value-key="value"
+              :placeholder="
+                t('placeholder.select_categories') || 'Select categories'
+              "
+            />
+          </UFormField>
+        </UCard>
+
+        <UCard>
+          <template #header>
+            <h3 class="font-semibold">{{ t("label.tags") || "Tags" }}</h3>
+          </template>
+
+          <UFormField name="tagIds">
+            <USelectMenu
+              class="w-full"
+              v-model="formState.tagIds"
+              :items="tagOptions"
+              multiple
+              value-key="value"
+              :placeholder="t('placeholder.select_tags') || 'Select tags'"
+            />
+          </UFormField>
+        </UCard>
+
+        <UCard>
+          <template #header>
+            <h3 class="font-semibold">
+              {{ t("label.related_posts") || "Related Posts" }}
+            </h3>
+          </template>
+
+          <UFormField name="relatedPostIds">
+            <USelectMenu
+              v-model="formState.relatedPostIds"
+              :items="relatedPostOptions"
+              multiple
+              value-key="value"
+              class="w-full"
+              :placeholder="
+                t('placeholder.select_related_posts') || 'Select related posts (optional)'
+              "
+            />
+          </UFormField>
+         
+        </UCard>
+         <UCard>
           <template #header>
             <h3 class="font-semibold">{{ t("label.publish") || "Publish" }}</h3>
           </template>
@@ -181,54 +272,6 @@ watch(
               </UButton>
             </div>
           </div>
-        </UCard>
-
-        <UCard>
-          <template #header>
-            <h3 class="font-semibold">
-              {{ t("label.cover_image") || "Cover Image" }}
-            </h3>
-          </template>
-
-          <UFormField name="coverImage">
-            <ImageUploader v-model="formState.coverImage" folder="posts" />
-          </UFormField>
-        </UCard>
-
-        <UCard>
-          <template #header>
-            <h3 class="font-semibold">
-              {{ t("label.categories") || "Categories" }}
-            </h3>
-          </template>
-
-          <UFormField name="categoryIds">
-            <USelectMenu
-              v-model="formState.categoryIds"
-              :items="categoryOptions"
-              multiple
-              value-key="value"
-              :placeholder="
-                t('placeholder.select_categories') || 'Select categories'
-              "
-            />
-          </UFormField>
-        </UCard>
-
-        <UCard>
-          <template #header>
-            <h3 class="font-semibold">{{ t("label.tags") || "Tags" }}</h3>
-          </template>
-
-          <UFormField name="tagIds">
-            <USelectMenu
-              v-model="formState.tagIds"
-              :items="tagOptions"
-              multiple
-              value-key="value"
-              :placeholder="t('placeholder.select_tags') || 'Select tags'"
-            />
-          </UFormField>
         </UCard>
       </div>
     </div>

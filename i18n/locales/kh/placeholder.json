@@ -4,6 +4,7 @@
         "enter_password":"បញ្ចូលពាក្យសម្ងាត់របស់អ្នក",
         "search":"ស្វែងរក...",
         "select_categories":"ជ្រើសរើសប្រភេទ",
-        "select_tags":"ជ្រើសរើសស្លាក"
+        "select_tags":"ជ្រើសរើសស្លាក",
+        "select_related_posts":"ជ្រើសរើសប្រធានបទពាក់ព័ន្ធ"
     }
 }

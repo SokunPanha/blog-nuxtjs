@@ -41,7 +41,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const { title, excerpt, slug, coverImage, content, status, isFeatured, categoryIds, tagIds } =
+  const { title, excerpt, slug, coverImage, content, status, isFeatured, categoryIds, tagIds, relatedPostIds } =
     result.data;
 
   // Handle slug update
@@ -100,6 +100,12 @@ export default defineEventHandler(async (event) => {
             connect: tagIds.map((tagId) => ({ id: tagId })),
           }
         : undefined,
+      relatedPosts: relatedPostIds !== undefined
+        ? {
+            set: [],
+            connect: relatedPostIds.map((postId) => ({ id: postId })),
+          }
+        : undefined,
     },
     include: {
       author: {
@@ -123,6 +129,14 @@ export default defineEventHandler(async (event) => {
           id: true,
           name: true,
           slug: true,
+        },
+      },
+      relatedPosts: {
+        select: {
+          id: true,
+          title: true,
+          slug: true,
+          coverImage: true,
         },
       },
     },

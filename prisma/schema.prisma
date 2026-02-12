@@ -61,6 +61,10 @@ model Post {
   tags        Tag[]      @relation("PostTags")
   comments    Comment[]
 
+  // Self-referencing many-to-many for related posts
+  relatedPosts   Post[] @relation("RelatedPosts")
+  relatedToPost  Post[] @relation("RelatedPosts")
+
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   deletedAt   DateTime?

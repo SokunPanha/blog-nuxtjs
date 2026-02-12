@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const { title, excerpt, slug, coverImage, content, status, isFeatured, categoryIds, tagIds } =
+  const { title, excerpt, slug, coverImage, content, status, isFeatured, categoryIds, tagIds, relatedPostIds } =
     result.data;
 
   // Generate slug if not provided
@@ -53,6 +53,9 @@ export default defineEventHandler(async (event) => {
       tags: tagIds?.length
         ? { connect: tagIds.map((id) => ({ id })) }
         : undefined,
+      relatedPosts: relatedPostIds?.length
+        ? { connect: relatedPostIds.map((id) => ({ id })) }
+        : undefined,
     },
     include: {
       author: {
@@ -76,6 +79,14 @@ export default defineEventHandler(async (event) => {
           id: true,
           name: true,
           slug: true,
+        },
+      },
+      relatedPosts: {
+        select: {
+          id: true,
+          title: true,
+          slug: true,
+          coverImage: true,
         },
       },
     },
