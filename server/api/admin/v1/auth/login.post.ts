@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { prisma } from "~~/server/api/utils/db";
 import { setAdminSession } from "~~/server/utils/adminSession";
 

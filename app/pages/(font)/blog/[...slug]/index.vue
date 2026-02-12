@@ -178,7 +178,7 @@ useSeoMeta({
 
           <div
             v-if="isContentRestricted"
-            class="h-[50vh] bg-gradient-to-b from-gray-50/40 via-gray-100 to-gray-50 dark:from-black/10 dark:via-black/100 dark:to-black dark:from-white/10 dark:via-white/100 dark:to-white flex p-10 items-end justify-center fixed bottom-0 left-0 right-0 w-full"
+            class="h-[50vh] bg-linear-to-b from-gray-50/40 via-gray-100 to-gray-50 dark:from-black/10 dark:via-black/100 dark:to-black flex p-10 items-end justify-center fixed bottom-0 left-0 right-0 w-full"
           >
             <OauthCard />
           </div>
