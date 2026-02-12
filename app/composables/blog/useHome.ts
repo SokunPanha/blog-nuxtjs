@@ -33,14 +33,16 @@ export const useHome = () => {
       return nuxtApp.payload.data[key] || nuxtApp.static.data[key];
     },
   });
-  const cotegoriesData = toValue(categories || [])?.data?.map((category) => ({
-    id: category.id,
-    name: category.name,
-    slug: category.slug,
-    description: category.description,
-    coverImage: category.coverImage,
-    postCount: category.postCount,
-  }));
+  const cotegoriesData = computed(() =>
+    categories.value?.data?.map((category: any) => ({
+      id: category.id,
+      name: category.name,
+      slug: category.slug,
+      description: category.description,
+      coverImage: category.coverImage,
+      postCount: category.postCount,
+    })) || []
+  );
 
   const homeData = computed(() => {
     const blogData = data.value?.data;

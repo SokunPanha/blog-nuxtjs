@@ -1,7 +1,7 @@
 import { useBlogSession } from "~/composables/blog/useBlogSession";
 
 export const useBlogAuth = () => {
-  const { loggedIn, user, clear, fetch: refreshSession } = useBlogSession();
+  const { loggedIn, user, clear, fetch } = useBlogSession();
   const route = useRoute();
 
   const setRedirectCookie = () => {
@@ -34,12 +34,13 @@ export const useBlogAuth = () => {
     clear();
   };
 
+
   return {
     loggedIn,
     user,
     loginWithGithub,
     loginWithGoogle,
     logout,
-    refreshSession,
+    fetch,
   };
 };

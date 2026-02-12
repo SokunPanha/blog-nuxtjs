@@ -17,7 +17,17 @@ const slug = computed(() => {
 
 // Use session from composable - state is already fetched by layout
 const { loggedIn, fetch } = useBlogSession();
-await fetch();
+
+await callOnce("blog-session-fetch", fetch);
+
+// Track if we're on client to prevent hydration mismatch
+const isMounted = ref(false);
+onMounted(() => {
+  isMounted.value = true;
+});
+
+// Only apply login-dependent styles after hydration
+const isContentRestricted = computed(() => isMounted.value && !loggedIn.value);
 // Fetch post by slug - no await for instant navigation, SSR still works
 const { data, pending, error } = useFetch(() => `/api/v1/posts/${slug.value}`, {
   key: `post-${slug.value}`,
@@ -101,7 +111,7 @@ useSeoMeta({
     <!-- Post content -->
     <div
       v-else-if="post"
-      :class="{ 'h-screen overflow-hidden': !loggedIn }"
+      :class="{ 'h-screen overflow-hidden': isContentRestricted }"
       class="max-w-7xl mx-auto p-10 flex lg:flex-row flex-col justify-between gap-20"
     >
       <section class="relative flex-1">
@@ -167,7 +177,7 @@ useSeoMeta({
           </div>
 
           <div
-            v-if="!loggedIn"
+            v-if="isContentRestricted"
             class="h-[50vh] bg-gradient-to-b from-gray-50/40 via-gray-100 to-gray-50 dark:from-black/10 dark:via-black/100 dark:to-black dark:from-white/10 dark:via-white/100 dark:to-white flex p-10 items-end justify-center fixed bottom-0 left-0 right-0 w-full"
           >
             <OauthCard />
