@@ -49,7 +49,7 @@ useHead({
     <div v-if="pending" class="animate-pulse">
       <div class="h-10 bg-gray-200 dark:bg-gray-700 rounded w-1/3 mb-4" />
       <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mb-12" />
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         <div v-for="i in 6" :key="i">
           <div class="bg-gray-200 dark:bg-gray-700 rounded-lg h-48 mb-4" />
           <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
@@ -133,7 +133,7 @@ useHead({
       </div>
 
       <!-- Posts grid -->
-      <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div v-else class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         <BlogCard
           v-for="post in posts"
           :key="post.id"

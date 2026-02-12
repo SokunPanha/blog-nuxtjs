@@ -12,7 +12,8 @@ const navItems = [
 </script>
 
 <template>
-  <header class="sticky top-0 z-50 bg-white dark:bg-black w-full shadow-xl">
+ <Transition name="slide-down" appear>
+   <header class="sticky top-0 z-50 bg-white dark:bg-black w-full shadow-xl">
     <nav class="flex justify-between items-center w-full p-3 max-w-7xl mx-auto">
       <div class="flex items-center gap-2">
         <UDrawer direction="bottom" class="sm:hidden">
@@ -27,10 +28,11 @@ const navItems = [
           </template>
         </UDrawer>
         <NuxtLink
-          class="font-bold text-xl bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text text-transparent"
+          class="font-bold  flex items-center gap-2 text-xl  "
           to="/"
         >
-          Dev Hub
+         <UAvatar size="xl" src="/images/logo.jpg" alt="Logo" />
+         <h1>Dev Hub</h1>
         </NuxtLink>
       </div>
 
@@ -50,4 +52,22 @@ const navItems = [
       </NavItems>
     </nav>
   </header>
+ </Transition>
 </template>
+
+<style scoped>
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.slide-down-enter-from {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.slide-down-leave-to {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+</style>

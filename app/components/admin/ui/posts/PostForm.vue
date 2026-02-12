@@ -119,7 +119,7 @@ watch(
 
 <template>
   <UForm :state="formState" :schema="schema" @submit="handleSubmit">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       <!-- Main content -->
       <div class="lg:col-span-2 space-y-6">
         <UCard>

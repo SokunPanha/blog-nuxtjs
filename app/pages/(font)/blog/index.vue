@@ -55,7 +55,7 @@ watch(page, (newPage) => {
     <!-- Loading state -->
     <div
       v-if="pending"
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
     >
       <div v-for="i in 6" :key="i" class="animate-pulse">
         <div class="bg-gray-200 dark:bg-gray-700 rounded-lg h-48 mb-4" />
@@ -90,7 +90,7 @@ watch(page, (newPage) => {
     </div>
 
     <!-- Posts grid -->
-    <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div v-else class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
       
       <BlogCard
         v-for="post in posts"

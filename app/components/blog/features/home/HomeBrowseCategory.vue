@@ -22,7 +22,7 @@ const props = defineProps({
           v-for="category in categories"
           :key="category.id"
           :to="`/category/${category.slug}`"
-          class="p-2 shadow-md w-[150px] max-w-[150px] rounded-md shrink-0 block"
+          class="p-2  w-[150px] max-w-[150px] rounded-md shrink-0 block"
         >
           <div
             class="flex rounded-md flex-col items-center h-2/3 overflow-hidden mb-1 gap-2"

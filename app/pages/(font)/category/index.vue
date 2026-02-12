@@ -28,7 +28,7 @@ const categories = computed(() => data.value?.data || []);
     <!-- Loading state -->
     <div
       v-if="pending"
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+      class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
     >
       <div v-for="i in 8" :key="i" class="animate-pulse">
         <div class="bg-gray-200 dark:bg-gray-700 rounded-xl h-40 mb-4" />
@@ -63,7 +63,7 @@ const categories = computed(() => data.value?.data || []);
     <!-- Categories grid -->
     <div
       v-else
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+      class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
     >
       <CategoryCard
         v-for="category in categories"

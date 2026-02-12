@@ -71,14 +71,14 @@ const imageLoaded = ref(false);
          </div> -->
 
         <h3
-          class="text-lg font-bold leading-tight line-clamp-2 text-gray-900 dark:text-gray-100 group-hover:text-primary-500 transition-colors"
+          class="md:text-lg text-md text-sm p-1 font-bold leading-tight line-clamp-2 text-gray-900 dark:text-gray-100 group-hover:text-primary-500 transition-colors"
         >
           {{ props.blog.title }}
         </h3>
 
         <p
           v-if="props.blog.excerpt"
-          class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2"
+          class="text-sm md:text-base text-gray-500 dark:text-gray-400 line-clamp-2"
         >
           {{ props.blog.excerpt }}
         </p>

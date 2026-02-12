@@ -4,6 +4,10 @@ import { useBlogSession } from "~/composables/blog/useBlogSession";
 
 definePageMeta({
   layout: "blog-layout",
+  pageTransition: {
+    name: "page-slide",
+    mode: "out-in",
+  },
 });
 
 const { t } = useI18n();
@@ -75,6 +79,15 @@ useSeoMeta({
 </script>
 
 <template>
+  <!-- Floating Home Button -->
+  <NuxtLink
+    v-if="!pending"
+    to="/"
+    class="fixed bottom-6 right-6 z-10 flex items-center justify-center w-12 h-12 bg-primary-500 hover:bg-primary-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+  >
+    <UIcon name="i-lucide-home" class="w-6 h-6" />
+  </NuxtLink>
+
   <main>
     <!-- Loading state -->
     <div v-if="pending" class="max-w-4xl mx-auto p-10">
@@ -197,7 +210,7 @@ useSeoMeta({
           {{ t("label.related_posts") || "Related Posts" }}
         </h2>
         <div
-          class="lg:flex lg:flex-col lg:gap-5 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 gap-5"
+          class="lg:flex  lg:flex-col lg:gap-5 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 lg:grid-cols-1 gap-5"
         >
           <BlogCard
             v-for="related in relatedPosts"
