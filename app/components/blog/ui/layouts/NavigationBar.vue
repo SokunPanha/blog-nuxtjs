@@ -12,7 +12,7 @@ const navItems = [
 </script>
 
 <template>
-   <header class="sticky top-0 z-50 bg-white dark:bg-gray-900 w-full shadow-xl">
+   <header class="sticky top-0 z-50 bg-white dark:bg-black w-full shadow-xl">
     <nav class="flex justify-between items-center w-full p-3 max-w-7xl mx-auto">
       <div class="flex items-center gap-2">
         <UDrawer direction="bottom" class="sm:hidden">
