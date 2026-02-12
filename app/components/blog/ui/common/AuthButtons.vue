@@ -7,8 +7,6 @@ const { t } = useI18n();
 const isSignInOpen = ref(false);
 const { fetch, loggedIn, user, logout } = useBlogAuth();
 
-// Use callOnce to ensure fetch only runs once and results are properly hydrated
-await callOnce("blog-session-fetch", fetch);
 
 const userMenuItems = computed<DropdownMenuItem[][]>(() => [
   [
