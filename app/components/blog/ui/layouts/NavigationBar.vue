@@ -12,7 +12,6 @@ const navItems = [
 </script>
 
 <template>
- <Transition name="slide-down" appear>
    <header class="sticky top-0 z-50 bg-white dark:bg-black w-full shadow-xl">
     <nav class="flex justify-between items-center w-full p-3 max-w-7xl mx-auto">
       <div class="flex items-center gap-2">
@@ -52,7 +51,6 @@ const navItems = [
       </NavItems>
     </nav>
   </header>
- </Transition>
 </template>
 
 <style scoped>
