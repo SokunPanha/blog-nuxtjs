@@ -13,6 +13,12 @@ await fetchSession();
 
 const isSidebarOpen = ref(false);
 const isSidebarCollapsed = ref(false);
+const route = useRoute();
+
+// Close mobile sidebar on navigation
+watch(() => route.path, () => {
+  isSidebarOpen.value = false;
+});
 
 const navigation = computed(() => [
   {
@@ -103,7 +109,6 @@ const userMenuItems = computed<DropdownMenuItem[][]>(() => [
             <UNavigationMenu
               :items="navigation"
               orientation="vertical"
-              @click="isSidebarOpen = false"
             />
           </nav>
         </div>
