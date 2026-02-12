@@ -18,10 +18,11 @@ export default defineNuxtRouteMiddleware(async (to) => {
   }
   
   // Check admin session for protected routes
-  const { loggedIn, fetch } = useAdminSession();
+  const { loggedIn, fetch, pending } = useAdminSession();
   await fetch();
 
-  if (!loggedIn.value) {
+  if (!loggedIn.value && pending.value) {
+  console.log("🚀 ~ loggedIn:", loggedIn.value)
     return navigateTo("/admin/auth/login");
   }
 

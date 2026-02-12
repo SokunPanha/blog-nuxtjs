@@ -10,12 +10,14 @@ export const useAdminSession = () => {
     user: null,
     loggedIn: false,
   }));
+  const pending = ref(true)
 
   const user = computed(() => sessionState.value.user);
   const loggedIn = computed(() => sessionState.value.loggedIn);
 
   const fetch = async () => {
     try {
+      pending.value = true;
       const data = await $fetch("/api/admin/v1/auth/session");
       sessionState.value = {
         user: data.user,
@@ -26,6 +28,8 @@ export const useAdminSession = () => {
         user: null,
         loggedIn: false,
       };
+    } finally {
+      pending.value = false;
     }
   };
 
@@ -41,5 +45,6 @@ export const useAdminSession = () => {
     loggedIn,
     fetch,
     clear,
+    pending,
   };
 };
