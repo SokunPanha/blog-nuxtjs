@@ -1,4 +1,5 @@
 import { prisma } from "../utils/db";
+import { setBlogSession } from "~~/server/utils/blogSession";
 
 export default defineOAuthGitHubEventHandler({
   config: {
@@ -78,8 +79,8 @@ export default defineOAuthGitHubEventHandler({
       }
     }
 
-    // Set user session
-    await setUserSession(event, {
+    // Set blog session
+    await setBlogSession(event, {
       user: {
         id: user.id,
         username: user.username,
@@ -89,11 +90,15 @@ export default defineOAuthGitHubEventHandler({
       },
     });
 
-    // Redirect to home page
-    return sendRedirect(event, "/");
+    // Redirect back to original page or home
+    const redirectTo = getCookie(event, "auth-redirect") || "/";
+    deleteCookie(event, "auth-redirect");
+    return sendRedirect(event, redirectTo);
   },
   onError(event, error) {
     console.error("GitHub OAuth error:", error);
-    return sendRedirect(event, "/?error=github_oauth_failed");
+    const redirectTo = getCookie(event, "auth-redirect") || "/";
+    deleteCookie(event, "auth-redirect");
+    return sendRedirect(event, `${redirectTo}?error=github_oauth_failed`);
   },
 });

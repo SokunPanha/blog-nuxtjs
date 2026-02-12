@@ -1,4 +1,5 @@
 import { prisma } from "../utils/db";
+import { setBlogSession } from "~~/server/utils/blogSession";
 
 export default defineOAuthGoogleEventHandler({
   config: {
@@ -88,8 +89,8 @@ export default defineOAuthGoogleEventHandler({
       }
     }
 
-    // Set user session
-    await setUserSession(event, {
+    // Set blog session
+    await setBlogSession(event, {
       user: {
         id: user.id,
         username: user.username,
@@ -99,11 +100,15 @@ export default defineOAuthGoogleEventHandler({
       },
     });
 
-    // Redirect to home page
-    return sendRedirect(event, "/");
+    // Redirect back to original page or home
+    const redirectTo = getCookie(event, "auth-redirect") || "/";
+    deleteCookie(event, "auth-redirect");
+    return sendRedirect(event, redirectTo);
   },
   onError(event, error) {
     console.error("Google OAuth error:", error);
-    return sendRedirect(event, "/?error=google_oauth_failed");
+    const redirectTo = getCookie(event, "auth-redirect") || "/";
+    deleteCookie(event, "auth-redirect");
+    return sendRedirect(event, `${redirectTo}?error=google_oauth_failed`);
   },
 });
