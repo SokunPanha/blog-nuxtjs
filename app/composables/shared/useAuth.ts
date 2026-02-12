@@ -1,14 +1,15 @@
 import { ref } from "vue";
-import { useToast, useUserSession, navigateTo } from "#imports";
+import { useToast, navigateTo } from "#imports";
+import { useAdminSession } from "~/composables/admin/useAdminSession";
 
 export const useAuth = () => {
   const toast = useToast();
-  const { fetch: refreshSession } = useUserSession();
+  const { fetch: refreshSession, clear: clearSession } = useAdminSession();
   const loading = ref(false);
+
   const login = async (username: string, password: string) => {
     try {
       loading.value = true;
-      console.log("Login attempt");
       await $fetch("/api/admin/v1/auth/login", {
         method: "POST",
         body: {
@@ -16,7 +17,7 @@ export const useAuth = () => {
           password,
         },
       });
-      // Refresh session state so middleware sees loggedIn = true
+      // Refresh admin session state so middleware sees loggedIn = true
       await refreshSession();
       toast.add({
         title: "Success",
@@ -27,7 +28,7 @@ export const useAuth = () => {
     } catch (error: any) {
       toast.add({
         title: "Error",
-        description: error.data.message || "Something went wrong",
+        description: error.data?.message || "Something went wrong",
         color: "error",
       });
     } finally {
@@ -41,8 +42,8 @@ export const useAuth = () => {
       await $fetch("/api/admin/v1/auth/logout", {
         method: "POST",
       });
-      // Refresh session state so middleware sees loggedIn = false
-      await refreshSession();
+      // Clear admin session state
+      clearSession();
       toast.add({
         title: "Success",
         description: "Logout successful",
@@ -52,13 +53,14 @@ export const useAuth = () => {
     } catch (error: any) {
       toast.add({
         title: "Error",
-        description: error.data.message || "Something went wrong",
+        description: error.data?.message || "Something went wrong",
         color: "error",
       });
     } finally {
       loading.value = false;
     }
   };
+
   return {
     login,
     logOut,

@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { prisma } from "~~/server/api/utils/db";
+import { setAdminSession } from "~~/server/utils/adminSession";
 
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || "access-secret";
 const REFRESH_TOKEN_SECRET =
@@ -78,7 +79,7 @@ export default defineEventHandler(async (event) => {
     path: "/",
   });
 
-  await setUserSession(event, {
+  await setAdminSession(event, {
     user: {
       id: user.id,
       username: user.username,

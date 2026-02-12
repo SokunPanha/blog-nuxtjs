@@ -1,15 +1,7 @@
 import { uploadImage } from "~~/server/utils/cloudinary";
 
 export default defineEventHandler(async (event) => {
-  // Check authentication
-  const session = await getUserSession(event);
-  if (!session?.user) {
-    throw createError({
-      statusCode: 401,
-      message: "Unauthorized",
-    });
-  }
-
+  // Auth is handled by server/middleware/admin-auth.ts
   try {
     const formData = await readMultipartFormData(event);
 

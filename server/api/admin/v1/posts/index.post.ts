@@ -3,14 +3,9 @@ import { PostRequestSchema } from "~~/shared/types/zod";
 import { generateSlug, ensureUniqueSlug } from "~~/server/utils/slug";
 
 export default defineEventHandler(async (event) => {
-  // Check authentication
-  const session = await getUserSession(event);
-  if (!session?.user) {
-    throw createError({
-      statusCode: 401,
-      message: "Unauthorized",
-    });
-  }
+  // Auth is handled by server/middleware/admin-auth.ts
+  // Admin user is available in event.context.adminUser
+  const adminUser = event.context.adminUser;
 
   const body = await readBody(event);
 
@@ -51,7 +46,7 @@ export default defineEventHandler(async (event) => {
       status,
       // isFeatured: isFeatured || false, // Uncomment after migration
       publishedAt: status === "PUBLISHED" ? new Date() : null,
-      authorId: session.user.id,
+      authorId: adminUser.id,
       categories: categoryIds?.length
         ? { connect: categoryIds.map((id) => ({ id })) }
         : undefined,

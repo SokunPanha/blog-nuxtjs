@@ -1,15 +1,7 @@
 import { prisma } from "~~/server/api/utils/db";
 
 export default defineEventHandler(async (event) => {
-  // Check authentication
-  const session = await getUserSession(event);
-  if (!session?.user) {
-    throw createError({
-      statusCode: 401,
-      message: "Unauthorized",
-    });
-  }
-
+  // Auth is handled by server/middleware/admin-auth.ts
   const id = getRouterParam(event, "id");
 
   if (!id) {
