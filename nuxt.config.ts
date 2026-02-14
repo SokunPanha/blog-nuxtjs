@@ -20,7 +20,6 @@ export default defineNuxtConfig({
     dirs: ["composables/admin", "composables/blog", "composables/shared"],
   },
   modules: [
-    "@nuxt/content",
     "@nuxt/image",
     "@nuxt/ui",
     "@nuxtjs/i18n",
