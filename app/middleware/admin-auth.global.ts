@@ -21,8 +21,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   const { loggedIn, fetch, pending } = useAdminSession();
   await fetch();
 
-  if (!loggedIn.value && pending.value) {
-  console.log("🚀 ~ loggedIn:", loggedIn.value)
+  if (!loggedIn.value && !pending.value) {
     return navigateTo("/admin/auth/login");
   }
 
