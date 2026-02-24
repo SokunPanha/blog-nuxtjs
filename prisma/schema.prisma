@@ -44,11 +44,14 @@ model Account {
 
 model Post {
   id          String     @id @default(cuid())
-  title       String
-  excerpt     String?
+  titleEn     String     @map("title_en")
+  titleKh     String?    @map("title_kh")
+  excerptEn   String?    @map("excerpt_en")
+  excerptKh   String?    @map("excerpt_kh")
   slug        String     @unique
   coverImage  String
-  content     String     // markdown or html
+  contentEn   String     @map("content_en") // markdown or html
+  contentKh   String?    @map("content_kh")
   published   Boolean    @default(false)
   status      String     @default("DRAFT") // DRAFT, PUBLISHED, ARCHIVED
   isFeatured  Boolean    @default(false)
@@ -73,11 +76,13 @@ model Post {
 }
 
 model Category {
-  id          String   @id @default(cuid())
-  name        String
-  slug        String   @unique
-  posts       Post[]   @relation("PostCategories")
-  description String?
+  id            String   @id @default(cuid())
+  nameEn        String   @map("name_en")
+  nameKh        String?  @map("name_kh")
+  slug          String   @unique
+  posts         Post[]   @relation("PostCategories")
+  descriptionEn String?  @map("description_en")
+  descriptionKh String?  @map("description_kh")
   status      String   @default("DRAFT") // DRAFT, PUBLISHED, ARCHIVED
   coverImage  String?
   createdAt   DateTime @default(now())
@@ -86,12 +91,14 @@ model Category {
 }
 
 model Tag {
-  id          String   @id @default(cuid())
-  name        String
-  slug        String   @unique
-  posts       Post[]   @relation("PostTags")
-  description String?  @default("")
-  coverImage  String?  @default("")
+  id            String   @id @default(cuid())
+  nameEn        String   @map("name_en")
+  nameKh        String?  @map("name_kh")
+  slug          String   @unique
+  posts         Post[]   @relation("PostTags")
+  descriptionEn String?  @default("") @map("description_en")
+  descriptionKh String?  @default("") @map("description_kh")
+  coverImage    String?  @default("")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

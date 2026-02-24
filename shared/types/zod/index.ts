@@ -26,11 +26,14 @@ export const PostStatusEnum = z.enum(["DRAFT", "PUBLISHED", "ARCHIVED"]);
 export type PostStatus = z.infer<typeof PostStatusEnum>;
 
 export const PostRequestSchema = z.object({
-  title: z.string().min(1).max(255),
-  excerpt: z.string().max(500).optional().nullable(),
+  titleEn: z.string().min(1).max(255),
+  titleKh: z.string().max(255).optional().nullable(),
+  excerptEn: z.string().max(500).optional().nullable(),
+  excerptKh: z.string().max(500).optional().nullable(),
   slug: z.string().max(255).optional(),
   coverImage: z.string().url(),
-  content: z.string().min(1),
+  contentEn: z.string().min(1),
+  contentKh: z.string().optional().nullable(),
   status: PostStatusEnum.default("DRAFT"),
   isFeatured: z.boolean().default(false),
   categoryIds: z.array(z.string()).optional(),
@@ -44,9 +47,11 @@ export type PostUpdateType = z.infer<typeof PostUpdateSchema>;
 
 // Category schemas
 export const CategoryRequestSchema = z.object({
-  name: z.string().min(1).max(100),
+  nameEn: z.string().min(1).max(100),
+  nameKh: z.string().max(100).optional().nullable(),
   slug: z.string().max(100).optional(),
-  description: z.string().max(500).optional().nullable(),
+  descriptionEn: z.string().max(500).optional().nullable(),
+  descriptionKh: z.string().max(500).optional().nullable(),
   coverImage: z.string().url().optional().nullable(),
   status: PostStatusEnum.default("DRAFT"),
 });
@@ -57,9 +62,11 @@ export type CategoryUpdateType = z.infer<typeof CategoryUpdateSchema>;
 
 // Tag schemas
 export const TagRequestSchema = z.object({
-  name: z.string().min(1).max(100),
+  nameEn: z.string().min(1).max(100),
+  nameKh: z.string().max(100).optional().nullable(),
   slug: z.string().max(100).optional(),
-  description: z.string().max(500).optional().nullable(),
+  descriptionEn: z.string().max(500).optional().nullable(),
+  descriptionKh: z.string().max(500).optional().nullable(),
   coverImage: z.string().url().optional().nullable(),
 });
 export type TagRequestType = z.infer<typeof TagRequestSchema>;
