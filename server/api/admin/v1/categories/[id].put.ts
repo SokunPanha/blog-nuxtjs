@@ -37,7 +37,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const { name, slug, description, coverImage, status } = result.data;
+  const { nameEn, nameKh, slug, descriptionEn, descriptionKh, coverImage, status } = result.data;
 
   // Handle slug update
   let finalSlug = existingCategory.slug;
@@ -50,8 +50,8 @@ export default defineEventHandler(async (event) => {
       slug,
       existingSlugs.map((c) => c.slug)
     );
-  } else if (name && name !== existingCategory.name && !slug) {
-    const newSlug = generateSlug(name);
+  } else if (nameEn && nameEn !== existingCategory.nameEn && !slug) {
+    const newSlug = generateSlug(nameEn);
     const existingSlugs = await prisma.category.findMany({
       where: { id: { not: id } },
       select: { slug: true },
@@ -66,9 +66,11 @@ export default defineEventHandler(async (event) => {
   const category = await prisma.category.update({
     where: { id },
     data: {
-      name,
+      nameEn,
+      nameKh,
       slug: finalSlug,
-      description,
+      descriptionEn,
+      descriptionKh,
       coverImage,
       status,
     },

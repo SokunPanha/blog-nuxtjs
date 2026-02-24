@@ -41,7 +41,7 @@ const statusOptions = [
 // Table columns
 const columns: TableColumn<Category>[] = [
   {
-    accessorKey: "name",
+    accessorKey: "nameEn",
     header: t("tableColumn.category_name") || "Name",
   },
   {
@@ -165,12 +165,12 @@ const breadcrumbs = [
 
       <!-- Table -->
       <UTable :data="categories" :columns="columns" :loading="loading">
-        <template #name-cell="{ row }">
+        <template #nameEn-cell="{ row }">
           <div class="flex items-center gap-3">
             <img
               v-if="row.original.coverImage"
               :src="row.original.coverImage"
-              :alt="row.original.name"
+              :alt="row.original.nameEn"
               class="w-10 h-10 rounded object-cover"
             />
             <div
@@ -179,7 +179,7 @@ const breadcrumbs = [
             >
               <UIcon name="i-lucide-folder" class="w-5 h-5 text-gray-400" />
             </div>
-            <span class="font-medium">{{ row.original.name }}</span>
+            <span class="font-medium">{{ row.original.nameEn }}</span>
           </div>
         </template>
 
@@ -253,7 +253,7 @@ const breadcrumbs = [
       :loading="deleteLoading"
       :title="t('label.delete_category') || 'Delete Category'"
       :message="
-        t('message.confirm_delete_message', { name: selectedCategory?.name }) ||
+        t('message.confirm_delete_message', { name: selectedCategory?.nameEn }) ||
         'Are you sure you want to delete this item? This action cannot be undone.'
       "
       @confirm="handleDeleteConfirm"

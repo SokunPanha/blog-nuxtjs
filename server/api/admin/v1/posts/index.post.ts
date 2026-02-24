@@ -19,11 +19,11 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const { title, excerpt, slug, coverImage, content, status, isFeatured, categoryIds, tagIds, relatedPostIds } =
+  const { titleEn, titleKh, excerptEn, excerptKh, slug, coverImage, contentEn, contentKh, status, isFeatured, categoryIds, tagIds, relatedPostIds } =
     result.data;
 
   // Generate slug if not provided
-  let finalSlug = slug || generateSlug(title);
+  let finalSlug = slug || generateSlug(titleEn);
 
   // Ensure slug is unique
   const existingSlugs = await prisma.post.findMany({
@@ -38,13 +38,16 @@ export default defineEventHandler(async (event) => {
   // TODO: Add isFeatured: isFeatured || false after running: npx prisma db push
   const post = await prisma.post.create({
     data: {
-      title,
-      excerpt,
+      titleEn,
+      titleKh,
+      excerptEn,
+      excerptKh,
       slug: finalSlug,
       coverImage,
-      content,
+      contentEn,
+      contentKh,
       status,
-      // isFeatured: isFeatured || false, // Uncomment after migration
+      isFeatured: isFeatured || false,
       publishedAt: status === "PUBLISHED" ? new Date() : null,
       authorId: adminUser.id,
       categories: categoryIds?.length
@@ -70,21 +73,24 @@ export default defineEventHandler(async (event) => {
       categories: {
         select: {
           id: true,
-          name: true,
+          nameEn: true,
+          nameKh: true,
           slug: true,
         },
       },
       tags: {
         select: {
           id: true,
-          name: true,
+          nameEn: true,
+          nameKh: true,
           slug: true,
         },
       },
       relatedPosts: {
         select: {
           id: true,
-          title: true,
+          titleEn: true,
+          titleKh: true,
           slug: true,
           coverImage: true,
         },

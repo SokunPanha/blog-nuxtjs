@@ -41,7 +41,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const { title, excerpt, slug, coverImage, content, status, isFeatured, categoryIds, tagIds, relatedPostIds } =
+  const { titleEn, titleKh, excerptEn, excerptKh, slug, coverImage, contentEn, contentKh, status, isFeatured, categoryIds, tagIds, relatedPostIds } =
     result.data;
 
   // Handle slug update
@@ -55,8 +55,8 @@ export default defineEventHandler(async (event) => {
       slug,
       existingSlugs.map((p) => p.slug)
     );
-  } else if (title && title !== existingPost.title && !slug) {
-    const newSlug = generateSlug(title);
+  } else if (titleEn && titleEn !== existingPost.titleEn && !slug) {
+    const newSlug = generateSlug(titleEn);
     const existingSlugs = await prisma.post.findMany({
       where: { id: { not: id } },
       select: { slug: true },
@@ -76,17 +76,19 @@ export default defineEventHandler(async (event) => {
   }
 
   // Update post
-  // TODO: Add isFeatured after running: npx prisma db push
   const post = await prisma.post.update({
     where: { id },
     data: {
-      title,
-      excerpt,
+      titleEn,
+      titleKh,
+      excerptEn,
+      excerptKh,
       slug: finalSlug,
       coverImage,
-      content,
+      contentEn,
+      contentKh,
       status,
-      // isFeatured, // Uncomment after migration
+      isFeatured,
       publishedAt,
       categories: categoryIds !== undefined
         ? {
@@ -120,21 +122,24 @@ export default defineEventHandler(async (event) => {
       categories: {
         select: {
           id: true,
-          name: true,
+          nameEn: true,
+          nameKh: true,
           slug: true,
         },
       },
       tags: {
         select: {
           id: true,
-          name: true,
+          nameEn: true,
+          nameKh: true,
           slug: true,
         },
       },
       relatedPosts: {
         select: {
           id: true,
-          title: true,
+          titleEn: true,
+          titleKh: true,
           slug: true,
           coverImage: true,
         },
