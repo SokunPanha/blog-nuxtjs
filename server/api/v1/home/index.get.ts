@@ -3,10 +3,12 @@ import { prisma } from "~~/server/api/utils/db";
 export default defineEventHandler(async () => {
   const baseSelect = {
     id: true,
-    title: true,
+    titleEn: true,
+    titleKh: true,
+    excerptEn: true,
+    excerptKh: true,
     slug: true,
     coverImage: true,
-    excerpt: true,
     publishedAt: true,
     author: {
       select: {
@@ -23,6 +25,16 @@ export default defineEventHandler(async () => {
     status: "PUBLISHED",
     deletedAt: null,
   };
+
+  const transformPost = (p: any) => ({
+    id: p.id,
+    title: { en: p.titleEn, kh: p.titleKh },
+    excerpt: { en: p.excerptEn, kh: p.excerptKh },
+    slug: p.slug,
+    coverImage: p.coverImage,
+    publishedAt: p.publishedAt,
+    author: p.author,
+  });
 
   // Get latest posts (ordered by publishedAt desc)
   const latestPosts = await prisma.post.findMany({
@@ -54,9 +66,9 @@ export default defineEventHandler(async () => {
     status: 200,
     message: "Home data retrieved successfully",
     data: {
-      latestPosts,
-      popularPosts,
-      featuredPosts,
+      latestPosts: latestPosts.map(transformPost),
+      popularPosts: popularPosts.map(transformPost),
+      featuredPosts: featuredPosts.map(transformPost),
     },
   };
 });

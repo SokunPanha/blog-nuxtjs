@@ -55,8 +55,10 @@ export default defineEventHandler(async (event) => {
     orderBy: { publishedAt: "desc" },
     select: {
       id: true,
-      title: true,
-      excerpt: true,
+      titleEn: true,
+      titleKh: true,
+      excerptEn: true,
+      excerptKh: true,
       slug: true,
       coverImage: true,
       publishedAt: true,
@@ -72,12 +74,28 @@ export default defineEventHandler(async (event) => {
       categories: {
         select: {
           id: true,
-          name: true,
+          nameEn: true,
+          nameKh: true,
           slug: true,
         },
       },
     },
   });
+
+  const transformedPosts = posts.map((p) => ({
+    id: p.id,
+    title: { en: p.titleEn, kh: p.titleKh },
+    excerpt: { en: p.excerptEn, kh: p.excerptKh },
+    slug: p.slug,
+    coverImage: p.coverImage,
+    publishedAt: p.publishedAt,
+    author: p.author,
+    categories: p.categories.map((c) => ({
+      id: c.id,
+      name: { en: c.nameEn, kh: c.nameKh },
+      slug: c.slug,
+    })),
+  }));
 
   return {
     status: 200,
@@ -85,12 +103,12 @@ export default defineEventHandler(async (event) => {
     data: {
       category: {
         id: category.id,
-        name: category.name,
+        name: { en: category.nameEn, kh: category.nameKh },
+        description: { en: category.descriptionEn, kh: category.descriptionKh },
         slug: category.slug,
-        description: category.description,
         coverImage: category.coverImage,
       },
-      ...createPaginatedResponse(posts, total, page, limit),
+      ...createPaginatedResponse(transformedPosts, total, page, limit),
     },
   };
 });
