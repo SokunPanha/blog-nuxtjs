@@ -30,14 +30,16 @@ export default defineEventHandler(async (event) => {
       categories: {
         select: {
           id: true,
-          name: true,
+          nameEn: true,
+          nameKh: true,
           slug: true,
         },
       },
       tags: {
         select: {
           id: true,
-          name: true,
+          nameEn: true,
+          nameKh: true,
           slug: true,
         },
       },
@@ -49,8 +51,10 @@ export default defineEventHandler(async (event) => {
         },
         select: {
           id: true,
-          title: true,
-          excerpt: true,
+          titleEn: true,
+          titleKh: true,
+          excerptEn: true,
+          excerptKh: true,
           slug: true,
           coverImage: true,
           publishedAt: true,
@@ -98,8 +102,10 @@ export default defineEventHandler(async (event) => {
       orderBy: { publishedAt: "desc" },
       select: {
         id: true,
-        title: true,
-        excerpt: true,
+        titleEn: true,
+        titleKh: true,
+        excerptEn: true,
+        excerptKh: true,
         slug: true,
         coverImage: true,
         publishedAt: true,
@@ -118,15 +124,38 @@ export default defineEventHandler(async (event) => {
     relatedPosts = [...relatedPosts, ...categoryBasedPosts];
   }
 
-  // Remove relatedPosts from post object to avoid duplication
-  const { relatedPosts: _, ...postData } = post;
+  // Remove relatedPosts and bilingual fields from post object
+  const { relatedPosts: _, titleEn, titleKh, excerptEn, excerptKh, contentEn, contentKh, ...postData } = post;
+
+  const transformRelated = (r: any) => ({
+    id: r.id,
+    title: { en: r.titleEn, kh: r.titleKh },
+    excerpt: { en: r.excerptEn, kh: r.excerptKh },
+    slug: r.slug,
+    coverImage: r.coverImage,
+    publishedAt: r.publishedAt,
+    author: r.author,
+  });
 
   return {
     status: 200,
     message: "Post retrieved successfully",
     data: {
       ...postData,
-      relatedPosts,
+      title: { en: titleEn, kh: titleKh },
+      excerpt: { en: excerptEn, kh: excerptKh },
+      content: { en: contentEn, kh: contentKh },
+      categories: post.categories.map((c) => ({
+        id: c.id,
+        name: { en: c.nameEn, kh: c.nameKh },
+        slug: c.slug,
+      })),
+      tags: post.tags.map((t) => ({
+        id: t.id,
+        name: { en: t.nameEn, kh: t.nameKh },
+        slug: t.slug,
+      })),
+      relatedPosts: relatedPosts.map(transformRelated),
     },
   };
 });

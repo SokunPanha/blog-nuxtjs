@@ -18,8 +18,9 @@ export default defineEventHandler(async (event) => {
 
   if (search) {
     where.OR = [
-      { title: { contains: search, mode: "insensitive" } },
-      { excerpt: { contains: search, mode: "insensitive" } },
+      { titleEn: { contains: search, mode: "insensitive" } },
+      { titleKh: { contains: search, mode: "insensitive" } },
+      { excerptEn: { contains: search, mode: "insensitive" } },
     ];
   }
 
@@ -50,8 +51,10 @@ export default defineEventHandler(async (event) => {
     orderBy: { publishedAt: "desc" },
     select: {
       id: true,
-      title: true,
-      excerpt: true,
+      titleEn: true,
+      titleKh: true,
+      excerptEn: true,
+      excerptKh: true,
       slug: true,
       coverImage: true,
       publishedAt: true,
@@ -68,23 +71,46 @@ export default defineEventHandler(async (event) => {
       categories: {
         select: {
           id: true,
-          name: true,
+          nameEn: true,
+          nameKh: true,
           slug: true,
         },
       },
       tags: {
         select: {
           id: true,
-          name: true,
+          nameEn: true,
+          nameKh: true,
           slug: true,
         },
       },
     },
   });
 
+  const transformed = posts.map((p) => ({
+    id: p.id,
+    title: { en: p.titleEn, kh: p.titleKh },
+    excerpt: { en: p.excerptEn, kh: p.excerptKh },
+    slug: p.slug,
+    coverImage: p.coverImage,
+    publishedAt: p.publishedAt,
+    createdAt: p.createdAt,
+    author: p.author,
+    categories: p.categories.map((c) => ({
+      id: c.id,
+      name: { en: c.nameEn, kh: c.nameKh },
+      slug: c.slug,
+    })),
+    tags: p.tags.map((t) => ({
+      id: t.id,
+      name: { en: t.nameEn, kh: t.nameKh },
+      slug: t.slug,
+    })),
+  }));
+
   return {
     status: 200,
     message: "Posts retrieved successfully",
-    ...createPaginatedResponse(posts, total, page, limit),
+    ...createPaginatedResponse(transformed, total, page, limit),
   };
 });

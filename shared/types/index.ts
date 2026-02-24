@@ -3,21 +3,26 @@ export type AuthorCardType = {
   image: string;
 };
 
+export type Localized<T extends string | null = string> = {
+  en: T;
+  kh: string | null;
+};
+
 export type BlogCardType = {
-  id: string; // Changed from number to string to match Prisma ID
-  title: string;
+  id: string;
+  title: Localized;
+  excerpt: Localized<string | null>;
   image: string | null;
   author: AuthorCardType;
   date: string;
   slug: string;
-  excerpt?: string | null;
 };
 
 export type CategoryType = {
   id: string;
-  name: string;
+  name: Localized;
+  description: Localized<string | null>;
   slug: string;
-  description: string | null;
   coverImage: string | null;
   postCount: number;
 };

@@ -3,7 +3,7 @@ import { prisma } from "~~/server/api/utils/db";
 export default defineEventHandler(async () => {
   // Get all tags with post count
   const tags = await prisma.tag.findMany({
-    orderBy: { name: "asc" },
+    orderBy: { nameEn: "asc" },
     include: {
       _count: {
         select: {
@@ -18,12 +18,12 @@ export default defineEventHandler(async () => {
     },
   });
 
-  // Transform to include postCount
+  // Transform to include postCount and localized objects
   const transformedTags = tags.map((tag) => ({
     id: tag.id,
-    name: tag.name,
+    name: { en: tag.nameEn, kh: tag.nameKh },
+    description: { en: tag.descriptionEn, kh: tag.descriptionKh },
     slug: tag.slug,
-    description: tag.description,
     coverImage: tag.coverImage,
     postCount: tag._count.posts,
   }));
