@@ -21,15 +21,19 @@ const { t } = useI18n();
 
 // Form state
 const formState = reactive({
-  name: "",
-  description: "",
+  nameEn: "",
+  nameKh: "",
+  descriptionEn: "",
+  descriptionKh: "",
   coverImage: "",
 });
 
 // Validation schema
 const schema = z.object({
-  name: z.string().min(1, "Name is required").max(100),
-  description: z.string().max(500).optional(),
+  nameEn: z.string().min(1, "English name is required").max(100),
+  nameKh: z.string().max(100).optional(),
+  descriptionEn: z.string().max(500).optional(),
+  descriptionKh: z.string().max(500).optional(),
   coverImage: z
     .string()
     .url("Must be a valid URL")
@@ -50,12 +54,16 @@ watch(
   (isOpen) => {
     if (isOpen) {
       if (props.tag) {
-        formState.name = props.tag.name;
-        formState.description = props.tag.description || "";
+        formState.nameEn = props.tag.nameEn;
+        formState.nameKh = props.tag.nameKh || "";
+        formState.descriptionEn = props.tag.descriptionEn || "";
+        formState.descriptionKh = props.tag.descriptionKh || "";
         formState.coverImage = props.tag.coverImage || "";
       } else {
-        formState.name = "";
-        formState.description = "";
+        formState.nameEn = "";
+        formState.nameKh = "";
+        formState.descriptionEn = "";
+        formState.descriptionKh = "";
         formState.coverImage = "";
       }
     }
@@ -87,15 +95,20 @@ const handleClose = () => {
         @submit="handleSubmit"
         class="space-y-4"
       >
-        <UFormField name="name" :label="t('label.name') || 'Name'" required>
-          <UInput v-model="formState.name" />
+        <UFormField name="nameEn" :label="t('label.name') || 'Name (EN)'" required>
+          <UInput v-model="formState.nameEn" />
         </UFormField>
 
-        <UFormField
-          name="description"
-          :label="t('label.description') || 'Description'"
-        >
-          <UTextarea v-model="formState.description" :rows="3" />
+        <UFormField name="nameKh" :label="'ឈ្មោះ (KH)'">
+          <UInput v-model="formState.nameKh" />
+        </UFormField>
+
+        <UFormField name="descriptionEn" :label="t('label.description') || 'Description (EN)'">
+          <UTextarea v-model="formState.descriptionEn" :rows="3" />
+        </UFormField>
+
+        <UFormField name="descriptionKh" :label="'ការពិពណ៌នា (KH)'">
+          <UTextarea v-model="formState.descriptionKh" :rows="3" />
         </UFormField>
 
         <UFormField

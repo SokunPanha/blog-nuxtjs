@@ -4,9 +4,11 @@ import type { CategoryRequestType, CategoryUpdateType } from "~~/shared/types/zo
 
 export interface Category {
   id: string;
-  name: string;
+  nameEn: string;
+  nameKh: string | null;
   slug: string;
-  description: string | null;
+  descriptionEn: string | null;
+  descriptionKh: string | null;
   coverImage: string | null;
   status: string;
   postCount: number;

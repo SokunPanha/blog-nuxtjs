@@ -4,11 +4,14 @@ import type { PostRequestType, PostUpdateType } from "~~/shared/types/zod";
 
 export interface Post {
   id: string;
-  title: string;
-  excerpt: string | null;
+  titleEn: string;
+  titleKh: string | null;
+  excerptEn: string | null;
+  excerptKh: string | null;
   slug: string;
   coverImage: string;
-  content: string;
+  contentEn: string;
+  contentKh: string | null;
   status: string;
   isFeatured: boolean;
   viewCount: number;
@@ -22,9 +25,9 @@ export interface Post {
     lastName: string | null;
     avatar: string | null;
   };
-  categories: Array<{ id: string; name: string; slug: string }>;
-  tags: Array<{ id: string; name: string; slug: string }>;
-  relatedPosts?: Array<{ id: string; title: string; slug: string; coverImage: string }>;
+  categories: Array<{ id: string; nameEn: string; nameKh: string | null; slug: string }>;
+  tags: Array<{ id: string; nameEn: string; nameKh: string | null; slug: string }>;
+  relatedPosts?: Array<{ id: string; titleEn: string; titleKh: string | null; slug: string; coverImage: string }>;
 }
 
 export interface PostsResponse {

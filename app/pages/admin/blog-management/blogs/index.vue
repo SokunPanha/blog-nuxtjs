@@ -32,7 +32,7 @@ const statusOptions = [
 // Table columns
 const columns: TableColumn<Post>[] = [
   {
-    accessorKey: "title",
+    accessorKey: "titleEn",
     header: t("tableColumn.post_title") || "Title",
   },
   {
@@ -152,18 +152,18 @@ const breadcrumbs = [
 
       <!-- Table -->
       <UTable :data="posts" :columns="columns" :loading="loading">
-        <template #title-cell="{ row }">
+        <template #titleEn-cell="{ row }">
           <div class="flex items-center gap-3">
             <img
               v-if="row.original.coverImage"
               :src="row.original.coverImage"
-              :alt="row.original.title"
+              :alt="row.original.titleEn"
               class="w-12 h-12 rounded object-cover"
             />
             <div>
-              <p class="font-medium">{{ row.original.title }}</p>
+              <p class="font-medium">{{ row.original.titleEn }}</p>
               <p class="text-sm text-gray-500 truncate max-w-xs">
-                {{ row.original.excerpt || "No excerpt" }}
+                {{ row.original.excerptEn || "No excerpt" }}
               </p>
             </div>
           </div>
@@ -189,7 +189,7 @@ const breadcrumbs = [
               variant="subtle"
               size="xs"
             >
-              {{ cat.name }}
+              {{ cat.nameEn }}
             </UBadge>
             <UBadge
               v-if="row.original.categories?.length > 2"
@@ -256,7 +256,7 @@ const breadcrumbs = [
       :loading="deleteLoading"
       :title="t('label.delete_post') || 'Delete Post'"
       :message="
-        t('message.confirm_delete_message', { name: postToDelete?.title }) ||
+        t('message.confirm_delete_message', { name: postToDelete?.titleEn }) ||
         'Are you sure you want to delete this item? This action cannot be undone.'
       "
       @confirm="handleDeleteConfirm"

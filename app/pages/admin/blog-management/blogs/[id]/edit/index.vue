@@ -37,7 +37,7 @@ const handleCancel = () => {
 const breadcrumbs = computed(() => [
   { label: t("label.dashboard") || "Dashboard", to: "/admin" },
   { label: t("label.blogs") || "Blogs", to: "/admin/blog-management/blogs" },
-  { label: currentPost.value?.title || t("label.edit") || "Edit" },
+  { label: currentPost.value?.titleEn || t("label.edit") || "Edit" },
 ]);
 </script>
 

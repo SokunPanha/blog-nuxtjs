@@ -26,21 +26,24 @@ export default defineEventHandler(async (event) => {
       categories: {
         select: {
           id: true,
-          name: true,
+          nameEn: true,
+          nameKh: true,
           slug: true,
         },
       },
       tags: {
         select: {
           id: true,
-          name: true,
+          nameEn: true,
+          nameKh: true,
           slug: true,
         },
       },
       relatedPosts: {
         select: {
           id: true,
-          title: true,
+          titleEn: true,
+          titleKh: true,
           slug: true,
           coverImage: true,
         },

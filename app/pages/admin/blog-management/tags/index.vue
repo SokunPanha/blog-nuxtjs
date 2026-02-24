@@ -25,7 +25,7 @@ const deleteLoading = ref(false);
 // Table columns
 const columns: TableColumn<Tag>[] = [
   {
-    accessorKey: "name",
+    accessorKey: "nameEn",
     header: t("tableColumn.tag_name") || "Name",
   },
   {
@@ -139,12 +139,12 @@ const breadcrumbs = [
 
       <!-- Table -->
       <UTable :data="tags" :columns="columns" :loading="loading">
-        <template #name-cell="{ row }">
+        <template #nameEn-cell="{ row }">
           <div class="flex items-center gap-3">
             <img
               v-if="row.original.coverImage"
               :src="row.original.coverImage"
-              :alt="row.original.name"
+              :alt="row.original.nameEn"
               class="w-8 h-8 rounded object-cover"
             />
             <div
@@ -153,7 +153,7 @@ const breadcrumbs = [
             >
               <UIcon name="i-lucide-tag" class="w-4 h-4 text-gray-400" />
             </div>
-            <span class="font-medium">{{ row.original.name }}</span>
+            <span class="font-medium">{{ row.original.nameEn }}</span>
           </div>
         </template>
 
@@ -222,7 +222,7 @@ const breadcrumbs = [
       :loading="deleteLoading"
       :title="t('label.delete_tag') || 'Delete Tag'"
       :message="
-        t('message.confirm_delete_message', { name: selectedTag?.name }) ||
+        t('message.confirm_delete_message', { name: selectedTag?.nameEn }) ||
         'Are you sure you want to delete this item? This action cannot be undone.'
       "
       @confirm="handleDeleteConfirm"

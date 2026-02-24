@@ -13,8 +13,9 @@ export default defineEventHandler(async (event) => {
 
   if (search) {
     where.OR = [
-      { title: { contains: search, mode: "insensitive" } },
-      { excerpt: { contains: search, mode: "insensitive" } },
+      { titleEn: { contains: search, mode: "insensitive" } },
+      { titleKh: { contains: search, mode: "insensitive" } },
+      { excerptEn: { contains: search, mode: "insensitive" } },
     ];
   }
 
@@ -44,14 +45,16 @@ export default defineEventHandler(async (event) => {
       categories: {
         select: {
           id: true,
-          name: true,
+          nameEn: true,
+          nameKh: true,
           slug: true,
         },
       },
       tags: {
         select: {
           id: true,
-          name: true,
+          nameEn: true,
+          nameKh: true,
           slug: true,
         },
       },
