@@ -2,15 +2,17 @@
 interface Props {
   category: {
     id: string;
-    name: string;
+    name: { en: string; kh: string | null };
     slug: string;
-    description?: string | null;
+    description?: { en: string | null; kh: string | null } | null;
     coverImage?: string | null;
     postCount: number;
   };
 }
 
 defineProps<Props>();
+
+const { locale } = useI18n();
 </script>
 
 <template>
@@ -23,7 +25,7 @@ defineProps<Props>();
       <NuxtImg
         v-if="category.coverImage"
         :src="category.coverImage"
-        :alt="category.name"
+        :alt="category.name[locale as 'en' | 'kh'] || category.name.en"
         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         format="webp"
       />
@@ -45,13 +47,13 @@ defineProps<Props>();
     <!-- Content -->
     <div class="p-4">
       <h3 class="font-semibold text-lg text-gray-900 dark:text-white group-hover:text-primary-500 transition-colors">
-        {{ category.name }}
+        {{ category.name[locale as "en" | "kh"] || category.name.en }}
       </h3>
       <p
-        v-if="category.description"
+        v-if="category.description?.[locale as 'en' | 'kh'] || category.description?.en"
         class="mt-1 text-sm text-gray-500 dark:text-gray-400 line-clamp-2"
       >
-        {{ category.description }}
+        {{ category.description?.[locale as "en" | "kh"] || category.description?.en }}
       </p>
     </div>
   </NuxtLink>

@@ -98,6 +98,7 @@ watch(page, (newPage) => {
         :blog="{
           id: post.id,
           title: post.title,
+          excerpt: post.excerpt,
           slug: post.slug,
           image: post.coverImage,
           author: {
