@@ -1,8 +1,12 @@
+import { computed } from "vue";
+import { useFetch } from "#imports";
+import type { NuxtApp } from "#app";
 import type { BlogCardType } from "~~/shared/types";
 
 const mapPost = (post: any): BlogCardType => ({
   id: post.id,
   title: post.title,
+  excerpt: post.excerpt,
   image: post.coverImage,
   slug: post.slug,
   author: {
@@ -10,7 +14,6 @@ const mapPost = (post: any): BlogCardType => ({
     image: post.author.avatar || "",
   },
   date: new Date(post.publishedAt || Date.now()).toLocaleDateString(),
-  excerpt: post.excerpt,
 });
 
 export const useHome = () => {
@@ -22,14 +25,14 @@ export const useHome = () => {
     };
   }>("/api/v1/home", {
     key: "home-data",
-    getCachedData(key, nuxtApp) {
+    getCachedData(key: string, nuxtApp: NuxtApp) {
       return nuxtApp.payload.data[key] || nuxtApp.static.data[key];
     },
   });
 
-  const { data: categories } = useFetch("/api/v1/categories", {
+  const { data: categories } = useFetch<{ data: any[] }>("/api/v1/categories", {
     key: "categories",
-    getCachedData(key, nuxtApp) {
+    getCachedData(key: string, nuxtApp: NuxtApp) {
       return nuxtApp.payload.data[key] || nuxtApp.static.data[key];
     },
   });
@@ -37,8 +40,8 @@ export const useHome = () => {
     categories.value?.data?.map((category: any) => ({
       id: category.id,
       name: category.name,
-      slug: category.slug,
       description: category.description,
+      slug: category.slug,
       coverImage: category.coverImage,
       postCount: category.postCount,
     })) || []

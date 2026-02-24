@@ -1,3 +1,5 @@
+import { computed } from "vue";
+import { useState } from "#imports";
 import type { BlogUser } from "~~/server/utils/blogSession";
 
 interface BlogSessionState {
@@ -16,7 +18,7 @@ export const useBlogSession = () => {
 
   const fetch = async () => {
     try {
-      const data = await $fetch("/api/blog/v1/auth/session");
+      const data = await $fetch<{ user: BlogUser | null; loggedIn: boolean }>("/api/blog/v1/auth/session");
       sessionState.value = {
         user: data.user,
         loggedIn: data.loggedIn,

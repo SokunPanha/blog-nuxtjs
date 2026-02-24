@@ -1,3 +1,4 @@
+import { useRoute, useCookie } from "#imports";
 import { useBlogSession } from "~/composables/blog/useBlogSession";
 
 export const useBlogAuth = () => {

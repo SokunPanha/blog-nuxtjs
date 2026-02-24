@@ -2,12 +2,13 @@
 import { useBreakpoints } from "@vueuse/core";
 import { useBlogSession } from "~/composables/blog/useBlogSession";
 import { parseMarkdown } from "@nuxtjs/mdc/runtime";
+import type { Localized } from "#shared/types";
 
 definePageMeta({
   layout: "blog-layout",
 });
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 const route = useRoute();
 const router = useRouter();
 const contentIsParsing = ref(false);
@@ -29,19 +30,45 @@ onMounted(() => {
 
 // Only apply login-dependent styles after hydration
 const isContentRestricted = computed(() => isMounted.value && !loggedIn.value);
+interface PostAuthor { id: string; username: string; firstName: string | null; lastName: string | null; avatar: string | null }
+interface PostTag { id: string; name: Localized; slug: string }
+interface PostCategory { id: string; name: Localized; slug: string }
+interface RelatedPost {
+  id: string; title: Localized; excerpt: Localized<string | null>;
+  slug: string; coverImage: string | null; publishedAt: string | null; author: PostAuthor;
+}
+interface PostDetail {
+  id: string; title: Localized; excerpt: Localized<string | null>; content: Localized<string | null>;
+  slug: string; coverImage: string | null; publishedAt: string | null;
+  author: PostAuthor; categories: PostCategory[]; tags: PostTag[]; relatedPosts: RelatedPost[];
+}
+
 // Fetch post by slug - no await for instant navigation, SSR still works
-const { data, pending, error } = useFetch(() => `/api/v1/posts/${slug.value}`, {
+const { data, pending, error } = useFetch<{ data: PostDetail }>(() => `/api/v1/posts/${slug.value}`, {
   watch: [slug],
 });
 
 const post = computed(() => data.value?.data || null);
 const relatedPosts = computed(() => data.value?.data?.relatedPosts || []);
 
+// Locale-aware display fields
+const displayTitle = computed(() =>
+  post.value?.title?.[locale.value as "en" | "kh"] || post.value?.title?.en || ""
+);
+
+const displayExcerpt = computed(() =>
+  post.value?.excerpt?.[locale.value as "en" | "kh"] || post.value?.excerpt?.en || ""
+);
+
+const displayContent = computed(() =>
+  post.value?.content?.[locale.value as "en" | "kh"] || post.value?.content?.en || ""
+);
+
 // Parse markdown content reactively
 const parsedContent = ref<Awaited<ReturnType<typeof parseMarkdown>> | null>(null);
 
 watch(
-  () => post.value?.content,
+  () => displayContent.value,
   async (content, _, onCleanup) => {
     if (!content) {
       parsedContent.value = null
@@ -90,12 +117,12 @@ const formatDate = (dateString: string | null) => {
 
 // SEO
 useHead({
-  title: computed(() => post.value?.title || "Blog"),
+  title: computed(() => displayTitle.value || "Blog"),
 });
 
 useSeoMeta({
-  title: computed(() => post.value?.title),
-  description: computed(() => post.value?.excerpt || ""),
+  title: computed(() => displayTitle.value),
+  description: computed(() => displayExcerpt.value || ""),
   ogImage: computed(() => post.value?.coverImage),
 });
 </script>
@@ -162,7 +189,7 @@ useSeoMeta({
         <NuxtImg
           v-if="post.coverImage"
           :src="post.coverImage"
-          :alt="post.title"
+          :alt="displayTitle"
           class="w-full h-64 object-cover rounded-lg mb-8"
           format="webp"
         />
@@ -171,7 +198,7 @@ useSeoMeta({
         <div class="flex flex-col gap-2 mb-8">
           <div class="flex flex-row items-center justify-between gap-2">
             <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
-              {{ post.title }}
+              {{ displayTitle }}
             </h1>
           </div>
           <p class="text-sm text-gray-500">
@@ -199,7 +226,7 @@ useSeoMeta({
               color="primary"
               variant="subtle"
             >
-              {{ cat.name }}
+              {{ cat.name[locale as "en" | "kh"] || cat.name.en }}
             </UBadge>
             <UBadge
               v-for="tag in post.tags"
@@ -207,7 +234,7 @@ useSeoMeta({
               color="neutral"
               variant="outline"
             >
-              #{{ tag.name }}
+              #{{ tag.name[locale as "en" | "kh"] || tag.name.en }}
             </UBadge>
           </div>
 
@@ -255,6 +282,7 @@ useSeoMeta({
             :blog="{
               id: related.id,
               title: related.title,
+              excerpt: related.excerpt,
               slug: related.slug,
               image: related.coverImage,
               author: {
