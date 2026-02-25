@@ -79,6 +79,10 @@
     "browse_category": "Browse Category",
     "back": "Back",
     "sign_up_with": "Sign up with",
-    "choose_provider": "Choose your preferred sign up method"
+    "choose_provider": "Choose your preferred sign up method",
+    "my_profile": "My Profile",
+    "personal_information": "Personal Information",
+    "save_changes": "Save Changes",
+    "member_since": "Member since"
   }
 }

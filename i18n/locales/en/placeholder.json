@@ -5,6 +5,9 @@
         "search":"Search...",
         "select_categories":"Select categories",
         "select_tags":"Select tags",
-        "select_related_posts":"Select related posts"
+        "select_related_posts":"Select related posts",
+        "first_name": "First name",
+        "last_name": "Last name",
+        "username": "Username"
     }
 }

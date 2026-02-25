@@ -19,6 +19,8 @@
     "category_not_found": "រកមិនឃើញប្រភេទ",
     "category_not_found_description": "ប្រភេទដែលអ្នកកំពុងស្វែងរកមិនមានទេ។",
     "no_posts_in_category": "មិនមានអត្ថបទក្នុងប្រភេទនេះទេ",
-    "choose_provider": "ជ្រើសរើសវិធីចូលប្រើប្រាស់ដែលអ្នកពេញចិត្ត"
+    "choose_provider": "ជ្រើសរើសវិធីចូលប្រើប្រាស់ដែលអ្នកពេញចិត្ត",
+    "profile_description": "គ្រប់គ្រងព័ត៌មានគណនីរបស់អ្នក",
+    "email_managed_by_oauth": "គ្រប់គ្រងដោយអ្នកផ្តល់សេវា OAuth"
   }
 }
