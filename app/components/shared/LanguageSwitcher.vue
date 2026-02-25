@@ -1,9 +1,11 @@
 <script setup lang="ts">
-const { locale, setLocale } = useI18n()
 import { APP_LOCALES } from '#shared/constants'
+const { locale } = useI18n()
+const switchLocalePath = useSwitchLocalePath()
 const currentFlag = computed(() => APP_LOCALES.find((l: any) => l.code === locale.value)?.flag)
 function toggleLocale() {
-  setLocale(locale.value === 'en' ? 'kh' : 'en')
+  const next = locale.value === 'en' ? 'kh' : 'en'
+  navigateTo(switchLocalePath(next))
 }
 </script>
 
