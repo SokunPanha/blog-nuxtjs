@@ -16,6 +16,8 @@ export default defineNuxtConfig({
     "/blog/**": { swr: 10 },
     "/category": { swr: 10 },
     "/category/**": { swr: 10 },
+    "/kh": { swr: 60 },
+    "/kh/**": { swr: 10 },
     "/admin/**": { ssr: true },
   },
   imports: {
@@ -102,8 +104,13 @@ export default defineNuxtConfig({
       },
     ],
     defaultLocale: "en",
-    strategy: "no_prefix",
+    strategy: "prefix_except_default",
     langDir: "locales",
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: "i18n_locale",
+      redirectOn: "root",
+    },
   },
   app: {
     head: {
