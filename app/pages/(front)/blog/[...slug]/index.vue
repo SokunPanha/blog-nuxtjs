@@ -9,6 +9,7 @@ definePageMeta({
 });
 
 const { t, locale } = useI18n();
+const localePath = useLocalePath();
 const route = useRoute();
 const router = useRouter();
 const contentIsParsing = ref(false);
@@ -164,7 +165,7 @@ useSeoMeta({
         "
       />
       <div class="mt-6">
-        <UButton @click="router.push('/blog')">
+        <UButton @click="navigateTo(localePath('/blog'))">
           {{ t("label.back_to_blog") || "Back to Blog" }}
         </UButton>
       </div>

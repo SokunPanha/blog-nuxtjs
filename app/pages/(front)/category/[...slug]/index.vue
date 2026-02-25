@@ -4,8 +4,8 @@ definePageMeta({
 });
 
 const { t, locale } = useI18n();
+const localePath = useLocalePath();
 const route = useRoute();
-const router = useRouter();
 
 const slug = computed(() => {
   const params = route.params.slug;
@@ -32,7 +32,7 @@ const meta = computed(() => toValue(categoryData)?.data?.meta || null);
 // Update URL when page changes
 watch(page, (newPage) => {
   navigateTo({
-    path: `/category/${slug.value}`,
+    path: localePath(`/category/${slug.value}`),
     query: newPage > 1 ? { page: newPage } : {},
   });
 });
@@ -75,7 +75,7 @@ useHead({
         :description="t('message.category_not_found_description') || 'The category you are looking for does not exist.'"
         class="mb-6"
       />
-      <UButton @click="router.push('/category')">
+      <UButton @click="navigateTo(localePath('/category'))">
         {{ t("label.back_to_categories") || "Back to Categories" }}
       </UButton>
     </div>
@@ -89,7 +89,7 @@ useHead({
           color="neutral"
           icon="i-lucide-arrow-left"
           class="mb-4"
-          @click="router.push('/category')"
+          @click="navigateTo(localePath('/category'))"
         >
           {{ t("label.all_categories") || "All Categories" }}
         </UButton>

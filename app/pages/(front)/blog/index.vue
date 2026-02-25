@@ -4,6 +4,7 @@ definePageMeta({
 });
 
 const { t } = useI18n();
+const localePath = useLocalePath();
 const route = useRoute();
 const router = useRouter();
 
@@ -26,7 +27,7 @@ const meta = computed(() => data.value?.meta || null);
 // Update URL when page changes
 watch(page, (newPage) => {
   navigateTo({
-    path: "/blog",
+    path: localePath("/blog"),
     query: newPage > 1 ? { page: newPage } : {},
   });
 });
@@ -36,7 +37,7 @@ watch(page, (newPage) => {
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Header -->
     <div class="mt-6" :v-if="route.query.sort">
-      <UButton @click="router.push('/')" variant="ghost" icon="i-lucide-arrow-left">
+      <UButton @click="navigateTo(localePath('/'))" variant="ghost" icon="i-lucide-arrow-left">
         {{ t("label.back") || "Back" }}
       </UButton>
     </div>
