@@ -27,10 +27,13 @@ const { fetchPosts } = useAdminPosts();
 
 // Form state
 const formState = reactive({
-  title: props.post?.title || "",
-  excerpt: props.post?.excerpt || "",
+  titleEn: props.post?.titleEn || "",
+  titleKh: props.post?.titleKh || "",
+  excerptEn: props.post?.excerptEn || "",
+  excerptKh: props.post?.excerptKh || "",
   coverImage: props.post?.coverImage || "",
-  content: props.post?.content || "",
+  contentEn: props.post?.contentEn || "",
+  contentKh: props.post?.contentKh || "",
   status: (props.post?.status || "DRAFT") as PostStatus,
   isFeatured: props.post?.isFeatured || false,
   categoryIds: props.post?.categories?.map((c) => c.id) || ([] as string[]),
@@ -40,10 +43,13 @@ const formState = reactive({
 
 // Validation schema
 const schema = z.object({
-  title: z.string().min(1, "Title is required").max(255),
-  excerpt: z.string().max(500).optional(),
+  titleEn: z.string().min(1, "English title is required").max(255),
+  titleKh: z.string().max(255).optional(),
+  excerptEn: z.string().max(500).optional(),
+  excerptKh: z.string().max(500).optional(),
   coverImage: z.string().url("Must be a valid URL"),
-  content: z.string().min(1, "Content is required"),
+  contentEn: z.string().min(1, "English content is required"),
+  contentKh: z.string().optional(),
   status: z.enum(["DRAFT", "PUBLISHED", "ARCHIVED"]),
   isFeatured: z.boolean().optional(),
   categoryIds: z.array(z.string()).optional(),
@@ -79,18 +85,18 @@ onMounted(async () => {
 });
 
 const categoryOptions = computed(() =>
-  categories.value.map((c) => ({ value: c.id, label: c.name })),
+  categories.value.map((c) => ({ value: c.id, label: c.nameEn })),
 );
 
 const tagOptions = computed(() =>
-  tags.value.map((t) => ({ value: t.id, label: t.name })),
+  tags.value.map((t) => ({ value: t.id, label: t.nameEn })),
 );
 
 // Filter out current post from related posts options
 const relatedPostOptions = computed(() =>
   allPosts.value
     .filter((p) => p.id !== props.post?.id)
-    .map((p) => ({ value: p.id, label: p.title })),
+    .map((p) => ({ value: p.id, label: p.titleEn })),
 );
 
 const handleSubmit = () => {
@@ -102,10 +108,13 @@ watch(
   () => props.post,
   (newPost) => {
     if (newPost) {
-      formState.title = newPost.title;
-      formState.excerpt = newPost.excerpt || "";
+      formState.titleEn = newPost.titleEn;
+      formState.titleKh = newPost.titleKh || "";
+      formState.excerptEn = newPost.excerptEn || "";
+      formState.excerptKh = newPost.excerptKh || "";
       formState.coverImage = newPost.coverImage;
-      formState.content = newPost.content;
+      formState.contentEn = newPost.contentEn;
+      formState.contentKh = newPost.contentKh || "";
       formState.status = newPost.status as PostStatus;
       formState.isFeatured = newPost.isFeatured || false;
       formState.categoryIds = newPost.categories?.map((c) => c.id) || [];
@@ -127,27 +136,38 @@ watch(
             <h3 class="font-semibold">{{ t("label.content") || "Content" }}</h3>
           </template>
 
-          <div class="space-y-4">
-            <UFormField
-              name="title"
-              :label="t('label.title') || 'Title'"
-              required
-            >
-              <UInput class="w-full" v-model="formState.title" size="lg" />
-            </UFormField>
+          <UTabs
+            :items="[{ label: 'English (EN)', value: 'en', slot: 'en' }, { label: 'ភាសាខ្មែរ (KH)', value: 'kh', slot: 'kh' }]"
+            class="w-full"
+          >
+            <template #en>
+              <div class="space-y-4 pt-4">
+                <UFormField name="titleEn" :label="t('label.title') || 'Title (EN)'" required>
+                  <UInput class="w-full" v-model="formState.titleEn" size="lg" />
+                </UFormField>
+                <UFormField name="excerptEn" :label="t('label.excerpt') || 'Excerpt (EN)'">
+                  <UTextarea class="w-full" v-model="formState.excerptEn" :rows="3" />
+                </UFormField>
+                <UFormField name="contentEn" :label="t('label.content') || 'Content (EN)'" required>
+                  <EditorTipTap v-model="formState.contentEn" class="min-h-[400px]" />
+                </UFormField>
+              </div>
+            </template>
 
-            <UFormField name="excerpt" :label="t('label.excerpt') || 'Excerpt'">
-              <UTextarea class="w-full" v-model="formState.excerpt" :rows="3" />
-            </UFormField>
-
-            <UFormField
-              name="content"
-              :label="t('label.content') || 'Content'"
-              required
-            >
-              <EditorTipTap v-model="formState.content" class="min-h-[400px]" />
-            </UFormField>
-          </div>
+            <template #kh>
+              <div class="space-y-4 pt-4">
+                <UFormField name="titleKh" :label="t('label.title') || 'ចំណងជើង (KH)'">
+                  <UInput class="w-full" v-model="formState.titleKh" size="lg" />
+                </UFormField>
+                <UFormField name="excerptKh" :label="t('label.excerpt') || 'សង្ខេប (KH)'">
+                  <UTextarea class="w-full" v-model="formState.excerptKh" :rows="3" />
+                </UFormField>
+                <UFormField name="contentKh" :label="t('label.content') || 'មាតិកា (KH)'">
+                  <EditorTipTap v-model="formState.contentKh" class="min-h-[400px]" />
+                </UFormField>
+              </div>
+            </template>
+          </UTabs>
         </UCard>
       </div>
 

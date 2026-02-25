@@ -3,7 +3,7 @@ definePageMeta({
   layout: "blog-layout",
 });
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 const route = useRoute();
 const router = useRouter();
 
@@ -37,9 +37,17 @@ watch(page, (newPage) => {
   });
 });
 
+const categoryDisplayName = computed(() =>
+  category.value?.name?.[locale.value as "en" | "kh"] || category.value?.name?.en || "Category"
+);
+
+const categoryDisplayDescription = computed(() =>
+  category.value?.description?.[locale.value as "en" | "kh"] || category.value?.description?.en
+);
+
 // SEO
 useHead({
-  title: computed(() => category.value?.name || "Category"),
+  title: computed(() => categoryDisplayName.value),
 });
 </script>
 
@@ -93,24 +101,24 @@ useHead({
         >
           <NuxtImg
             :src="category.coverImage"
-            :alt="category.name"
+            :alt="categoryDisplayName"
             class="w-full h-full object-cover"
             format="webp"
           />
           <div class="absolute inset-0 bg-black/40" />
           <div class="absolute inset-0 flex items-center justify-center">
             <h1 class="text-4xl font-bold text-white">
-              {{ category.name }}
+              {{ categoryDisplayName }}
             </h1>
           </div>
         </div>
 
         <h1 v-else class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-          {{ category.name }}
+          {{ categoryDisplayName }}
         </h1>
 
-        <p v-if="category.description" class="text-lg text-gray-600 dark:text-gray-400">
-          {{ category.description }}
+        <p v-if="categoryDisplayDescription" class="text-lg text-gray-600 dark:text-gray-400">
+          {{ categoryDisplayDescription }}
         </p>
 
         <p v-if="meta" class="text-sm text-gray-500 mt-2">
@@ -140,6 +148,7 @@ useHead({
           :blog="{
             id: post.id,
             title: post.title,
+            excerpt: post.excerpt,
             slug: post.slug,
             image: post.coverImage,
             author: {

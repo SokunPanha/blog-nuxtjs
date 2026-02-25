@@ -6,7 +6,7 @@ export default defineEventHandler(async () => {
     where: {
       status: "PUBLISHED",
     },
-    orderBy: { name: "asc" },
+    orderBy: { nameEn: "asc" },
     include: {
       _count: {
         select: {
@@ -21,12 +21,12 @@ export default defineEventHandler(async () => {
     },
   });
 
-  // Transform to include postCount
+  // Transform to include postCount and localized objects
   const transformedCategories = categories.map((cat) => ({
     id: cat.id,
-    name: cat.name,
+    name: { en: cat.nameEn, kh: cat.nameKh },
+    description: { en: cat.descriptionEn, kh: cat.descriptionKh },
     slug: cat.slug,
-    description: cat.description,
     coverImage: cat.coverImage,
     postCount: cat._count.posts,
   }));

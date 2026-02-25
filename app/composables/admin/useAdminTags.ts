@@ -4,9 +4,11 @@ import type { TagRequestType, TagUpdateType } from "~~/shared/types/zod";
 
 export interface Tag {
   id: string;
-  name: string;
+  nameEn: string;
+  nameKh: string | null;
   slug: string;
-  description: string | null;
+  descriptionEn: string | null;
+  descriptionKh: string | null;
   coverImage: string | null;
   postCount: number;
   createdAt: string;

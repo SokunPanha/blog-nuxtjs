@@ -16,10 +16,10 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const { name, slug, description, coverImage, status } = result.data;
+  const { nameEn, nameKh, slug, descriptionEn, descriptionKh, coverImage, status } = result.data;
 
   // Generate slug if not provided
-  let finalSlug = slug || generateSlug(name);
+  let finalSlug = slug || generateSlug(nameEn);
 
   // Ensure slug is unique
   const existingSlugs = await prisma.category.findMany({
@@ -33,9 +33,11 @@ export default defineEventHandler(async (event) => {
   // Create category
   const category = await prisma.category.create({
     data: {
-      name,
+      nameEn,
+      nameKh,
       slug: finalSlug,
-      description,
+      descriptionEn,
+      descriptionKh,
       coverImage,
       status,
     },

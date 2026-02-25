@@ -1,3 +1,5 @@
+import { computed } from "vue";
+import { useState } from "#imports";
 import type { AdminUser } from "~~/server/utils/adminSession";
 
 interface AdminSessionState {
@@ -17,8 +19,7 @@ export const useAdminSession = () => {
 
   const fetch = async () => {
     try {
-      pending.value = true;
-      const data = await $fetch("/api/admin/v1/auth/session");
+      const data = await $fetch<{ user: AdminUser | null; loggedIn: boolean }>("/api/admin/v1/auth/session");
       sessionState.value = {
         user: data.user,
         loggedIn: data.loggedIn,

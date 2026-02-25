@@ -11,10 +11,10 @@ export default defineNuxtConfig({
     cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET,
   },
   routeRules: {
-    "/": { ssr: false },
-    "/blog/**": { isr: 300 },
-    "/category/**": { isr: 300 },
-    "/admin/**": { ssr: true }, // or just remove it
+    "/": { swr: 60 },
+    "/blog/**": { swr: 60 },
+    "/category/**": { swr: 60 },
+    "/admin/**": { ssr: true },
   },
   imports: {
     dirs: ["composables/admin", "composables/blog", "composables/shared"],

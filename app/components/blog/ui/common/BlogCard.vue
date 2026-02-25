@@ -16,6 +16,16 @@ const options = computed(() => ({
   ...props.options,
 }));
 
+const { locale } = useI18n();
+
+const displayTitle = computed(() =>
+  props.blog.title[locale.value as "en" | "kh"] || props.blog.title.en
+);
+
+const displayExcerpt = computed(() =>
+  props.blog.excerpt?.[locale.value as "en" | "kh"] || props.blog.excerpt?.en
+);
+
 const imageLoaded = ref(false);
 </script>
 <template>
@@ -35,7 +45,7 @@ const imageLoaded = ref(false);
           <NuxtImg
             v-if="props.blog.image"
             :src="props.blog.image"
-            :alt="props.blog.title"
+            :alt="displayTitle"
             width="400"
             height="225"
             format="webp"
@@ -73,14 +83,14 @@ const imageLoaded = ref(false);
         <h3
           class="md:text-lg text-md text-sm p-1 font-bold leading-tight line-clamp-2 text-gray-900 dark:text-gray-100 group-hover:text-primary-500 transition-colors"
         >
-          {{ props.blog.title }}
+          {{ displayTitle }}
         </h3>
 
         <p
-          v-if="props.blog.excerpt"
+          v-if="displayExcerpt"
           class="text-sm md:text-base text-gray-500 dark:text-gray-400 line-clamp-2"
         >
-          {{ props.blog.excerpt }}
+          {{ displayExcerpt }}
         </p>
       </div>
 

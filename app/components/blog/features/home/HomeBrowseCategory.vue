@@ -7,6 +7,8 @@ const props = defineProps({
     default: () => [],
   },
 });
+
+const { locale } = useI18n();
 </script>
 <template>
   <section class="bg-gray-100 dark:bg-gray-800 py-4">
@@ -36,7 +38,9 @@ const props = defineProps({
               alt=""
             />
           </div>
-          <p class="text-center">{{ category.name }}</p>
+          <p class="text-center">
+            {{ category.name[locale as "en" | "kh"] || category.name.en }}
+          </p>
         </NuxtLink>
       </div>
     </div>
