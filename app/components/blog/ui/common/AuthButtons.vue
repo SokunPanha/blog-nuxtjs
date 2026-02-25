@@ -3,12 +3,19 @@ import type { DropdownMenuItem } from "@nuxt/ui";
 import { useBlogAuth } from "~/composables/blog/useBlogAuth";
 
 const { t } = useI18n();
+const localePath = useLocalePath();
 
 const isSignInOpen = ref(false);
-const { fetch, loggedIn, user, logout } = useBlogAuth();
-
+const { loggedIn, user, logout } = useBlogAuth();
 
 const userMenuItems = computed<DropdownMenuItem[][]>(() => [
+  [
+    {
+      label: t("label.my_profile") || "My Profile",
+      icon: "i-lucide-user",
+      onSelect: () => navigateTo(localePath("/profile")),
+    },
+  ],
   [
     {
       label: t("label.logout") || "Logout",

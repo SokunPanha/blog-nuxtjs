@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     "/blog/**": { swr: 10 },
     "/category": { swr: 10 },
     "/category/**": { swr: 10 },
+    "/profile": { ssr: true },
     "/kh": { swr: 60 },
     "/kh/**": { swr: 10 },
     "/admin/**": { ssr: true },
