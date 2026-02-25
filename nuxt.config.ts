@@ -12,8 +12,10 @@ export default defineNuxtConfig({
   },
   routeRules: {
     "/": { swr: 60 },
-    "/blog/**": { swr: 60 },
-    "/category/**": { swr: 60 },
+    "/blog": { swr: 10 },
+    "/blog/**": { swr: 10 },
+    "/category": { swr: 10 },
+    "/category/**": { swr: 10 },
     "/admin/**": { ssr: true },
   },
   imports: {
