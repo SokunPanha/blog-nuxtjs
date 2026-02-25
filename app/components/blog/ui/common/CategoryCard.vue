@@ -13,11 +13,12 @@ interface Props {
 defineProps<Props>();
 
 const { locale } = useI18n();
+const localePath = useLocalePath();
 </script>
 
 <template>
   <NuxtLink
-    :to="`/category/${category.slug}`"
+    :to="localePath(`/category/${category.slug}`)"
     class="group block overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-all duration-300"
   >
     <!-- Cover image -->

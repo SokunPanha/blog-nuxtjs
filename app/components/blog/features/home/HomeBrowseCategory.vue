@@ -9,13 +9,14 @@ const props = defineProps({
 });
 
 const { locale } = useI18n();
+const localePath = useLocalePath();
 </script>
 <template>
   <section class="bg-gray-100 dark:bg-gray-800 py-4">
     <div class="flex flex-col gap-4 max-w-4xl mx-auto px-4">
       <div class="flex justify-between items-center">
         <p class="font-semibold">{{ $t("label.browse_category") }}</p>
-        <NuxtLink to="/category">{{ $t("label.view_all") }}</NuxtLink>
+        <NuxtLink :to="localePath('/category')">{{ $t("label.view_all") }}</NuxtLink>
       </div>
       <div
         class="flex flex-nowrap overflow-x-auto no-scrollbar min-h-[100px] gap-4 py-3"
@@ -23,7 +24,7 @@ const { locale } = useI18n();
         <NuxtLink
           v-for="category in categories"
           :key="category.id"
-          :to="`/category/${category.slug}`"
+          :to="localePath(`/category/${category.slug}`)"
           class="p-2  w-[150px] max-w-[150px] rounded-md shrink-0 block"
         >
           <div

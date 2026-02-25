@@ -17,6 +17,7 @@ const options = computed(() => ({
 }));
 
 const { locale } = useI18n();
+const localePath = useLocalePath();
 
 const displayTitle = computed(() =>
   props.blog.title[locale.value as "en" | "kh"] || props.blog.title.en
@@ -29,7 +30,7 @@ const displayExcerpt = computed(() =>
 const imageLoaded = ref(false);
 </script>
 <template>
-  <NuxtLink :to="`/blog/${props.blog.slug}`" class="block group h-full">
+  <NuxtLink :to="localePath(`/blog/${props.blog.slug}`)" class="block group h-full">
     <UCard
       class="overflow-hidden h-full flex flex-col transition-all duration-300 hover:shadow-xl dark:hover:shadow-gray-800/50 hover:-translate-y-1"
       :ui="{
