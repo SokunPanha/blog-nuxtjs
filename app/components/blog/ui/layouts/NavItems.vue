@@ -11,6 +11,7 @@ const props = defineProps<{
   navItems: NavItemsType[];
   options?: OptionsType;
 }>();
+const localePath = useLocalePath();
 const options = computed(() => {
   return {
     horizontal: false,
@@ -37,7 +38,7 @@ const navItemsStyle = computed(() => {
         'hidden sm:block': options.horizontal,
       }"
     >
-      <NuxtLink :to="item.path">{{ $t(item.name) }}</NuxtLink>
+      <NuxtLink :to="localePath(item.path)">{{ $t(item.name) }}</NuxtLink>
     </li>
     <li>
       <slot name="appendRight"></slot>

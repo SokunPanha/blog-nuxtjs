@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const localePath = useLocalePath();
 const navItems = [
   {
     name: "home",
@@ -28,7 +29,7 @@ const navItems = [
         </UDrawer>
         <NuxtLink
           class="font-bold  flex items-center gap-2 text-xl  "
-          to="/"
+          :to="localePath('/')"
         >
          <UAvatar size="xl" src="/images/logo.jpg" alt="Logo" />
          <h1>Dev Hub</h1>
