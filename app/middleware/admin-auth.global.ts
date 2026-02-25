@@ -6,23 +6,24 @@ export default defineNuxtRouteMiddleware(async (to) => {
     return;
   }
 
+  const { loggedIn, fetch, pending } = useAdminSession();
+
+  // On server or first client load, always fetch
+  // On subsequent client navigations, skip fetch if session already loaded
+  if (import.meta.server || pending.value) {
+    await fetch();
+  }
+
   // Allow access to login page
   if (to.path === "/admin/auth/login") {
-    const { loggedIn, fetch } = useAdminSession();
-    await fetch();
-    // Redirect to admin if already logged in
     if (loggedIn.value) {
       return navigateTo("/admin");
     }
     return;
   }
-  
-  // Check admin session for protected routes
-  const { loggedIn, fetch, pending } = useAdminSession();
-  await fetch();
 
-  if (!loggedIn.value && !pending.value) {
+  // Check admin session for protected routes
+  if (!loggedIn.value) {
     return navigateTo("/admin/auth/login");
   }
-
 });

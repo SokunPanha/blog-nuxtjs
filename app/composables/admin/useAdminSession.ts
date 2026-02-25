@@ -12,14 +12,18 @@ export const useAdminSession = () => {
     user: null,
     loggedIn: false,
   }));
-  const pending = ref(true)
+  const pending = useState<boolean>("admin-session-pending", () => true);
 
   const user = computed(() => sessionState.value.user);
   const loggedIn = computed(() => sessionState.value.loggedIn);
 
   const fetch = async () => {
     try {
-      const data = await $fetch<{ user: AdminUser | null; loggedIn: boolean }>("/api/admin/v1/auth/session");
+      // Forward cookies on SSR so the session cookie is included in the request
+      const headers = import.meta.server ? useRequestHeaders(["cookie"]) : undefined;
+      const data = await $fetch<{ user: AdminUser | null; loggedIn: boolean }>("/api/admin/v1/auth/session", {
+        headers,
+      });
       sessionState.value = {
         user: data.user,
         loggedIn: data.loggedIn,
