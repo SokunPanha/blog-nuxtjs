@@ -1,7 +1,12 @@
 import { PrismaClient } from '../../../prisma/generated/client'
 import { PrismaPg } from '@prisma/adapter-pg'
 
-const prismaClientSingleton = () => {
+declare global {
+  // eslint-disable-next-line no-var
+  var __prisma: PrismaClient | undefined
+}
+
+const createPrismaClient = () => {
   // Support both local DATABASE_URL and Vercel Postgres naming
   let connectionString = process.env.DATABASE_URL || process.env.POSTGRES_PRISMA_URL
   if (!connectionString) {
@@ -21,16 +26,13 @@ const prismaClientSingleton = () => {
 
   return new PrismaClient({
     adapter: pool,
-    log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
+    log: process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'],
   })
 }
 
-type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>
-
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClientSingleton | undefined
+// Use global variable to persist across HMR in development
+if (!global.__prisma) {
+  global.__prisma = createPrismaClient()
 }
 
-// Cache prisma instance in both dev and production for serverless
-export const prisma = globalForPrisma.prisma ?? prismaClientSingleton()
-globalForPrisma.prisma = prisma
+export const prisma = global.__prisma
