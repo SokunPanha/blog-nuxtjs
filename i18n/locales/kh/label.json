@@ -81,6 +81,11 @@
     "my_profile": "គណនីរបស់ខ្ញុំ",
     "personal_information": "ព័ត៌មានផ្ទាល់ខ្លួន",
     "save_changes": "រក្សាទុកការផ្លាស់ប្តូរ",
-    "member_since": "សមាជិកតាំងពី"
+    "member_since": "សមាជិកតាំងពី",
+    "share": "ចែករំលែក",
+    "share_facebook": "ចែករំលែកទៅ Facebook",
+    "share_x": "ចែករំលែកទៅ X",
+    "share_telegram": "ចែករំលែកទៅ Telegram",
+    "copy_link": "ចម្លងតំណ"
   }
 }

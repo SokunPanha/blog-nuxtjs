@@ -83,6 +83,11 @@
     "my_profile": "My Profile",
     "personal_information": "Personal Information",
     "save_changes": "Save Changes",
-    "member_since": "Member since"
+    "member_since": "Member since",
+    "share": "Share",
+    "share_facebook": "Share on Facebook",
+    "share_x": "Share on X",
+    "share_telegram": "Share on Telegram",
+    "copy_link": "Copy link"
   }
 }

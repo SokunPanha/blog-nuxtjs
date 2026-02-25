@@ -21,6 +21,7 @@
     "confirm_delete_message": "Are you sure you want to delete '{name}'? This action cannot be undone.",
     "choose_provider": "Choose your preferred sign in method",
     "profile_description": "Manage your account information",
-    "email_managed_by_oauth": "Managed by your OAuth provider"
+    "email_managed_by_oauth": "Managed by your OAuth provider",
+    "link_copied": "Copied!"
   }
 }

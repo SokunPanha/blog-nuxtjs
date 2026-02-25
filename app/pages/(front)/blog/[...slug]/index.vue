@@ -116,6 +116,14 @@ const formatDate = (dateString: string | null) => {
   });
 };
 
+// Share URL (client-side only, inside ClientOnly)
+const shareUrl = computed(() => {
+  if (import.meta.client) {
+    return window.location.href;
+  }
+  return "";
+});
+
 // SEO
 useHead({
   title: computed(() => displayTitle.value || "Blog"),
@@ -238,6 +246,14 @@ useSeoMeta({
               #{{ tag.name[locale as "en" | "kh"] || tag.name.en }}
             </UBadge>
           </div>
+
+          <!-- Share buttons -->
+          <ClientOnly>
+            <ShareButtons
+              :url="shareUrl"
+              :title="displayTitle"
+            />
+          </ClientOnly>
 
           <div
             v-if="isContentRestricted"
