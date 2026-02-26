@@ -140,7 +140,7 @@ useSeoMeta({
   <!-- Floating Home Button -->
   <NuxtLink
     v-if="!pending"
-    to="/"
+    :to="localePath('/')"
     class="fixed bottom-6 right-6 z-10 flex items-center justify-center w-12 h-12 bg-primary-500 hover:bg-primary-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
   >
     <UIcon name="i-lucide-home" class="w-6 h-6" />
