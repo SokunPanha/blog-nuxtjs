@@ -174,18 +174,15 @@ export default defineNuxtConfig({
   app: {
     head: {
       link: [
-        // Fonts (already there)
         {
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap",
         },
-        // Favicon
         {
           rel: "icon",
-          type: "image/png", // or "image/svg+xml" if using SVG
-          href: "https://cdn-icons-png.freepik.com/512/11187/11187715.png", // place your favicon in /public folder
+          type: "image/png",
+          href: "https://cdn-icons-png.freepik.com/512/11187/11187715.png",
         },
-        // optional: shortcut icon
         {
           rel: "shortcut icon",
           type: "image/png",
