@@ -31,6 +31,64 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "@nuxtjs/mdc",
     "nuxt-auth-utils",
+    [
+      "@vite-pwa/nuxt",
+      {
+        registerType: "autoUpdate",
+        manifest: {
+          name: "Dev Hub",
+          short_name: "Dev Hub",
+          description: "A tech blog by Panha",
+          theme_color: "#ffffff",
+          background_color: "#ffffff",
+          display: "standalone",
+          start_url: "/",
+          scope: "/",
+          icons: [
+            {
+              src: "/pwa-192x192.png",
+              sizes: "192x192",
+              type: "image/png",
+            },
+            {
+              src: "/pwa-512x512.png",
+              sizes: "512x512",
+              type: "image/png",
+            },
+            {
+              src: "/pwa-512x512.png",
+              sizes: "512x512",
+              type: "image/png",
+              purpose: "maskable",
+            },
+          ],
+        },
+        workbox: {
+          globPatterns: ["**/*.{js,css,html,png,svg,ico,woff2}"],
+          runtimeCaching: [
+            {
+              urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+              handler: "CacheFirst",
+              options: {
+                cacheName: "google-fonts-cache",
+                expiration: {
+                  maxEntries: 10,
+                  maxAgeSeconds: 60 * 60 * 24 * 365,
+                },
+              },
+            },
+          ],
+        },
+        client: {
+          installPrompt: true,
+        },
+        devOptions: {
+          enabled: true,
+          suppressWarnings: true,
+          type: "module",
+        },
+      },
+    ],
   ],
   components: [
     "~/components/blog/ui",
