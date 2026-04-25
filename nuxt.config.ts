@@ -11,7 +11,6 @@ export default defineNuxtConfig({
     cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET,
   },
   routeRules: {
-    "/": { swr: 60 },
     "/blog": { swr: 10 },
     "/blog/**": { swr: 10 },
     "/category": { swr: 10 },
