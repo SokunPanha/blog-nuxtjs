@@ -4,7 +4,7 @@ import { useHome } from "~/composables/blog/useHome";
 definePageMeta({
   layout: "blog-layout",
 });
-const router = useRouter();
+
 const { homeData, loading, cotegoriesData } = useHome();
 const { t } = useI18n();
 
@@ -20,20 +20,34 @@ useHead({
 </script>
 
 <template>
-  <main>
+  <div class="bg-white dark:bg-gray-950">
     <HomeHero />
+
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="border-t border-gray-100 dark:border-gray-800/60" />
+    </div>
+
     <HomeBrowseCategory :categories="cotegoriesData" />
-    <div v-if="loading" class="max-w-7xl mx-auto p-4 md:p-10 space-y-10">
-      <div v-for="i in 3" :key="i" class="space-y-4">
+
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="border-t border-gray-100 dark:border-gray-800/60" />
+    </div>
+
+    <!-- Skeleton -->
+    <div v-if="loading" class="max-w-6xl mx-auto px-6 py-10 space-y-12">
+      <div v-for="i in 3" :key="i" class="space-y-6">
         <div class="flex justify-between items-center">
-          <USkeleton class="h-6 w-32" />
+          <div class="flex items-center gap-3">
+            <USkeleton class="w-1 h-7 rounded-full" />
+            <USkeleton class="h-7 w-44" />
+          </div>
           <USkeleton class="h-5 w-20" />
         </div>
-        <div class="flex gap-4 overflow-hidden">
+        <div class="flex gap-6 overflow-hidden">
           <USkeleton
             v-for="j in 3"
             :key="j"
-            class="h-[250px] w-[250px] rounded-lg shrink-0"
+            class="h-[320px] w-[300px] rounded-2xl shrink-0"
           />
         </div>
       </div>
@@ -61,5 +75,7 @@ useHead({
         view-all-path="/blog?sort=featured"
       />
     </template>
-  </main>
+
+    <div class="h-16" />
+  </div>
 </template>

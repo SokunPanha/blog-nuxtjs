@@ -7,41 +7,46 @@ interface OptionsType {
   horizontal?: boolean;
   keepNavItems?: boolean;
 }
+
 const props = defineProps<{
   navItems: NavItemsType[];
   options?: OptionsType;
 }>();
-const localePath = useLocalePath();
-const options = computed(() => {
-  return {
-    horizontal: false,
-    keepNavItems: true,
-    ...props.options,
-  };
-});
 
-const navItemsStyle = computed(() => {
-  return options.value.horizontal
-    ? "flex flex-row gap-4 items-center "
-    : "flex flex-col gap-2 items-center p-3 ";
-});
+const localePath = useLocalePath();
+const options = computed(() => ({
+  horizontal: false,
+  keepNavItems: true,
+  ...props.options,
+}));
+
+const route = useRoute();
 </script>
 
 <template>
-  <ul  :class="navItemsStyle">
-    <li
-      v-if="options.keepNavItems"
-      v-for="item in props.navItems"
-      :key="item.name"
-      :class="{
-        'p-2 block w-full text-center cursor-pointer': !options.horizontal,
-        'hidden sm:block': options.horizontal,
-      }"
-    >
-      <NuxtLink :to="localePath(item.path)">{{ $t(item.name) }}</NuxtLink>
-    </li>
+  <ul :class="options.horizontal ? 'flex flex-row gap-1 items-center' : 'flex flex-col gap-1 p-4'">
+    <template v-if="options.keepNavItems">
+      <li
+        v-for="item in props.navItems"
+        :key="item.name"
+        :class="options.horizontal ? 'hidden sm:block' : 'w-full'"
+      >
+        <NuxtLink
+          :to="localePath(item.path)"
+          :class="[
+            'text-sm font-medium transition-colors duration-150 px-3 py-1.5 rounded-lg block',
+            route.path === item.path
+              ? 'text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-800'
+              : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800/50',
+            !options.horizontal ? 'text-center' : '',
+          ]"
+        >
+          {{ $t(item.name) }}
+        </NuxtLink>
+      </li>
+    </template>
     <li>
-      <slot name="appendRight"></slot>
+      <slot name="appendRight" />
     </li>
   </ul>
 </template>
